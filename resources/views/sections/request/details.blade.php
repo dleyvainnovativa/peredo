@@ -2,7 +2,7 @@
     <div class="container py-4">
         <div class="text-center py-2">
             <h3 class="fw-bold"><i class="fas fa-clipboard-list me-2 text-primary"></i>Anexos</h3>
-            <p class="text-muted">Para agregar items deberás dar click en "Agregar producto", seleccionar de la lista, agregar cantidad y dar click en "Agregar Item"</p>
+            <p class="text-muted">Sube los anexos necesarios"</p>
         </div>
 
         <form>

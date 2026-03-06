@@ -2,7 +2,7 @@
     <div class="container py-4">
         <div class="text-center py-2">
             <h3 class="fw-bold"><i class="fas fa-building me-2 text-primary"></i>Datos del Promotor</h3>
-            <p class="text-muted">Favor de agregar tu número de empleado y RFC para validación</p>
+            <p class="text-muted">Favor de agregar tu número del promotor y RFC para validación</p>
         </div>
         <div class="row g-4 mb-5" id="branches-grid">
             <form class="needs-validation">
@@ -12,7 +12,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="form-label">Número de empleado *</label>
+                        <label class="form-label">Número de promotor *</label>
                         <div class="input-group mb-3">
                             <input type="text" name="employee" value="082907558" class="form-control " placeholder="Ingresa tu número de empleado">
                         </div>
@@ -104,7 +104,7 @@
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Agregar productos</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Anexos</button>
                     </div>
                 </div>
             </div>
