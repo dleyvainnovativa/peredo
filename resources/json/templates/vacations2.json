@@ -1,0 +1,184 @@
+{
+    "id": "a92fb2fc-6367-4051-ab03-7c6519c7820e",
+    "signOrdered": true,
+    "checkEdition": false,
+    "positionRequired": true,
+    "postCommentsRequired": false,
+    "WithoutInitialPage": false,
+    "OnlyNOM151": false,
+    "Active": true,
+    "Fields": [
+        {
+            "variable": "fechahoy",
+            "description": "Fecha de hoy",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "date",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "noempsol",
+            "description": "Número de empleado del solicitante",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "nomsolicitante",
+            "description": "Nombre del solicitante",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "tipopago",
+            "description": "Tipo de pago",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "list",
+            "lists": "Tipo de pago",
+            "unique": false
+        },
+        {
+            "variable": "areasol",
+            "description": "Área de trabajo del solicitante",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "list",
+            "lists": "Departamentos Promex",
+            "unique": false
+        },
+        {
+            "variable": "turnosol",
+            "description": "Turno del solicitante",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "list",
+            "lists": "Turnos",
+            "unique": false
+        },
+        {
+            "variable": "puesto",
+            "description": "Puesto del solicitante",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "fechapersol",
+            "description": "Fecha de permiso solicitado",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "date",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "fchsl",
+            "description": "Fecha de salida de vacaciones",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "date",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "diasol",
+            "description": "Días solicitados",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "nomjfdirecto",
+            "description": "Nombre del jefe directo",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        },
+        {
+            "variable": "cmjf",
+            "description": "Comentarios al jefe",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false
+        }
+    ],
+    "Templates": "<figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198.33px;\"><p style=\"text-align:center;\"><img class=\"image_resized\" style=\"width:98.14%;\" src=\"https://files.contisign.com.mx/images/1760484684814.png\"></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:148.34px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 100%);vertical-align:top;width:248.33px;\"><strong>PROMEX LOGISTICS, S. DE R. L. DE C. V.</strong><br><span class=\"text-small\">Calle Monterosso 102 Int. 201</span><br><span class=\"text-small\">Col. Las Delicias C.P. 38080</span><br><span class=\"text-small\">Celaya, Guanajuato, México</span><br><span class=\"text-small\">Tel: (01-461) 159-6833</span></td></tr></tbody></table></figure><p style=\"text-align:right;\"><strong>FECHA DE SOLICITUD:</strong> <s>fechahoy</s></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><strong>CARTA DE SOLICITUD DE VACACIONES</strong></p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:595px;\" colspan=\"3\"><p style=\"text-align:center;\"><strong>SOLICITANTE</strong></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">N° NÓMINA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\">NOMBRE:&nbsp;</td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>noempsol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\"><s>nomsolicitante</s></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">ÁREA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">TURNO:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">PUESTO:&nbsp;<span style=\"color:hsl(0,0%,100%);\"> <s>tipopago</s></span></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>areasol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\"><s>turnosol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>puesto</s></td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>Asunto:</strong> Solicitud de autorización de vacaciones.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Por medio de la presente, me permito solicitar la autorización para disfrutar de mis días de vacaciones correspondientes a los años laborados en la empresa.</p><p>&nbsp;</p><p><strong>Fechas solicitadas:</strong></p><p>Del <s>fechapersol</s> al <s>fchsl</s></p><p>Siendo un total de <s>diasol</s> días.</p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\">Atentamente</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\"><s>nomsolicitante</s></p></td></tr></tbody></table></figure><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:595px;\" colspan=\"3\"><p style=\"text-align:center;\"><strong>AUTORIZÓ</strong></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">N° NÓMINA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\">NOMBRE:&nbsp;</td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\"><s>nomjfdirecto</s></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">ÁREA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">TURNO:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">PUESTO: <span style=\"color:hsl(0,0%,100%);\"><s>cmjf</s></span></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\">Atentamente</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\"><s>nomjfdirecto</s></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
+    "TemplateName": "00. 1PROMEX_Formato de Vacaciones_2",
+    "Category": "Uso general",
+    "Grouped": null,
+    "Annexed": [],
+    "AnnexedQuantity": 0,
+    "PSCreq": false,
+    "SignType": [
+        "Firma sencilla",
+        "Firma autógrafa"
+    ],
+    "UserSigns": [
+        {
+            "Name": "Jefe Directo",
+            "Email": "",
+            "Charge": "Signed",
+            "Position": "",
+            "BusinessName": "",
+            "Order": 2,
+            "external": false,
+            "bgColor": "7905f199",
+            "x": 232.875,
+            "y": 710.125,
+            "width": 132.5,
+            "height": 55.5,
+            "dimension": {
+                "w": 599,
+                "h": 846
+            }
+        },
+        {
+            "Name": "Empleado",
+            "Email": "",
+            "Charge": "Signed",
+            "Position": "",
+            "BusinessName": "",
+            "Order": 1,
+            "external": false,
+            "bgColor": "1867cd99",
+            "x": 235.625,
+            "y": 476.875,
+            "width": 129.5,
+            "height": 56.5,
+            "dimension": {
+                "w": 599,
+                "h": 846
+            }
+        },
+        {
+            "Name": "Ángel Chavez",
+            "Email": "achavez@sistemascontino.com.mx",
+            "Charge": "Notification",
+            "Position": " ",
+            "BusinessName": " ",
+            "Order": null,
+            "external": false
+        }
+    ],
+    "ShowQR": false,
+    "Status": null,
+    "allowBulkUpload": false,
+    "created_at": "2025-10-14T23:36:17.440Z",
+    "updated_at": "2025-10-14T23:36:17.440Z",
+    "personid": "71219611-799b-401d-8319-f97fad578620"
+}

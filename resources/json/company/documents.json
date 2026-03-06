@@ -1,0 +1,68 @@
+[
+        {
+            "SUCURSAL": "CAMPECHE",
+            "DEPENDENCIA": "SNTE",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "DISTRITO FEDERAL",
+            "DEPENDENCIA": "SERV DE SALUD PUBLICA DEL DF",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "DURANGO",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "OAXACA",
+            "DEPENDENCIA": "BUROCRATAS",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "OAXACA",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "PUEBLA",
+            "DEPENDENCIA": "FEDERALES",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "QUERETARO",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_ETESA",
+            "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
+        },
+        {
+            "SUCURSAL": "TABASCO",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_NOMI-PAY",
+            "CAMPOS": "NUMERO_EMPLEADO,RFC,NOMBRE_CLIENTE"
+        },
+        {
+            "SUCURSAL": "PUEBLA",
+            "DEPENDENCIA": "FEDERALES",
+            "DOCUMENTO": "REFACIL_SEP Puebla",
+            "CAMPOS": "MONTO_PRESTAMO,NUMERO_EMPLEADO,NOMBRE_CLIENTE,ULTIMO_UUID"
+        },
+        {
+            "SUCURSAL": "QUERETARO",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_ETESA_NOMIPAY",
+            "CAMPOS": "RFC,NUMERO_EMPLEADO,NOMBRE_CLIENTE"
+        },
+        {
+            "SUCURSAL": "MICHOACAN",
+            "DEPENDENCIA": "FEDERAL",
+            "DOCUMENTO": "REFACIL_BENEFIT",
+            "CAMPOS": "NOMBRE_CLIENTE,NOMBRE_DEPENDENCIA,RFC"
+        }
+    ]

@@ -1,0 +1,20 @@
+[
+        {
+            "IDENTIFICADOR": "1",
+            "NOMBRE_CORTO": "ABACO",
+            "NOMBRE_LARGO": null,
+            "RUTA_LOGO": "https://www.contactocp.com.mx/abaco/imagenes/empresas/1.png"
+        },
+        {
+            "IDENTIFICADOR": "4",
+            "NOMBRE_CORTO": "DINAMO",
+            "NOMBRE_LARGO": null,
+            "RUTA_LOGO": "https://www.contactocp.com.mx/abaco/imagenes/empresas/4.png"
+        },
+        {
+            "IDENTIFICADOR": "3",
+            "NOMBRE_CORTO": "REFACIL",
+            "NOMBRE_LARGO": null,
+            "RUTA_LOGO": "https://www.contactocp.com.mx/abaco/imagenes/empresas/3.png"
+        }
+    ]

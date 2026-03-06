@@ -1,0 +1,205 @@
+{
+  "id": "363bff6d-aa5d-4065-b66e-dd011759e5b9",
+  "signOrdered": true,
+  "checkEdition": false,
+  "positionRequired": true,
+  "postCommentsRequired": null,
+  "WithoutInitialPage": null,
+  "OnlyNOM151": null,
+  "Active": true,
+  "Fields": [
+    {
+      "variable": "fechahoy",
+      "description": "Fecha de hoy",
+      "autocomplete": "",
+      "dataType": "date",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "noempsol",
+      "description": "Número de empleado del solicitante",
+      "autocomplete": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "nomsolicitante",
+      "description": "Nombre del solicitante",
+      "autocomplete": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "tipopago",
+      "description": "Tipo de pago",
+      "autocomplete": "",
+      "dataType": "list",
+      "lists": "Tipo de pago",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "areasol",
+      "description": "Área de trabajo del solicitante",
+      "autocomplete": "",
+      "dataType": "list",
+      "lists": "Departamentos Promex",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "turnosol",
+      "description": "Turno del solicitante",
+      "autocomplete": "",
+      "dataType": "list",
+      "lists": "Turnos",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "puesto",
+      "description": "Puesto del solicitante",
+      "autocomplete": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "fechapersol",
+      "description": "Fecha de permiso solicitado",
+      "autocomplete": "",
+      "dataType": "date",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "fchsl",
+      "description": "Fecha de salida de vacaciones",
+      "autocomplete": "",
+      "showlist": "",
+      "dataType": "date",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "diasol",
+      "description": "Días solicitados",
+      "autocomplete": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "nomjfdirecto",
+      "description": "Nombre del jefe directo",
+      "autocomplete": "",
+      "showlist": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "cmjf",
+      "description": "Comentarios al jefe",
+      "autocomplete": "",
+      "showlist": "",
+      "dataType": "text",
+      "lists": "",
+      "unique": false,
+      "separate": false
+    },
+    {
+      "variable": "fechahoy"
+    },
+    {
+      "variable": "noempsol"
+    },
+    {
+      "variable": "nomsolicitante"
+    },
+    {
+      "variable": "tipopago"
+    },
+    {
+      "variable": "areasol"
+    },
+    {
+      "variable": "turnosol"
+    },
+    {
+      "variable": "puesto"
+    },
+    {
+      "variable": "fechapersol"
+    },
+    {
+      "variable": "fchsl"
+    },
+    {
+      "variable": "diasol"
+    },
+    {
+      "variable": "nomjfdirecto"
+    },
+    {
+      "variable": "cmjf"
+    }
+  ],
+  "Templates": "<figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198.33px;\"><p style=\"text-align:center;\"><img class=\"image_resized\" style=\"width:98.14%;\" src=\"data:image/jpeg;base64,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\"></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:148.34px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 100%);vertical-align:top;width:248.33px;\"><strong>PROMEX LOGISTICS, S. DE R. L. DE C. V.</strong><br><span class=\"text-small\">Calle Monterosso 102 Int. 201</span><br><span class=\"text-small\">Col. Las Delicias C.P. 38080</span><br><span class=\"text-small\">Celaya, Guanajuato, México</span><br><span class=\"text-small\">Tel: (01-461) 159-6833</span></td></tr></tbody></table></figure><p style=\"text-align:right;\"><strong>FECHA DE SOLICITUD:</strong> <s>fechahoy</s></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><strong>CARTA DE SOLICITUD DE VACACIONES</strong></p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:595px;\" colspan=\"3\"><p style=\"text-align:center;\"><strong>SOLICITANTE</strong></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">N° NÓMINA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\">NOMBRE:&nbsp;</td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>noempsol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\"><s>nomsolicitante</s></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">ÁREA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">TURNO:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">PUESTO:&nbsp;<span style=\"color:hsl(0,0%,100%);\"> <s>tipopago</s></span></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>areasol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\"><s>turnosol</s></td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\"><s>puesto</s></td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>Asunto:</strong> Solicitud de autorización de vacaciones.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Por medio de la presente, me permito solicitar la autorización para disfrutar de mis días de vacaciones correspondientes a los años laborados en la empresa.</p><p>&nbsp;</p><p><strong>Fechas solicitadas:</strong></p><p>Del <s>fechapersol</s> al <s>fchsl</s></p><p>Siendo un total de <s>diasol</s> días.</p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\">Atentamente</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\"><s>nomsolicitante</s></p></td></tr></tbody></table></figure><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:595px;\" colspan=\"3\"><p style=\"text-align:center;\"><strong>AUTORIZÓ</strong></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">N° NÓMINA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\">NOMBRE:&nbsp;</td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:396.67px;\" colspan=\"2\"><s>nomjfdirecto</s></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">ÁREA:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">TURNO:&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">PUESTO: <span style=\"color:hsl(0,0%,100%);\"><s>cmjf</s></span></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.34px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 0%);width:198.33px;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p>",
+  "TemplateName": "00. 1PROMEX_Formato de Vacaciones",
+  "Category": "Uso general",
+  "Grouped": null,
+  "Annexed": [],
+  "AnnexedQuantity": 0,
+  "PSCreq": false,
+  "SignType": [
+    "Firma sencilla",
+    "Firma autógrafa"
+  ],
+  "UserSigns": [
+    {
+      "Name": "Jefe Directo",
+      "Email": "",
+      "Charge": "Signed",
+      "Position": "",
+      "BusinessName": "",
+      "Order": 1,
+      "external": false,
+      "bgColor": "38c33299",
+      "x": 239,
+      "y": 502.125,
+      "width": 119,
+      "height": 51.5,
+      "dimension": {
+        "w": 599,
+        "h": 846
+      }
+    },
+    {
+      "Name": "Ángel Chavez",
+      "Email": "achavez@sistemascontino.com.mx",
+      "Charge": "Notification",
+      "Position": " ",
+      "BusinessName": " ",
+      "Order": null,
+      "external": false
+    }
+  ],
+  "ShowQR": false,
+  "Status": null,
+  "allowBulkUpload": null,
+  "created_at": "2024-07-16T22:21:52.081Z",
+  "updated_at": "2025-10-14T23:26:51.989Z",
+  "personid": "71219611-799b-401d-8319-f97fad578620"
+}
