@@ -356,5 +356,5 @@ document.getElementById("continue-services-button").addEventListener("click", as
 
 document.getElementById("send_request").addEventListener("click", async function () {
     let message = await showNotification(" Se ha enviado la solicitud", "El almacenista será notificado para su aprobación", null, "me-2 fas fa-check-circle");
-        window.location = "almacen";
+        location.reload();
 })

@@ -175,20 +175,20 @@ async function fillTemplateFields() {
 async function uploadDocument(event) {
     event.preventDefault();
 
-    let data = await validateForm(event, "contisign/send");
-    if (data) {
-        console.log(data);
-            Swal.fire({
-        icon: "success",
-        title: "Solicitud enviada",
-        text: "Tu solicitud se envió correctamente",
-        confirmButtonText: "Aceptar"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            location.reload(); // refresh page
-        }
-    });
-    }
+    // let data = await validateForm(event, "contisign/send");
+    // if (data) {
+    //     console.log(data);
+    //         Swal.fire({
+    //     icon: "success",
+    //     title: "Solicitud enviada",
+    //     text: "Tu solicitud se envió correctamente",
+    //     confirmButtonText: "Aceptar"
+    // }).then((result) => {
+    //     if (result.isConfirmed) {
+    //         location.reload(); // refresh page
+    //     }
+    // });
+    // }
 }
 
 
