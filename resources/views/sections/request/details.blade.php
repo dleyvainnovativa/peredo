@@ -39,15 +39,15 @@
                     <div class="col-md-auto ms-auto col-6">
                         <button type="button" disabled class="btn btn-primary w-100" id="continue-services-button" data-next="tab-calendar">Continuar</button>
                     </div> -->
-                    <div class="col-md-auto col-2">
+                    <div class="col-md-auto col-5">
                         <!-- <div class="col-md-auto col-5"> -->
                         <!-- <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-services"><i class="fas fa-chevron-left"></i></button> -->
-                        <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-branches"><i class="fas fa-chevron-left me-2"></i> Anterior</button>
+                        <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-branches"> Anterior</button>
                     </div>
                     <div class="col-md-auto col-5 d-none">
                         <button disabled type="button" disabled class="btn btn-outline-primary w-100" id="selected-services-button">0 Services</button>
                     </div>
-                    <div class="col-md-auto ms-auto col-5">
+                    <div class="col-md-auto ms-auto col-7">
                         <!-- <div class="col-md-auto ms-auto col-7"> -->
                         <button type="button" class="btn btn-primary w-100" id="continue-services-button" data-next="tab-review">Ver Resumen</button>
                     </div>
