@@ -29,7 +29,11 @@
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input data-fill="" value="pedrop@correo.com" type="email" class="form-control " id="employee_email">
+                        <input data-fill="" value="dancaballerodlc@gmail.com" type="email" class="form-control " id="employee_email">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input data-fill="" value="2291229900" type="phone" class="form-control " id="employee_phone">
                     </div>
 
                     <!-- <div class="col-md-6 d-none">

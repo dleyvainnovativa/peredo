@@ -35,7 +35,7 @@
             <small class="d-xl-block d-none mt-2 text-muted">Datos del Promotor</small>
         </button>
     </li>
-    <li class="nav-item flex-fill text-center calendar-options" role="presentation">
+    <li class="nav-item flex-fill text-center calendar-options d-none" role="presentation">
         <button disabled class="nav-link text-center mx-auto" id="tab-services" data-bs-toggle="pill" data-bs-target="#pane-services" type="button">
             <div class="rounded-circle bg-primary-subtle border border-dark text-secondary d-flex align-items-center justify-content-center mx-auto">
                 <i class="fas fa-clipboard-list"></i>

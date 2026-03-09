@@ -60,6 +60,7 @@ async function buildFormControls(jsonData) {
             input.type = "text";
             input.hidden = true;
             input.setAttribute("data-variable", field.variable);
+            input.setAttribute("name", field.variable);
             input.placeholder = "Ingresa " + field.description;
             inputGroup.appendChild(input);
 
@@ -134,16 +135,34 @@ async function fillDocument(){
 
     const container = document.getElementById("template_html");
     document.getElementById("send_html").value = JSON.stringify(container.innerHTML);
+    document.getElementById("send_template_fields").value = JSON.stringify(getTemplateFields());
 
-    document.getElementById("send_employee_name").value = document.getElementById("full_name").value;
+    document.getElementById("send_promotor_name").value = document.getElementById("full_name").value;
+    document.getElementById("send_promotor_email").value = document.getElementById("email").value;
+
+    document.getElementById("send_employee_name").value = document.getElementById("employee_full_name").value;
+    document.getElementById("send_employee_email").value = document.getElementById("employee_email").value;
+    
     document.getElementById("send_employee_num").value = document.getElementById("employee").value;
     document.getElementById("send_employee_position").value = document.getElementById("position").value;
     document.getElementById("send_employee_department").value = document.getElementById("department").value;
-    document.getElementById("send_employee_email").value = document.getElementById("email").value;
 
-    document.getElementById("send_leader_name").value = document.getElementById("team_leader").value;
-    document.getElementById("send_leader_email").value = document.getElementById("team_leader_email").value;
+    // document.getElementById("send_leader_name").value = document.getElementById("team_leader").value;
+    // document.getElementById("send_leader_email").value = document.getElementById("team_leader_email").value;
 
+}
+
+function getTemplateFields() {
+    const inputs = document.querySelectorAll('#template_fields input[data-variable]');
+    
+    const fields = Array.from(inputs).map(input => {
+        return {
+            name: input.dataset.variable,
+            value: input.value
+        };
+    });
+
+    return fields;
 }
 
 async function fillTemplateFields() {
@@ -174,21 +193,12 @@ async function fillTemplateFields() {
 
 async function uploadDocument(event) {
     event.preventDefault();
-
-    // let data = await validateForm(event, "contisign/send");
-    // if (data) {
-    //     console.log(data);
-    //         Swal.fire({
-    //     icon: "success",
-    //     title: "Solicitud enviada",
-    //     text: "Tu solicitud se envió correctamente",
-    //     confirmButtonText: "Aceptar"
-    // }).then((result) => {
-    //     if (result.isConfirmed) {
-    //         location.reload(); // refresh page
-    //     }
-    // });
-    // }
+    let data = await validateForm(event, "contisign/send");
+    if (data) {
+        console.log(data);
+        let message = await showNotification(" Se ha enviado la solicitud", "El almacenista será notificado para su aprobación", null, "me-2 fas fa-check-circle");
+        location.reload();
+    }
 }
 
 

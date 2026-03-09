@@ -24,10 +24,10 @@ async function searchEmployee(event) {
         document.getElementById('team_leader_email').value = employee.team_leader_email;
 
         // Empleado
-        document.getElementById('review_name').textContent = employee.full_name;
-        document.getElementById('review_name').textContent = employee.full_name;
-        document.getElementById('review_name').textContent = employee.full_name;
-        document.getElementById('review_name').textContent = employee.full_name;
+        document.getElementById('review_employee_num').textContent = document.getElementById("employee").value;
+        document.getElementById('review_employee_name').textContent = document.getElementById("employee_full_name").value;
+        document.getElementById('review_employee_rfc').textContent = document.getElementById("employee_rfc").value;
+        document.getElementById('review_employee_email').textContent = document.getElementById("employee_email").value;
 
         // Promotor
         document.getElementById('review_name').textContent = employee.full_name;

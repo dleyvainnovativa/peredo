@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContisignController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +12,4 @@ Route::get('/almacen', function () {
     return view('pages.requests');
 });
 Route::post('/employees/search', [PageController::class, 'search']);
+Route::post('contisign/send', [ContisignController::class, 'generateDocument']);

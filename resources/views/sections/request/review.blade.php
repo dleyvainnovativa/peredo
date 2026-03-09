@@ -15,7 +15,7 @@
                         <h5 class="fw-bold mb-4"><i class="fas fa-user me-2 text-primary" aria-hidden="true"></i> Datos del Empleado</h5>
                         <div class="row g-3">
                             <div class="col-12 col-md-6">
-                                <p><b>Número de Empleado: </b><span id="review_employee_name">082907558</span></p>
+                                <p><b>Número de Empleado: </b><span id="review_employee_num">082907558</span></p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <p><b>Nombre: </b><span id="review_employee_name">Pedro Pérez</span></p>
@@ -97,18 +97,24 @@
                     <div class="col-md-auto col-7 ms-auto">
                         <form>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input name="html" type="hidden" id="send_html">
                             <input name="template_id" type="hidden" id="send_template_id">
                             <input name="date_limit" type="hidden" id="send_date_limit" value="2025-10-18">
 
+                            <input name="fields" type="hidden" id="send_template_fields">
+
+                            <input name="promotor_name" type="hidden" id="send_promotor_name">
+                            <input name="promotor_email" type="hidden" id="send_promotor_email">
                             <input name="employee_name" type="hidden" id="send_employee_name">
+                            <input name="employee_email" type="hidden" id="send_employee_email">
                             <input name="employee_num" type="hidden" id="send_employee_num">
                             <input name="employee_position" type="hidden" id="send_employee_position">
                             <input name="employee_department" type="hidden" id="send_employee_department">
-                            <input name="employee_email" type="hidden" id="send_employee_email">
 
-                            <input name="leader_name" type="hidden" id="send_leader_name">
-                            <input name="leader_email" type="hidden" id="send_leader_email">
+                            <div id="template_fields" class="text-dark col-12 d-none">
+                            </div>
+                            <!-- <input name="leader_name" type="hidden" id="send_leader_name"> -->
+                            <!-- <input name="leader_email" type="hidden" id="send_leader_email"> -->
+                            <input name="html" type="hidden" id="send_html">
                             <button type="button" onclick="uploadDocument(event)" class="btn btn-primary w-100" id="send_request"
                                 data-next="tab-review">Solicitar</button>
                         </form>

@@ -21,10 +21,10 @@
                     <div id="template_annexed" class="text-dark row g-4">
                     </div>
                 </div>
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div id="template_fields" class="text-dark col-12">
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>

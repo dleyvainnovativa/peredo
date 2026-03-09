@@ -41,7 +41,7 @@ class PageController extends Controller
         $content = getJsonData("templates/templates.json");
         foreach ($content as $key => $template) {
             $name = $template["TemplateName"];
-            $image = $template["image"];
+            $image = $template["image"] ?? "";
             $templateObj["name"] = $name;
             $templateObj["filename"] = "";
             $templateObj["image"] = $image;

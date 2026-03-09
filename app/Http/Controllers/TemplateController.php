@@ -4,650 +4,183 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class TemplateController extends Controller
 {
-    public static function vacations($contisign, $request)
+
+    // gixtepan@sistemascontino.com.mx
+    // achavez@sistemascontino.com.mx
+    public static function template($contisign, $requestSignatures, $template, $fields, $html, $request)
     {
+        $dataTemplatesFields = [];
+
+        foreach ($fields as $field) {
+            $dataTemplatesFields[$field["name"]] = $field["value"];
+        }
+
         $moreTags = self::buildMoreTags($request);
 
-        $limit_date = date('Y-d-m', strtotime('+1 month'));
+        $limit_date = date('Y-m-d', strtotime('+1 month'));
 
-        // "2025-10-25"
-        // === 1. Create UniKey ===
+        // // === 1. Create UniKey ===
+        // // Use the ID from the JSON template
         $uniKeyPayload = [
-            "UniKey" => "U001PROMEX_FV",
-            "thisTemplateId" => "363bff6d-aa5d-4065-b66e-dd011759e5b9",
-            "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
+            "UniKey" => self::generateUniKey($template["TemplateName"]), // This might also be dynamic
+            "thisTemplateId" => $template['id'],
+            "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5", // This should be the current user's ID
             "version" => false
         ];
+        Log::debug([$uniKeyPayload]);
         $uniKeyData = $contisign->createUniKey($uniKeyPayload);
+        Log::debug([$uniKeyData]);
+        // $uniKeyData["contractId"] = "test";
+        // $uniKeyData["personId"] = "test";
+        // $uniKeyData["unikey"] = "test";
 
-        // === 2. Create DataTemplate ===
+        // === 2. Build Signatures from UserSigns in the template ===
+        $signatures = [];
+        foreach ($template['UserSigns'] as $userSign) {
+            foreach ($requestSignatures as $key => $rSign) {
+                if (strtolower($rSign["type"]) == strtolower($userSign["Name"])) {
+                    $userEmail = $rSign["email"];
+                    $userName = $rSign["name"];
+                }
+            }
+            if ($userSign["Charge"] == "Signed") {
+                $signature = [
+                    "Name" => $userName,
+                    "Email" => $userEmail,
+                    "Charge" => $userSign['Charge'],
+                    "Position" => $userSign['Position'],
+                    "BusinessName" => $userSign['BusinessName'],
+                    "Order" => $userSign['Order'],
+                    "external" => true,
+                    "bgColor" => $userSign['bgColor'] ?? '9b039999',
+                    "x" => $userSign['x'] ?? null,
+                    "y" => $userSign['y'] ?? null,
+                    "width" => $userSign['width'] ?? null,
+                    "height" => $userSign['height'] ?? null,
+                    "dimension" => $userSign['dimension'] ?? ['w' => 599, 'h' => 846],
+                    "Status" => "Esperando",
+                    "currentUserExternal" => $userSign['external'],
+                    "LimitDate" => $limit_date,
+                    // Assuming SignType has at least one value
+                    // "Type" => $template['SignType'][0] ?? "Firma sencilla"
+                ];
+
+                // Add AditionalInformation for compatibility
+                $signature["AditionalInformation"] = [
+                    "x" => $signature['x'],
+                    "y" => $signature['y'],
+                    "width" => $signature['width'],
+                    "height" => $signature['height'],
+                    "bgcolor" => "#" . $signature['bgColor'],
+                    "name" => $signature['Name'],
+                    "dimensions" => $signature['dimension']
+                ];
+            } else {
+                $signature = [
+                    "Name" => $userName,
+                    "Email" => $userEmail,
+                    "Charge" => $userSign['Charge'],
+                    "Position" => $userSign['Position'],
+                    "BusinessName" => $userSign['BusinessName'],
+                    "Order" => null,
+                    "external" => false,
+                    "Status" => "Esperando",
+                    "currentUserExternal" => $userSign['external'],
+                    "Type" => $template['SignType'][0] ?? "Firma sencilla",
+                    "LimitDate" => $limit_date
+                ];
+
+                // Add AditionalInformation for compatibility
+                $signature["AditionalInformation"] = [
+                    "bgcolor" => "#undefined",
+                    "name" => $signature['Name']
+                ];
+            }
+
+            if ($userSign["Charge"] == "Signed") {
+                foreach ($template["SignType"] as $key => $value) {
+                    $signature["Type"] = $value;
+                    $signatures[] = $signature;
+                }
+            } else {
+                $signatures[] = $signature;
+            }
+        }
+        Log::debug([$signatures]);
+
+        // dd($requestSignatures, $signatures, $fields, $uniKeyPayload);
+
+        // // dd(json_encode($signatures));
+
+        // // === 3. Create DataTemplate ===
         $dataTemplatePayload = [
-            "Active" => true,
-            "annexed" => [],
+            "Active" => $template['Active'],
+            "annexed" => $template['Annexed'],
             "Signsstatus" => "Este documento no ha sido firmado",
             "contract_id" => $uniKeyData['contractId'],
-            "DataTemplates" => [
-                "nomsolicitante" => "",
-                "fechahoy" => "",
-                "noempsol" => "",
-                "turnosol" => "",
-                "puesto" => "",
-                "areasol" => "",
-                "tipopago" => "",
-                "fechapersol" => "",
-                "diasol" => "",
-                "fchsl" => "",
-                "nomjfdirecto" => ""
-            ],
-            "DocumentName" => "Solicitud vacaciones de " . $request->employee_name,
+            "DataTemplates" => $dataTemplatesFields,
+            "DocumentName" => $template['TemplateName'] . " de " . $requestSignatures[0]["name"],
             "dtperson_id" => $uniKeyData['personId'],
-            "Tags" => [
-                "promex",
-                "sistemas",
-                "contino",
-                "u001promex_fv",
-                "00.",
-                "1promex_formato",
-                "de",
-                "vacaciones",
-                "solicitud_vacaciones",
-                ...$moreTags
-            ],
+            "Tags" => array_merge(
+                ["sistemas", "contino"], // Base tags
+                explode(' ', str_replace('_', ' ', $template['TemplateName'])), // Tags from template name
+                $moreTags
+            ),
             "Emptytemplate" => null,
             "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
-            "positionRequired" => true,
+            "positionRequired" => $template['positionRequired'],
             "UniKey" => $uniKeyData['unikey'],
-            "html" => json_decode($request->html),
-            "templateId" => "363bff6d-aa5d-4065-b66e-dd011759e5b9",
+            "html" => json_decode($html),
+            "templateId" => $template['id'],
             "documentUrl" => null,
-            "ConstancePSC" => false,
-            "OnlyNOM151" => false,
-            "Fields" => null,
-            "signatures" => [
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "9b039999",
-                    "x" => 240,
-                    "y" => 558,
-                    "width" => 111,
-                    "height" => 49.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 240,
-                        "y" => 558,
-                        "width" => 111,
-                        "height" => 49.5,
-                        "bgcolor" => "#9b039999",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla"
-                ],
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "9b039999",
-                    "x" => 240,
-                    "y" => 558,
-                    "width" => 111,
-                    "height" => 49.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 240,
-                        "y" => 558,
-                        "width" => 111,
-                        "height" => 49.5,
-                        "bgcolor" => "#9b039999",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa"
-                ],
-                [
-                    "Name" => "Ángel Chavez",
-                    "Email" => "achavez@sistemascontino.com.mx",
-                    "Charge" => "Notification",
-                    "Position" => " ",
-                    "BusinessName" => " ",
-                    "Order" => null,
-                    "external" => false,
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "bgcolor" => "#undefined",
-                        "name" => "Ángel Chavez"
-                    ],
-                    "Type" => "Firma sencilla",
-                    "LimitDate" => $limit_date
-                ]
-            ]
-
+            "ConstancePSC" => $template['PSCreq'],
+            "OnlyNOM151" => $template['OnlyNOM151'],
+            "Fields" => null, // This is often set to null when DataTemplates is used
+            "signatures" => $signatures
         ];
+        // dd(json_encode($dataTemplatePayload));
         $dataTemplateData = $contisign->createDataTemplate($dataTemplatePayload);
+        Log::debug([$dataTemplateData]);
 
-        // === 3. Send Signs ===
+        // dd($requestSignatures, $signatures, $fields, $uniKeyPayload, $dataTemplatePayload);
+
+        // === 4. Send Signs ===
+        // Add the documentid to each signature for the sendSigns payload
+        $signsPayloadSignatures = array_map(function ($sig) use ($dataTemplateData) {
+            $sig['documentid'] = $dataTemplateData['id'];
+            return $sig;
+        }, $signatures);
+
+        Log::debug([$signsPayloadSignatures]);
+
         $signsPayload = [
-            "signs" => [
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "9b039999",
-                    "x" => 240,
-                    "y" => 558,
-                    "width" => 111,
-                    "height" => 49.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 240,
-                        "y" => 558,
-                        "width" => 111,
-                        "height" => 49.5,
-                        "bgcolor" => "#9b039999",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "9b039999",
-                    "x" => 240,
-                    "y" => 558,
-                    "width" => 111,
-                    "height" => 49.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 240,
-                        "y" => 558,
-                        "width" => 111,
-                        "height" => 49.5,
-                        "bgcolor" => "#9b039999",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => "Ángel Chavez",
-                    "Email" => "achavez@sistemascontino.com.mx",
-                    "Charge" => "Notification",
-                    "Position" => " ",
-                    "BusinessName" => " ",
-                    "Order" => null,
-                    "external" => false,
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "bgcolor" => "#undefined",
-                        "name" => "Ángel Chavez"
-                    ],
-                    "Type" => "Firma sencilla",
-                    "LimitDate" => $limit_date,
-                    "documentid" => $dataTemplateData['id']
-                ]
-            ],
-
-            "firmas" => 999999
+            "signs" => $signsPayloadSignatures,
+            "firmas" => 999999 // This seems like a static value
         ];
-        $signsData = $contisign->sendSigns($signsPayload);
 
+
+        $signsData = $contisign->sendSigns($signsPayload);
+        Log::debug([$signsData]);
+
+
+        // // === 5. Return Response ===
         $data = [
             'unikey' => $uniKeyData['unikey'],
             'documentId' => $dataTemplateData['id'],
             'message' => $signsData['Message'] ?? 'Documento generado correctamente'
         ];
-        return $data;
+
+        Log::debug([$data]);
+
+
+        return response()->json($data);
     }
-    public static function vacations2($contisign, $request)
-    {
-        $moreTags = self::buildMoreTags($request);
-        $limit_date = date('Y-d-m', strtotime('+1 month'));
-        // === 1. Create UniKey ===
-        $uniKeyPayload = [
-            "UniKey" => "U001PROMEX_FV_2",
-            "thisTemplateId" => "a92fb2fc-6367-4051-ab03-7c6519c7820e",
-            "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
-            "version" => false
-        ];
-        $uniKeyData = $contisign->createUniKey($uniKeyPayload);
-
-        // === 2. Create DataTemplate ===
-        $dataTemplatePayload = [
-            "Active" => true,
-            "annexed" => [],
-            "Signsstatus" => "Este documento no ha sido firmado",
-            "contract_id" => $uniKeyData['contractId'],
-            "DataTemplates" => [
-                "nomsolicitante" => "",
-                "fechahoy" => "",
-                "noempsol" => "",
-                "turnosol" => "",
-                "puesto" => "",
-                "areasol" => "",
-                "tipopago" => "",
-                "fechapersol" => "",
-                "diasol" => "",
-                "nomjfdirecto" => "",
-                "cmjf" => ""
-            ],
-            "DocumentName" => "Solicitud vacaciones de " . $request->employee_name,
-            "dtperson_id" => $uniKeyData['personId'],
-            "Tags" => [
-                "promex",
-                "sistemas",
-                "contino",
-                "u001promex_fv2",
-                "00.",
-                "1promex_formato",
-                "de",
-                "vacaciones",
-                "solicitud_vacaciones",
-                ...$moreTags
-            ],
-            "Emptytemplate" => null,
-            "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
-            "positionRequired" => true,
-            "UniKey" => $uniKeyData['unikey'],
-            "html" => json_decode($request->html),
-            "templateId" => "a92fb2fc-6367-4051-ab03-7c6519c7820e",
-            "documentUrl" => null,
-            "ConstancePSC" => false,
-            "OnlyNOM151" => false,
-            "Fields" => null,
-            "signatures" => [
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 2,
-                    "external" => true,
-                    "bgColor" => "1867cd99",
-                    "x" => 235.625,
-                    "y" => 476.875,
-                    "width" => 129.5,
-                    "height" => 56.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 235.625,
-                        "y" => 476.875,
-                        "width" => 129.5,
-                        "height" => 56.5,
-                        "bgcolor" => "#1867cd99",
-                        "name" => "Daniel Leyva",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla"
-                ],
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 2,
-                    "external" => true,
-                    "bgColor" => "1867cd99",
-                    "x" => 235.625,
-                    "y" => 476.875,
-                    "width" => 129.5,
-                    "height" => 56.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 235.625,
-                        "y" => 476.875,
-                        "width" => 129.5,
-                        "height" => 56.5,
-                        "bgcolor" => "#1867cd99",
-                        "name" => "Daniel Leyva",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa"
-                ],
-                [
-                    "Name" => $request->employee_name,
-                    "Email" => $request->employee_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "7905f199",
-                    "x" => 232.875,
-                    "y" => 710.125,
-                    "width" => 132.5,
-                    "height" => 55.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Esperando",
-                    "AditionalInformation" => [
-                        "x" => 232.875,
-                        "y" => 710.125,
-                        "width" => 132.5,
-                        "height" => 55.5,
-                        "bgcolor" => "#7905f199",
-                        "name" => "USUARIO DEMO (No Información confidencial)",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla"
-                ],
-                [
-                    "Name" => $request->employee_name,
-                    "Email" => $request->employee_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "7905f199",
-                    "x" => 232.875,
-                    "y" => 710.125,
-                    "width" => 132.5,
-                    "height" => 55.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Esperando",
-                    "AditionalInformation" => [
-                        "x" => 232.875,
-                        "y" => 710.125,
-                        "width" => 132.5,
-                        "height" => 55.5,
-                        "bgcolor" => "#7905f199",
-                        "name" => "USUARIO DEMO (No Información confidencial)",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa"
-                ],
-                [
-                    "Name" => "Ángel Chavez",
-                    "Email" => "achavez@sistemascontino.com.mx",
-                    "Charge" => "Notification",
-                    "Position" => " ",
-                    "BusinessName" => " ",
-                    "Order" => null,
-                    "external" => false,
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "bgcolor" => "#undefined",
-                        "name" => "Ángel Chavez"
-                    ],
-                    "Type" => "Firma sencilla",
-                    "LimitDate" => $limit_date
-                ]
-            ]
-
-        ];
-        $dataTemplateData = $contisign->createDataTemplate($dataTemplatePayload);
-
-        // === 3. Send Signs ===
-        $signsPayload = [
-            "signs" => [
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 2,
-                    "external" => true,
-                    "bgColor" => "1867cd99",
-                    "x" => 235.625,
-                    "y" => 476.875,
-                    "width" => 129.5,
-                    "height" => 56.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 235.625,
-                        "y" => 476.875,
-                        "width" => 129.5,
-                        "height" => 56.5,
-                        "bgcolor" => "#1867cd99",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => $request->leader_name,
-                    "Email" => $request->leader_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 2,
-                    "external" => true,
-                    "bgColor" => "1867cd99",
-                    "x" => 235.625,
-                    "y" => 476.875,
-                    "width" => 129.5,
-                    "height" => 56.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "x" => 235.625,
-                        "y" => 476.875,
-                        "width" => 129.5,
-                        "height" => 56.5,
-                        "bgcolor" => "#1867cd99",
-                        "name" => "Sistemas Contino",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => $request->employee_name,
-                    "Email" => $request->employee_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "7905f199",
-                    "x" => 232.875,
-                    "y" => 710.125,
-                    "width" => 132.5,
-                    "height" => 55.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Esperando",
-                    "AditionalInformation" => [
-                        "x" => 232.875,
-                        "y" => 710.125,
-                        "width" => 132.5,
-                        "height" => 55.5,
-                        "bgcolor" => "#7905f199",
-                        "name" => "USUARIO DEMO (No Información confidencial)",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma sencilla",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => $request->employee_name,
-                    "Email" => $request->employee_email,
-                    "Charge" => "Signed",
-                    "Position" => "",
-                    "BusinessName" => "",
-                    "Order" => 1,
-                    "external" => true,
-                    "bgColor" => "7905f199",
-                    "x" => 232.875,
-                    "y" => 710.125,
-                    "width" => 132.5,
-                    "height" => 55.5,
-                    "dimension" => [
-                        "w" => 599,
-                        "h" => 846
-                    ],
-                    "Status" => "Esperando",
-                    "AditionalInformation" => [
-                        "x" => 232.875,
-                        "y" => 710.125,
-                        "width" => 132.5,
-                        "height" => 55.5,
-                        "bgcolor" => "#7905f199",
-                        "name" => "USUARIO DEMO (No Información confidencial)",
-                        "dimensions" => [
-                            "w" => 599,
-                            "h" => 846
-                        ]
-                    ],
-                    "currentUserExternal" => true,
-                    "LimitDate" => $limit_date,
-                    "Type" => "Firma autógrafa",
-                    "documentid" => $dataTemplateData['id']
-                ],
-                [
-                    "Name" => "Ángel Chavez",
-                    "Email" => "achavez@sistemascontino.com.mx",
-                    "Charge" => "Notification",
-                    "Position" => " ",
-                    "BusinessName" => " ",
-                    "Order" => null,
-                    "external" => false,
-                    "Status" => "Pendiente",
-                    "AditionalInformation" => [
-                        "bgcolor" => "#undefined",
-                        "name" => "Ángel Chavez"
-                    ],
-                    "Type" => "Firma sencilla",
-                    "LimitDate" => $limit_date,
-                    "documentid" => $dataTemplateData['id']
-                ]
 
 
-            ],
-
-            "firmas" => 999999
-        ];
-        $signsData = $contisign->sendSigns($signsPayload);
-
-        $data = [
-            'unikey' => $uniKeyData['unikey'],
-            'documentId' => $dataTemplateData['id'],
-            'message' => $signsData['Message'] ?? 'Documento generado correctamente'
-        ];
-        return $data;
-    }
     public static function buildMoreTags($request)
     {
         $tags = [];
@@ -656,6 +189,7 @@ class TemplateController extends Controller
         $except = [
             'html',
             '_token',
+            'fields',
             'template_id',
             'employee_email',
             'leader_email',
@@ -684,5 +218,18 @@ class TemplateController extends Controller
 
         // Return unique tags
         return array_values(array_unique($tags));
+    }
+
+    public static function generateUniKey($templateName)
+    {
+        $templateName = trim($templateName);
+        // Replace "-" with ""
+        $templateName = str_replace('-', '', $templateName);
+        // Keep only uppercase letters and "_"
+        preg_match_all('/[A-Z_]/', $templateName, $matches);
+        $letters = implode('', $matches[0]);
+        // Concatenate OU
+        $unikey = 'OU' . $letters;
+        return $unikey;
     }
 }

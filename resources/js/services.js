@@ -354,7 +354,7 @@ document.getElementById("continue-services-button").addEventListener("click", as
     generateServicesTable(products);
 });
 
-document.getElementById("send_request").addEventListener("click", async function () {
-    let message = await showNotification(" Se ha enviado la solicitud", "El almacenista será notificado para su aprobación", null, "me-2 fas fa-check-circle");
-        location.reload();
-})
+// document.getElementById("send_request").addEventListener("click", async function () {
+//     let message = await showNotification(" Se ha enviado la solicitud", "El almacenista será notificado para su aprobación", null, "me-2 fas fa-check-circle");
+//         location.reload();
+// })

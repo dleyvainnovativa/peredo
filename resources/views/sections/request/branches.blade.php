@@ -53,22 +53,26 @@
                         <label for="email" class="form-label">Correo electrónico</label>
                         <input data-fill="" type="email" class="form-control " id="email" disabled="">
                     </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input data-fill="" type="phone" class="form-control " id="phone">
+                    </div>
 
                     <div class="col-md-6">
                         <label for="days" class="form-label">Monto Autorizado</label>
                         <input data-fill="mtntzd" type="number" class="form-control " id="days" disabled="">
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none">
                         <label for="position" class="form-label">Puesto</label>
                         <input data-fill="puesto" type="text" class="form-control " id="position" disabled="">
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none">
                         <label for="department" class="form-label">Gerencia</label>
                         <input data-fill="areasol" type="text" class="form-control " id="department" disabled="">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none">
                         <label for="department" class="form-label">Dirección perteneciente</label>
                         <input data-fill="areasol" type="text" class="form-control " id="direction" disabled="">
                     </div>
@@ -104,7 +108,8 @@
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Anexos</button>
+                        <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Anexos</button> -->
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Anexos</button>
                     </div>
                 </div>
             </div>
