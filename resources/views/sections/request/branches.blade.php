@@ -46,12 +46,12 @@
 
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">Nombre completo</label>
-                        <input data-fill="npmr" type="text" class="form-control " id="full_name" disabled="">
+                        <input data-fill="npmr" type="text" class="form-control " id="full_name">
                     </div>
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input data-fill="" type="email" class="form-control " id="email" disabled="">
+                        <input data-fill="" type="email" class="form-control " id="email">
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Teléfono</label>
@@ -60,7 +60,7 @@
 
                     <div class="col-md-6">
                         <label for="days" class="form-label">Monto Autorizado</label>
-                        <input data-fill="mtntzd" type="number" class="form-control " id="days" disabled="">
+                        <input data-fill="mtntzd" type="number" class="form-control " id="days">
                     </div>
 
                     <div class="col-md-6 d-none">
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-auto ms-auto col-7">
                         <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Anexos</button> -->
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Anexos</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Validación</button>
                     </div>
                 </div>
             </div>

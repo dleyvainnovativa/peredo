@@ -53,7 +53,7 @@
                             <div class="col-12 col-md-6">
                                 <p><b>Departamento: </b><span id="review_department">Tecnologias de la información</span></p>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 d-none">
                                 <p><b>Puesto: </b><span id="review_position">Desarrollador IBM</span></p>
                             </div>
                             <div class="col-12 col-md-6 d-none">
@@ -92,7 +92,7 @@
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-auto col-5">
-                        <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-services">Anterior</button>
+                        <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-branches">Anterior</button>
                     </div>
                     <div class="col-md-auto col-7 ms-auto">
                         <form>
