@@ -58,10 +58,7 @@
                         <input data-fill="" type="phone" class="form-control " id="phone">
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="days" class="form-label">Monto Autorizado</label>
-                        <input data-fill="mtntzd" type="number" class="form-control " id="days">
-                    </div>
+
 
                     <div class="col-md-6 d-none">
                         <label for="position" class="form-label">Puesto</label>
@@ -105,11 +102,12 @@
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-auto col-5">
+                        <!-- <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button> -->
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-services">Anexos</button> -->
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Validación</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Anexos</button>
+                        <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-annexed">Validación</button> -->
                     </div>
                 </div>
             </div>

@@ -39,9 +39,31 @@ class PageController extends Controller
     {
         $templates = [];
         $content = getJsonData("templates/templates.json");
+        $documentsRaw = getJsonData("company/documents.json");
+        $documents = [];
+        foreach ($documentsRaw as $doc) {
+
+            $sucursal = $doc['SUCURSAL'];
+            $dependencia = $doc['DEPENDENCIA'];
+
+            if (!isset($documents[$sucursal])) {
+                $documents[$sucursal] = [];
+            }
+
+            if (!isset($documents[$sucursal][$dependencia])) {
+                $documents[$sucursal][$dependencia] = [];
+            }
+
+            $documents[$sucursal][$dependencia][] = [
+                "doc_id" => self::getTemplateID($doc['DOCUMENTO']),
+                "documento" => $doc['DOCUMENTO'],
+                "campos" => explode(",", $doc['CAMPOS'])
+            ];
+        }
         foreach ($content as $key => $template) {
             $name = $template["TemplateName"];
             $image = $template["image"] ?? "";
+            $templateObj["doc_id"] = self::getTemplateID($name);
             $templateObj["name"] = $name;
             $templateObj["filename"] = "";
             $templateObj["image"] = $image;
@@ -50,8 +72,14 @@ class PageController extends Controller
         }
         // dd($templates);
         $data["templates"] = $templates;
-
-
+        $data["documents"] = $documents;
         return view('pages.request', $data);
+    }
+    private static function getTemplateID($name)
+    {
+        $name_id = strtolower($name);
+        $name_id = str_replace(' solicitud', '', $name_id);
+        $name_id = preg_replace('/[^a-z0-9_]/', '', $name_id);
+        return $name_id;
     }
 }

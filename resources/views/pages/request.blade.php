@@ -8,8 +8,8 @@
 
     <!-- Step Content -->
     <div class="tab-content" id="stepperTabsContent">
-        @include('sections.request.options')
         @include('sections.request.employee')
+        @include('sections.request.options')
         @include('sections.request.branches')
         @include('sections.request.details')
         @include('sections.request.review')

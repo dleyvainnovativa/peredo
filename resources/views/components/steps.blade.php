@@ -11,15 +11,15 @@
 </style>
 
 <ul class="nav nav-pills d-flex container px-0" id="stepperTabs" role="tablist" style="gap:0;">
-    <li class="nav-item flex-fill text-center calendar-options" role="presentation">
-        <button disabled class="nav-link text-center active mx-auto" id="tab-option" data-bs-toggle="pill" data-bs-target="#pane-option" type="button">
+    <li class="nav-item flex-fill text-center calendar-options active" role="presentation">
+        <button disabled class="nav-link text-center active  mx-auto" id="tab-option" data-bs-toggle="pill" data-bs-target="#pane-option" type="button">
             <div class="rounded-circle bg-primary-subtle border border-dark text-secondary d-flex align-items-center justify-content-center mx-auto">
                 <i class="fas fa-list"></i>
             </div>
-            <small class="d-xl-block d-none mt-2 text-muted" id="main_name">Lista de Plantillas</small>
+            <small class="d-xl-block d-none mt-2 text-muted" id="main_name">Datos Generales</small>
         </button>
     </li>
-    <li class="nav-item flex-fill text-center calendar-options" role="presentation">
+    <li class="nav-item flex-fill text-center calendar-options " role="presentation">
         <button disabled class="nav-link text-center  mx-auto" id="tab-employee" data-bs-toggle="pill" data-bs-target="#pane-employee" type="button">
             <div class="rounded-circle bg-primary-subtle border border-dark text-secondary d-flex align-items-center justify-content-center mx-auto">
                 <i class="fas fa-user"></i>

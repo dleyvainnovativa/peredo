@@ -33,6 +33,8 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js','resources/css/theme.css',
     'resources/js/navigate.js',
     ])
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
     <script preload src="https://kit.fontawesome.com/d544c5e79c.js" crossorigin="anonymous"></script>
