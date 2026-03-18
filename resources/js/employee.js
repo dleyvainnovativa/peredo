@@ -11,8 +11,9 @@ async function searchEmployee(event) {
         let employee = data;
 
         // Fill input fields
-        document.getElementById('employee').value = employee.employee;
-        document.getElementById('full_name').value = employee.full_name;
+        // document.getElementById('employee').value = employee.employee;
+        document.getElementById('full_name').value = employee.name;
+        document.getElementById('phone').value = employee.phone;
         document.getElementById('email').value = employee.email;
         document.getElementById('days').value = employee.days;
         document.getElementById('department').value = employee.department;
@@ -24,7 +25,7 @@ async function searchEmployee(event) {
         document.getElementById('team_leader_email').value = employee.team_leader_email;
 
         // Empleado
-        document.getElementById('review_employee_num').textContent = document.getElementById("employee").value;
+        document.getElementById('review_employee_num').textContent = document.getElementById("employee_number").value;
         document.getElementById('review_employee_name').textContent = document.getElementById("employee_full_name").value;
         document.getElementById('review_employee_rfc').textContent = document.getElementById("employee_rfc").value;
         document.getElementById('review_employee_email').textContent = document.getElementById("employee_email").value;

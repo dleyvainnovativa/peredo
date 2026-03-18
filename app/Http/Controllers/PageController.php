@@ -16,21 +16,27 @@ class PageController extends Controller
             ]);
 
             $employee_num = $validated["employee"];
-
-            $employees = getJsonData("employees.json");
-            $employee = [];
-            foreach ($employees as $key => $value) {
-                if ($value["employee"] == $validated["employee"]) {
-                    $employee = $value;
-                }
-            }
-            // dd($employees, $employee, $employee_num);
-            if (empty($employee)) {
-                return ErrorResponse(400, "Empleado no encontrado", __METHOD__, $request);
-            }
+            $employee = PeredoController::searchByIdentificador($employee_num);
             $data = $employee;
+            if ($employee) {
+                return SuccessResponse(200, "Fecha actualizada", __METHOD__, $data);
+            } else {
+                return SuccessResponse(400, "No hay promotor registrado", __METHOD__, $employee);
+            }
+            // $employee_num = $validated["employee"];
 
-            return SuccessResponse(200, "Fecha actualizada", __METHOD__, $data);
+            // $employees = getJsonData("employees.json");
+            // $employee = [];
+            // foreach ($employees as $key => $value) {
+            //     if ($value["employee"] == $validated["employee"]) {
+            //         $employee = $value;
+            //     }
+            // }
+            // // dd($employees, $employee, $employee_num);
+            // if (empty($employee)) {
+            //     return ErrorResponse(400, "Empleado no encontrado", __METHOD__, $request);
+            // }
+
         } catch (Exception $e) {
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
         }

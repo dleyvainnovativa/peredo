@@ -11,20 +11,21 @@
 
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label">Número de promotor *</label>
                         <div class="input-group mb-3">
-                            <input type="text" name="employee" value="082907558" class="form-control " placeholder="Ingresa tu número de empleado">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">RFC *</label>
-                        <div class="input-group mb-3">
-                            <input type="text" name="rfc" id="rfc" value="PASK820101XYZ" class="form-control " placeholder="Ingresa tu RFC">
+                            <input type="text" name="employee" value="22" class="form-control " placeholder="Ingresa tu número de empleado">
                             <button class="btn btn-primary " onclick="searchEmployee(event)" type="button" id="button-addon2">
                                 Buscar
                             </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 d-none">
+                        <label class="form-label">RFC *</label>
+                        <div class="input-group mb-3">
+                            <input type="text" name="rfc" id="rfc" value="PASK820101XYZ" class="form-control " placeholder="Ingresa tu RFC">
+
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
                     <input data-fill="ndpc" type="hidden" id="employee_dep">
                     <input data-fill="uuid" type="hidden" id="employee_id">
                     <input data-fill="nmlp" type="hidden" id="employee_num"> -->
-                    <input data-fill="fch" type="hidden" id="today" value="2026-03-10">
+                    <input data-fill="fch" type="hidden" id="today" value="2026-03-17">
                     <input data-fill="diasol" type="hidden" id="days_taken">
                     <input data-fill="fechapersol" type="hidden" id="fill_date_init">
                     <input data-fill="fchsl" type="hidden" id="fill_date_end">

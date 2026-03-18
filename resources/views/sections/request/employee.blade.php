@@ -13,7 +13,7 @@
                     <div class="col-md-6">
                         <label class="form-label">Número de empleado *</label>
                         <div class="input-group mb-3">
-                            <input data-fill="nmlp" id="employee" type="text" name="employee" value="012993558" class="form-control " placeholder="Ingresa tu número de empleado">
+                            <input data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control " placeholder="Ingresa tu número de empleado">
                         </div>
                     </div>
 
@@ -23,8 +23,17 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="full_name" class="form-label">Nombre completo (Nombres y Apellidos) <b>*</b></label>
-                        <input data-fill="nmtbj" value="Pedro Pérez" type="text" class="form-control " id="employee_full_name">
+                        <label for="full_name" class="form-label">Nombre <b>*</b></label>
+                        <input data-fill="nmtbj" value="Pedro" type="text" class="form-control " id="employee_full_name">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="lastname" class="form-label">Apellido Materno</label>
+                        <input data-fill="lastname" type="text" value="Pérez" class="form-control " id="lastname">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastname2" class="form-label">Apellido Paterno</label>
+                        <input data-fill="lastname2" type="text" value="Jiménez" class="form-control " id="lastname2">
                     </div>
 
                     <div class="col-md-6">
