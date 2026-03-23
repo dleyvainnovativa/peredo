@@ -9,6 +9,8 @@ export default defineConfig({
                 'resources/js/services.js', 'resources/js/manager.js', 'resources/js/file.js',
                 'resources/js/employee.js',
                 'resources/js/options.js',
+                'resources/js/review.js',
+                'resources/js/promotor.js',
             ],
             refresh: true,
         }),

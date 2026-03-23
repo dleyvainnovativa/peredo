@@ -1,149 +1,151 @@
-// ===============================
-// Employee.js
-// ===============================
+let currentField = null;
+let currentFile = null;
 
-// Async search employee
-async function searchEmployee(event) {
-    event.preventDefault();
+function openUploadModal(field) {
+    currentField = field;
+    document.getElementById('fileInput').value = '';
+    document.getElementById('imagePreview').innerHTML = '';
 
-    let data = await validateForm(event, "employees/search");
-    if (data) {
-        let employee = data;
-
-        // Fill input fields
-        // document.getElementById('employee').value = employee.employee;
-        document.getElementById('full_name').value = employee.name;
-        document.getElementById('phone').value = employee.phone;
-        document.getElementById('email').value = employee.email;
-        document.getElementById('days').value = employee.days;
-        document.getElementById('department').value = employee.department;
-        document.getElementById('direction').value = employee.department;
-        document.getElementById('position').value = employee.position;
-        document.getElementById('payment').value = employee.payment;
-        document.getElementById('shift').value = employee.shift;
-        document.getElementById('team_leader').value = employee.team_leader;
-        document.getElementById('team_leader_email').value = employee.team_leader_email;
-
-        // Empleado
-        document.getElementById('review_employee_num').textContent = document.getElementById("employee_number").value;
-        document.getElementById('review_employee_name').textContent = document.getElementById("employee_full_name").value;
-        document.getElementById('review_employee_rfc').textContent = document.getElementById("employee_rfc").value;
-        document.getElementById('review_employee_email').textContent = document.getElementById("employee_email").value;
-
-        // Promotor
-        document.getElementById('review_name').textContent = employee.full_name;
-        document.getElementById('review_email').textContent = employee.email;
-        document.getElementById('review_days').textContent = employee.days;
-        document.getElementById('review_department').textContent = employee.department;
-        document.getElementById('review_position').textContent = employee.position;
-        document.getElementById('review_payment').textContent = employee.payment;
-        document.getElementById('review_shift').textContent = employee.shift;
-        document.getElementById('review_team_leader').textContent = employee.team_leader;
-        document.getElementById('review_team_leader_email').textContent = employee.team_leader_email;
-
-
-        // Enable next button on personal step
-        document.getElementById("send_request").disabled = false;
-    }
+    let modal = new bootstrap.Modal(document.getElementById('uploadModal'));
+    modal.show();
 }
 
-// ===============================
-// Vacation form handling
-// ===============================
+document.getElementById('fileInput').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-// Grab elements
-const dateInitInput = document.getElementById("date_init");
-const dateEndInput = document.getElementById("date_end");
-const commentsInput = document.getElementById("comments");
-const validateBtn = document.getElementById("validateDetails");
+    currentFile = file;
 
-const reviewDateInit = document.getElementById("review_date_init");
-const reviewDateEnd = document.getElementById("review_date_end");
-const reviewTotalDays = document.getElementById("review_total_days");
-const reviewComments = document.getElementById("review_comments"); // optional
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById('imagePreview').innerHTML = `
+            <img src="${e.target.result}" class="img-fluid rounded" />
+        `;
+    };
+    reader.readAsDataURL(file);
+});
 
-let swalShown = false; // control duplicate alerts
+function saveImage() {
+    if (!currentFile) return;
 
-// Format date
-function formatDate(dateStr) {
-    if (!dateStr) return "";
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("es-MX", {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
+    const preview = document.getElementById(`preview_${currentField}`);
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        preview.innerHTML = `
+            <img src="${e.target.result}" class="img-fluid rounded" />
+            <small class="d-block mt-2 btn btn-primary">Cambiar</small>
+        `;
+    };
+    reader.readAsDataURL(currentFile);
+
+    // Optional: store file in hidden input or JS object
+    window[currentField] = currentFile;
+
+    bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
+}
+
+async function generatePDF(frontFile, backFile) {
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF();
+
+    await addImageToPDF(pdf, frontFile);
+
+    pdf.addPage();
+    await addImageToPDF(pdf, backFile);
+
+    return pdf.output('blob');
+}
+
+async function addImageToPDF(pdf, file) {
+    const base64 = await fileToBase64(file);
+
+    const img = await loadImage(base64);
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    // Maintain aspect ratio
+    const ratio = img.width / img.height;
+
+    let newWidth = pageWidth;
+    let newHeight = newWidth / ratio;
+
+    // If height exceeds page, scale down
+    if (newHeight > pageHeight) {
+        newHeight = pageHeight;
+        newWidth = newHeight * ratio;
+    }
+
+    // Center image
+    const x = (pageWidth - newWidth) / 2;
+    const y = (pageHeight - newHeight) / 2;
+
+    const format = base64.includes('png') ? 'PNG' : 'JPEG';
+
+    pdf.addImage(base64, format, x, y, newWidth, newHeight);
+}
+
+function loadImage(base64) {
+    return new Promise(resolve => {
+        const img = new Image();
+        img.src = base64;
+        img.onload = () => resolve(img);
     });
 }
 
-// Calculate total days
-function calculateDays(start, end) {
-    if (!start || !end) return "";
-    const d1 = new Date(start);
-    const d2 = new Date(end);
-    const diff = (d2 - d1) / (1000 * 60 * 60 * 24);
-    return diff >= 0 ? `${diff + 1} días y ${diff} noches` : "";
+function fileToBase64(file) {
+    return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.readAsDataURL(file);
+    });
 }
 
-// Validate form logic
-function checkForm() {
-    const initVal = dateInitInput.value;
-    const endVal = dateEndInput.value;
+function blobToFile(blob, filename) {
+    return new File([blob], filename, {
+        type: 'application/pdf'
+    });
+}
 
-    if (initVal && endVal) {
-        const allowedDays = 5;
-        const requestedDays = (new Date(endVal) - new Date(initVal)) / (1000 * 60 * 60 * 24) + 1;
+async function prepareEmployee() {
 
-        if (requestedDays > allowedDays) {
-            if (!swalShown) {
-                showAlert("Error al seleccionar días", `Solicitaste ${requestedDays} días, pero solo tienes ${allowedDays} disponibles.`)
-                // Swal.fire({
-                //     icon: "error",
-                //     title: "¡Error!",
-                //     text: `Solicitaste ${requestedDays} días, pero solo tienes ${allowedDays} disponibles.`,
-                //     confirmButtonText: "Entendido"
-                // });
-                swalShown = true;
-            }
-            // validateBtn.disabled = true;
-            return;
-        }
+    // ✅ 1. Validate images
+    if (!window.ine_front || !window.ine_back) {
+        showAlert('Error al ingresar datos', 'Debes subir INE frente y reverso');
+        return;
+    }
 
-        // ✅ valid case
-        // validateBtn.disabled = false;
-        swalShown = false;
-    } else {
-        // validateBtn.disabled = true;
+    try {
+
+        // ✅ 2. Generate PDF
+        const pdfBlob = await generatePDF(window.ine_front, window.ine_back);
+
+        // ✅ 3. Convert to File
+        const pdfFile = blobToFile(pdfBlob, 'annexed.pdf');
+
+        // ✅ 4. Inject into input[type=file]
+        const input = document.getElementById('annexed_input');
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(pdfFile);
+
+        input.files = dataTransfer.files;
+
+        console.log('PDF listo:', input.files[0]);
+
+        await manualNavigate("tab-branches");
+
+        // 👉 Now you can submit form normally
+        // document.getElementById('employee_form').submit();
+
+    } catch (error) {
+        console.error(error);
+        alert('Error al generar el PDF');
     }
 }
 
-// Update preview section
-async function updateReview() {
-    // const initVal = dateInitInput.value;
-    // const endVal = dateEndInput.value;
-    // reviewDateInit.textContent = formatDate(initVal);
-    // reviewDateEnd.textContent = formatDate(endVal);
-    // let days_taken = calculateDays(initVal, endVal);
-    // reviewTotalDays.textContent = days_taken;
-    // document.getElementById("days_taken").value = days_taken;
-    // document.getElementById("leader_comments").value = commentsInput.value;
-
-    // if (reviewComments) reviewComments.textContent = commentsInput.value;
-
-    await fillTemplateFields();
-    await fillTemplateHTML();
-    await fillDocument();
-
-    // Run validation
-    checkForm();
-}
-
-// ===============================
-// Event listeners
-// ===============================
-
-
-
-
-// Expose searchEmployee globally
-window.searchEmployee = searchEmployee;
-window.updateReview = updateReview;
+window.openUploadModal=openUploadModal;
+window.saveImage=saveImage;
+window.prepareEmployee=prepareEmployee;

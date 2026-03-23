@@ -18,5 +18,5 @@
 @include("components.filters")
 @include("modals.add_item")
 
-@vite(['resources/js/options.js', 'resources/js/navigate.js', 'resources/js/services.js', 'resources/js/file.js', 'resources/js/employee.js',])
+@vite(['resources/js/options.js', 'resources/js/navigate.js', 'resources/js/services.js', 'resources/js/file.js', 'resources/js/employee.js', 'resources/js/promotor.js', 'resources/js/review.js'])
 @endsection

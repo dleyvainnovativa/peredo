@@ -4,8 +4,8 @@ async function buildDetails() {
     let content = JSON.parse(chosen.value);
     let image = content.image;
     let name = content.TemplateName;
-    document.getElementById("main_img").src=image;
-    document.getElementById("main_name").textContent=name;
+    document.getElementById("main_img").src = image;
+    document.getElementById("main_name").textContent = name;
     let template_id = content.id;
     document.getElementById("send_template_id").value = template_id;
     // console.log(template_id);
@@ -31,8 +31,7 @@ async function getFields(all_fields) {
     return fields;
 }
 
-async function buildTemplateHtml(html){
-    
+async function buildTemplateHtml(html) {
     let templateHTML = document.getElementById("template_html");
     templateHTML.innerHTML = "";
     templateHTML.innerHTML = html;
@@ -54,15 +53,15 @@ async function buildFormControls(jsonData) {
 
         let inputGroup = document.createElement("div");
         inputGroup.className = "input-group mb-3";
-            // Build input
-            let input = document.createElement("input");
-            input.className = "form-control form-control-lg";
-            input.type = "text";
-            input.hidden = true;
-            input.setAttribute("data-variable", field.variable);
-            input.setAttribute("name", field.variable);
-            input.placeholder = "Ingresa " + field.description;
-            inputGroup.appendChild(input);
+        // Build input
+        let input = document.createElement("input");
+        input.className = "form-control form-control-lg";
+        input.type = "text";
+        input.hidden = true;
+        input.setAttribute("data-variable", field.variable);
+        input.setAttribute("name", field.variable);
+        input.placeholder = "Ingresa " + field.description;
+        inputGroup.appendChild(input);
 
         // wrapper.appendChild(inputGroup);
         // container.appendChild(wrapper);
@@ -70,7 +69,6 @@ async function buildFormControls(jsonData) {
     });
 }
 async function buildAnexed(jsonData) {
-
     const container = document.getElementById("template_annexed");
     container.innerHTML = ""; // Clear before building
     console.log(jsonData);
@@ -80,18 +78,18 @@ async function buildAnexed(jsonData) {
 
         let inputGroup = document.createElement("div");
         inputGroup.className = "col-12";
-            // Build input
-            let label = document.createElement("label");
-            let input = document.createElement("input");
-            label.className = "form-label";
-            label.textContent = field;
-            input.className = "form-control";
-            input.type = "file";
-            // input.hidden = true;
-            input.setAttribute("data-variable", field);
-            // input.placeholder = "Ingresa " + field.description;
-            inputGroup.appendChild(label);
-            inputGroup.appendChild(input);
+        // Build input
+        let label = document.createElement("label");
+        let input = document.createElement("input");
+        label.className = "form-label";
+        label.textContent = field;
+        input.className = "form-control";
+        input.type = "file";
+        // input.hidden = true;
+        input.setAttribute("data-variable", field);
+        // input.placeholder = "Ingresa " + field.description;
+        inputGroup.appendChild(label);
+        inputGroup.appendChild(input);
 
         // wrapper.appendChild(inputGroup);
         // container.appendChild(wrapper);
@@ -99,8 +97,8 @@ async function buildAnexed(jsonData) {
     });
 }
 
-async function fillTemplateHTML(){
-        let chosen = document.getElementById("templates_choose");
+async function fillTemplateHTML() {
+    let chosen = document.getElementById("templates_choose");
     let content = JSON.parse(chosen.value);
     let template = content.Templates;
     await buildTemplateHtml(template);
@@ -112,9 +110,9 @@ async function fillTemplateHTML(){
 
     // Get all hidden fields from promotorForm
     const hiddenFields = [
-  ...document.querySelectorAll("#promotorForm [data-fill]"),
-  ...document.querySelectorAll("#employee_form [data-fill]")
-];
+        ...document.querySelectorAll("#promotorForm [data-fill]"),
+        ...document.querySelectorAll("#employee_form [data-fill]")
+    ];
 
     hiddenFields.forEach(hidden => {
         const key = hidden.getAttribute("data-fill");
@@ -131,21 +129,25 @@ async function fillTemplateHTML(){
     container.innerHTML = html;
 
 }
-async function fillDocument(){
+async function fillDocument() {
 
     const container = document.getElementById("template_html");
     document.getElementById("send_html").value = JSON.stringify(container.innerHTML);
     document.getElementById("send_template_fields").value = JSON.stringify(getTemplateFields());
 
+    document.getElementById("send_promotor_id").value = document.getElementById("promotor_id").value;
     document.getElementById("send_promotor_name").value = document.getElementById("full_name").value;
     document.getElementById("send_promotor_email").value = document.getElementById("email").value;
-
-    document.getElementById("send_employee_name").value = document.getElementById("employee_full_name").value;
+    document.getElementById("send_employee_rfc").value = document.getElementById("employee_rfc").value;
+    document.getElementById("send_employee_phone").value = document.getElementById("employee_phone").value;
+    document.getElementById("send_employee_name").value = `${document.getElementById("employee_full_name").value} ${document.getElementById("lastname").value} ${document.getElementById("lastname2").value}`;
+    document.getElementById("send_employee_firstname").value = `${document.getElementById("employee_full_name").value}`;
+    document.getElementById("send_employee_lastname").value = `${document.getElementById("lastname").value}`;
+    document.getElementById("send_employee_lastname2").value = `${document.getElementById("lastname2").value}`;
     document.getElementById("send_employee_email").value = document.getElementById("employee_email").value;
-    
-    document.getElementById("send_employee_num").value = document.getElementById("employee").value;
-    document.getElementById("send_employee_position").value = document.getElementById("position").value;
-    document.getElementById("send_employee_department").value = document.getElementById("department").value;
+    document.getElementById("send_employee_num").value = document.getElementById("employee_number").value;
+    document.getElementById("send_employee_amount").value = document.getElementById("employee_amount").value;
+    document.getElementById("send_employee_lastid").value = document.getElementById("employee_last_id").value;
 
     // document.getElementById("send_leader_name").value = document.getElementById("team_leader").value;
     // document.getElementById("send_leader_email").value = document.getElementById("team_leader_email").value;
@@ -154,7 +156,7 @@ async function fillDocument(){
 
 function getTemplateFields() {
     const inputs = document.querySelectorAll('#template_fields input[data-variable]');
-    
+
     const fields = Array.from(inputs).map(input => {
         return {
             name: input.dataset.variable,
@@ -167,9 +169,9 @@ function getTemplateFields() {
 
 async function fillTemplateFields() {
     const hiddenFields = [
-  ...document.querySelectorAll("#promotorForm [data-fill]"),
-  ...document.querySelectorAll("#employee_form [data-fill]")
-];
+        ...document.querySelectorAll("#promotorForm [data-fill]"),
+        ...document.querySelectorAll("#employee_form [data-fill]")
+    ];
     // console.log(hiddenFields);
     hiddenFields.forEach(hidden => {
         const key = hidden.getAttribute("data-fill");
@@ -191,18 +193,46 @@ async function fillTemplateFields() {
     });
 }
 
-async function uploadDocument(event) {
-    event.preventDefault();
-    let data = await validateForm(event, "contisign/send");
-    if (data) {
-        console.log(data);
-        let message = await showNotification(" Se ha enviado la solicitud", "El almacenista será notificado para su aprobación", null, "me-2 fas fa-check-circle");
-        location.reload();
-    }
-}
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const sucursalSelect = document.getElementById("employee_sucursal");
+        const dependenciaSelect = document.getElementById("employee_direction");
+
+        // Populate sucursal
+        let option = document.createElement("option");
+        option.value = null;
+        option.textContent = "Selecciona Sucursal";
+            sucursalSelect.appendChild(option);
+
+        Object.keys(documents).forEach(sucursal => {
+            const option = document.createElement("option");
+            option.value = sucursal;
+            option.textContent = sucursal;
+            sucursalSelect.appendChild(option);
+        });
+
+        // When sucursal changes
+        sucursalSelect.addEventListener("change", function() {
+
+            const sucursal = this.value;
+
+            dependenciaSelect.innerHTML = '<option value="">Seleccione dependencia</option>';
+
+            if (!documents[sucursal]) return;
+
+            Object.keys(documents[sucursal]).forEach(dep => {
+                const option = document.createElement("option");
+                option.value = dep;
+                option.textContent = dep;
+                dependenciaSelect.appendChild(option);
+            });
+
+        });
+
+    });
 
 
-window.uploadDocument = uploadDocument;
 window.buildDetails = buildDetails;
 window.fillTemplateFields = fillTemplateFields;
 window.fillTemplateHTML = fillTemplateHTML;

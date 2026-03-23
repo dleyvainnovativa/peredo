@@ -5,8 +5,6 @@
             <p class="text-muted">Favor de agregar tu número de empleado y RFC para validación</p>
         </div>
         <div class="row g-4 mb-5" id="employee-grid">
-
-
             <form id="employee_form">
                 <div class="row g-3">
 
@@ -22,17 +20,17 @@
                         <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC">
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="full_name" class="form-label">Nombre <b>*</b></label>
                         <input data-fill="nmtbj" value="Pedro" type="text" class="form-control " id="employee_full_name">
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="lastname" class="form-label">Apellido Materno</label>
+                    <div class="col-md-4">
+                        <label for="lastname" class="form-label">Apellido Paterno</label>
                         <input data-fill="lastname" type="text" value="Pérez" class="form-control " id="lastname">
                     </div>
-                    <div class="col-md-6">
-                        <label for="lastname2" class="form-label">Apellido Paterno</label>
+                    <div class="col-md-4">
+                        <label for="lastname2" class="form-label">Apellido Materno</label>
                         <input data-fill="lastname2" type="text" value="Jiménez" class="form-control " id="lastname2">
                     </div>
 
@@ -47,30 +45,28 @@
 
                     <div class="col-md-6">
                         <label for="payment" class="form-label">Último UUID (Si aplica)</label>
-                        <input data-fill="uuid" type="text" class="form-control " value="1" id="employee_payment">
+                        <input data-fill="uuid" type="text" class="form-control " value="1" id="employee_last_id">
                     </div>
                     <div class="col-md-6">
-                        <label for="days" class="form-label">Monto Solicitado</label>
-                        <input data-fill="mtntzd" type="number" value="1200" class="form-control " id="days">
+                        <label for="employee_amount" class="form-label">Monto Solicitado</label>
+                        <input data-fill="mtntzd" type="number" value="1200" class="form-control " id="employee_amount">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">INE Frente</label>
-                        <input type="file"
-                            id="ine_front"
-                            class="form-control"
-                            accept="image/*,application/pdf"
-                            capture="environment"
-                            required>
+                        <div class="upload-card" onclick="openUploadModal('ine_front')">
+                            <div id="preview_ine_front" class="text-center p-4 border rounded">
+                                <span><i class="fas fa-camera me-2"></i> Subir INE Frente</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">INE Reverso</label>
-                        <input type="file"
-                            id="ine_back"
-                            class="form-control"
-                            accept="image/*,application/pdf"
-                            capture="environment"
-                            required>
+                        <div class="upload-card" onclick="openUploadModal('ine_back')">
+                            <div id="preview_ine_back" class="text-center p-4 border rounded">
+                                <span><i class="fas fa-camera me-2"></i> Subir INE Reverso</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -84,7 +80,7 @@
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-option">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" id="continue-employee-button" data-next="tab-branches">Datos del Promotor</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="prepareEmployee()" id="continue-employee-button">Datos del Promotor</button>
                         <!-- <button type="button" class="btn btn-primary w-100" id="continue-employee-button" data-next="tab-option">Seleccionar Plantilla</button> -->
                     </div>
                 </div>
@@ -93,41 +89,27 @@
     </div>
 </div>
 
+<div class="modal fade" id="uploadModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+
+            <h5>Subir documento</h5>
+
+            <input type="file"
+                id="fileInput"
+                accept="image/*"
+                capture="environment"
+                class="form-control mb-3">
+
+            <div id="imagePreview" class="text-center mb-3"></div>
+
+            <button class="btn btn-primary w-100" onclick="saveImage()">Guardar</button>
+
+        </div>
+    </div>
+</div>
 
 <script>
     const documents = @json($documents);
     const templates = @json($templates);
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-        const sucursalSelect = document.getElementById("employee_sucursal");
-        const dependenciaSelect = document.getElementById("employee_direction");
-
-        // Populate sucursal
-        Object.keys(documents).forEach(sucursal => {
-            const option = document.createElement("option");
-            option.value = sucursal;
-            option.textContent = sucursal;
-            sucursalSelect.appendChild(option);
-        });
-
-        // When sucursal changes
-        sucursalSelect.addEventListener("change", function() {
-
-            const sucursal = this.value;
-
-            dependenciaSelect.innerHTML = '<option value="">Seleccione dependencia</option>';
-
-            if (!documents[sucursal]) return;
-
-            Object.keys(documents[sucursal]).forEach(dep => {
-                const option = document.createElement("option");
-                option.value = dep;
-                option.textContent = dep;
-                dependenciaSelect.appendChild(option);
-            });
-
-        });
-
-    });
 </script>

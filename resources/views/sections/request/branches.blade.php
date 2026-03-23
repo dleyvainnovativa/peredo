@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <label class="form-label">Número de promotor *</label>
                         <div class="input-group mb-3">
-                            <input type="text" name="employee" value="22" class="form-control " placeholder="Ingresa tu número de empleado">
+                            <input type="text" name="employee" id="promotor_id" value="22" class="form-control " placeholder="Ingresa tu número de empleado">
                             <button class="btn btn-primary " onclick="searchEmployee(event)" type="button" id="button-addon2">
                                 Buscar
                             </button>
@@ -47,16 +47,16 @@
 
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">Nombre completo</label>
-                        <input data-fill="npmr" type="text" class="form-control " id="full_name">
+                        <input data-fill="npmr" disabled type="text" class="form-control " id="full_name">
                     </div>
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input data-fill="" type="email" class="form-control " id="email">
+                        <input data-fill="" disabled type="email" class="form-control " id="email">
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Teléfono</label>
-                        <input data-fill="" type="phone" class="form-control " id="phone">
+                        <input data-fill="" disabled type="phone" class="form-control " id="phone">
                     </div>
 
 
@@ -107,7 +107,7 @@
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Anexos</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Resumen</button>
                         <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-annexed">Validación</button> -->
                     </div>
                 </div>

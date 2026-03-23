@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class TemplateController extends Controller
 {
 
     // gixtepan@sistemascontino.com.mx
     // achavez@sistemascontino.com.mx
-    public static function template($contisign, $requestSignatures, $template, $fields, $html, $request)
+    public static function template($contisign, $requestSignatures, $template, $fields, $html, $request, $annexed, $register)
     {
+
         $dataTemplatesFields = [];
+        $annexedFile = self::setAnnexed($annexed);
 
         foreach ($fields as $field) {
             $dataTemplatesFields[$field["name"]] = $field["value"];
@@ -119,7 +123,13 @@ class TemplateController extends Controller
         // // === 3. Create DataTemplate ===
         $dataTemplatePayload = [
             "Active" => $template['Active'],
-            "annexed" => $template['Annexed'],
+            "annexed" => $annexedFile,
+            //             [
+            //     {
+            //         "FileName": "INE 1",
+            //         "FieldUrl": "https://files.contisign.com.mx/annexed/51774221805030.png"
+            //     }
+            // ]
             "Signsstatus" => "Este documento no ha sido firmado",
             "contract_id" => $uniKeyData['contractId'],
             "DataTemplates" => $dataTemplatesFields,
@@ -173,6 +183,13 @@ class TemplateController extends Controller
             'documentId' => $dataTemplateData['id'],
             'message' => $signsData['Message'] ?? 'Documento generado correctamente'
         ];
+
+        $register["id_contisign"] = $dataTemplateData['id'];
+        $register["unikey"] = $uniKeyData['unikey'];
+        $register["document_url"] = $dataTemplateData['documentUrl'];
+
+        RequestController::store($register);
+
 
         Log::debug([$data]);
 
@@ -231,5 +248,38 @@ class TemplateController extends Controller
         // Concatenate OU
         $unikey = 'OU' . $letters;
         return $unikey;
+    }
+
+
+    public static function setAnnexed($file)
+    {
+        try {
+
+            if (!$file || !$file->isValid()) {
+                return null;
+            }
+            $filename = Str::uuid() . '.pdf';
+            $response = Http::timeout(30)->attach(
+                'file',
+                fopen($file->getRealPath(), 'r'),
+                $filename
+            )->post('https://api.contisign.com.mx/api/uploaddocumentfile', [
+                'type' => 'annexed'
+            ]);
+
+            if (!$response->successful()) {
+                throw new \Exception('Error al subir archivo a Contisign');
+            }
+            $data = $response->json();
+            return [
+                [
+                    "FileName" => "INE",
+                    "FieldUrl" => $data['ImageUrl'] ?? null
+                ]
+            ];
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+            return null;
+        }
     }
 }

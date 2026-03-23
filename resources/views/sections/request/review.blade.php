@@ -1,5 +1,4 @@
 <!-- Review & Submit -->
-<script src="https://js.stripe.com/v3/"></script>
 
 <div class="tab-pane fade" id="pane-review" role="tabpanel" aria-labelledby="tab-review">
     <div class="container py-2">
@@ -27,7 +26,7 @@
                                 <p><b>Correo electrónico: </b><span id="review_employee_email">pedrop@correo.com</span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>Dependencia: </b><span id="review_employee_days">Ventas</span></p>
+                                <p><b>Dependencia: </b><span id="review_dependencia">Ventas</span></p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <p><b>UUID: </b><span id="review_employee_department">1</span></p>
@@ -48,9 +47,9 @@
                                 <p><b>Correo electrónico: </b><span id="review_email">gestion.documental@sistemascontino.com.mx</span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>Monto Autorizado: </b><span id="review_days">4</span></p>
+                                <p><b>Teléfono: </b><span id="review_phone"></span></p>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 d-none">
                                 <p><b>Departamento: </b><span id="review_department">Tecnologias de la información</span></p>
                             </div>
                             <div class="col-12 col-md-6 d-none">
@@ -98,17 +97,23 @@
                         <form>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input name="template_id" type="hidden" id="send_template_id">
-                            <input name="date_limit" type="hidden" id="send_date_limit" value="2025-10-18">
-
+                            <input class="d-none" name="annexed" type="file" id="annexed_input">
                             <input name="fields" type="hidden" id="send_template_fields">
 
+                            <input name="promotor_id" type="hidden" id="send_promotor_id">
                             <input name="promotor_name" type="hidden" id="send_promotor_name">
                             <input name="promotor_email" type="hidden" id="send_promotor_email">
+
                             <input name="employee_name" type="hidden" id="send_employee_name">
+                            <input name="employee_rfc" type="hidden" id="send_employee_rfc">
+                            <input name="employee_firstname" type="hidden" id="send_employee_firstname">
+                            <input name="employee_lastname" type="hidden" id="send_employee_lastname">
+                            <input name="employee_lastname2" type="hidden" id="send_employee_lastname2">
                             <input name="employee_email" type="hidden" id="send_employee_email">
+                            <input name="employee_phone" type="hidden" id="send_employee_phone">
                             <input name="employee_num" type="hidden" id="send_employee_num">
-                            <input name="employee_position" type="hidden" id="send_employee_position">
-                            <input name="employee_department" type="hidden" id="send_employee_department">
+                            <input name="employee_amount" type="hidden" id="send_employee_amount">
+                            <input name="employee_lastid" type="hidden" id="send_employee_lastid">
 
                             <div id="template_fields" class="text-dark col-12 d-none">
                             </div>

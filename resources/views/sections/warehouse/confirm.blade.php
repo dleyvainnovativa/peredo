@@ -1,5 +1,4 @@
 <!-- Review & Submit -->
-<script src="https://js.stripe.com/v3/"></script>
 
 <div class="tab-pane fade " id="pane-confirm" role="tabpanel" aria-labelledby="tab-confirm">
     <div class="container py-2">
