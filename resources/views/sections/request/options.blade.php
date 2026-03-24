@@ -31,7 +31,7 @@
                         <!-- <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button> -->
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" onclick="buildDetails()" id="continue-options-button" data-next="tab-employee">Datos del Empleado</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="buildDetails()" id="continue-options-button">Datos del Empleado</button>
                         <!-- <button type="button" class="btn btn-primary w-100" onclick="buildDetails()" id="continue-options-button" data-next="tab-branches">Siguiente</button> -->
 
                     </div>

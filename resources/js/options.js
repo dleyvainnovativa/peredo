@@ -1,21 +1,30 @@
 async function buildDetails() {
     let chosen = document.getElementById("templates_choose");
     console.log(chosen);
-    let content = JSON.parse(chosen.value);
-    let image = content.image;
-    let name = content.TemplateName;
-    document.getElementById("main_img").src = image;
-    document.getElementById("main_name").textContent = name;
-    let template_id = content.id;
-    document.getElementById("send_template_id").value = template_id;
-    // console.log(template_id);
-    let template = content.Templates;
-    let fields = await getFields(content.Fields);
-    let annexed = await content.Annexed;
-    console.log(fields);
-    await buildFormControls(fields);
-    await buildAnexed(annexed);
-    await buildTemplateHtml(template);
+    if(chosen.value){
+        let content = JSON.parse(chosen.value);
+        console.log(content);
+        let image = content.image;
+        let name = content.TemplateName;
+        document.getElementById("main_img").src = image ?? "img/logo.png";
+        document.getElementById("main_name").textContent = name;
+        let template_id = content.id;
+        document.getElementById("send_template_id").value = template_id;
+        // console.log(template_id);
+        let template = content.Templates;
+        let fields = await getFields(content.Fields);
+        let annexed = await content.Annexed;
+        console.log(fields);
+        await buildFormControls(fields);
+        await buildAnexed(annexed);
+        await buildTemplateHtml(template);
+        manualNavigate("tab-employee");
+
+    }else{
+                showAlert("Seleccione Plantilla", "Favor de seleccionar la plantilla para iniciar proceso");
+
+    }
+
 
     // console.log(template);
     // console.log(fields);

@@ -46,7 +46,9 @@ function saveImage() {
 }
 
 async function generatePDF(frontFile, backFile) {
-    const { jsPDF } = window.jspdf;
+    const {
+        jsPDF
+    } = window.jspdf;
 
     const pdf = new jsPDF();
 
@@ -111,34 +113,29 @@ function blobToFile(blob, filename) {
 
 async function prepareEmployee() {
 
-    // ✅ 1. Validate images
+    // Initialize Form Validation & Submit
+    const form = document.querySelector('#employee_form.needs-validation')
+    if (!form.checkValidity()) {
+        showAlert('Faltan datos', 'Ingrese todos los campos obligatorios');
+        return
+    }
+    form.classList.add('was-validated');
+
+
+
     if (!window.ine_front || !window.ine_back) {
         showAlert('Error al ingresar datos', 'Debes subir INE frente y reverso');
         return;
     }
-
     try {
-
-        // ✅ 2. Generate PDF
         const pdfBlob = await generatePDF(window.ine_front, window.ine_back);
-
-        // ✅ 3. Convert to File
         const pdfFile = blobToFile(pdfBlob, 'annexed.pdf');
-
-        // ✅ 4. Inject into input[type=file]
         const input = document.getElementById('annexed_input');
-
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(pdfFile);
-
         input.files = dataTransfer.files;
-
         console.log('PDF listo:', input.files[0]);
-
         await manualNavigate("tab-branches");
-
-        // 👉 Now you can submit form normally
-        // document.getElementById('employee_form').submit();
 
     } catch (error) {
         console.error(error);
@@ -146,6 +143,6 @@ async function prepareEmployee() {
     }
 }
 
-window.openUploadModal=openUploadModal;
-window.saveImage=saveImage;
-window.prepareEmployee=prepareEmployee;
+window.openUploadModal = openUploadModal;
+window.saveImage = saveImage;
+window.prepareEmployee = prepareEmployee;

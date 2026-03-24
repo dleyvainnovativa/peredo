@@ -4,8 +4,20 @@
 
 // Async search employee
 async function searchEmployee(event) {
+        document.getElementById('full_name').value = null;
+        document.getElementById('phone').value =  null;
+        document.getElementById('email').value =  null;
+        document.getElementById('review_employee_num').textContent = null;
+        document.getElementById('review_employee_name').textContent = null;
+        document.getElementById('review_employee_rfc').textContent = null;
+        document.getElementById('review_employee_email').textContent = null;
+        document.getElementById('review_dependencia').textContent = null;
+        document.getElementById('review_name').textContent = null;
+        document.getElementById('review_email').textContent = null;
+        document.getElementById('review_phone').textContent = null;
+        document.getElementById("send_request").disabled = true;
+        document.getElementById("continue-branches-button").disabled = true;
     event.preventDefault();
-
     let data = await validateForm(event, "employees/search");
     if (data) {
         let employee = data;
@@ -29,6 +41,9 @@ async function searchEmployee(event) {
 
         // Enable next button on personal step
         document.getElementById("send_request").disabled = false;
+        document.getElementById("continue-branches-button").disabled = false;
+    }else{
+        showAlert('Promotor no encontrado', 'El ID del promotor no es válido');
     }
 }
 
@@ -40,6 +55,11 @@ async function updateReview() {
     await fillTemplateFields();
     await fillTemplateHTML();
     await fillDocument();
+    if(document.getElementById("review_email").textContent){
+        manualNavigate("tab-review");
+    }else{
+        showAlert('Faltan datos del promotor', 'Busque de nuevo los datos del promotor');
+    }
 }
 
 // Expose searchEmployee globally

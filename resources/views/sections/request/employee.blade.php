@@ -5,29 +5,29 @@
             <p class="text-muted">Favor de agregar tu número de empleado y RFC para validación</p>
         </div>
         <div class="row g-4 mb-5" id="employee-grid">
-            <form id="employee_form">
+            <form id="employee_form" class="needs-validation">
                 <div class="row g-3">
 
                     <div class="col-md-6">
                         <label class="form-label">Número de empleado *</label>
                         <div class="input-group mb-3">
-                            <input data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control " placeholder="Ingresa tu número de empleado">
+                            <input data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control" placeholder="Ingresa tu número de empleado" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">RFC *</label>
-                        <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC">
+                        <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
                     </div>
 
                     <div class="col-md-4">
                         <label for="full_name" class="form-label">Nombre <b>*</b></label>
-                        <input data-fill="nmtbj" value="Pedro" type="text" class="form-control " id="employee_full_name">
+                        <input data-fill="nmtbj" value="Pedro" type="text" class="form-control " id="employee_full_name" required>
                     </div>
 
                     <div class="col-md-4">
                         <label for="lastname" class="form-label">Apellido Paterno</label>
-                        <input data-fill="lastname" type="text" value="Pérez" class="form-control " id="lastname">
+                        <input data-fill="lastname" type="text" value="Pérez" class="form-control " id="lastname" required>
                     </div>
                     <div class="col-md-4">
                         <label for="lastname2" class="form-label">Apellido Materno</label>
@@ -36,11 +36,11 @@
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico <b>*</b></label>
-                        <input data-fill="" value="dancaballerodlc@gmail.com" type="email" class="form-control " id="employee_email">
+                        <input data-fill="" value="dancaballerodlc@gmail.com" type="email" class="form-control " id="employee_email" required>
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Teléfono Celular <b>*</b></label>
-                        <input data-fill="" value="2291229900" type="phone" class="form-control " id="employee_phone">
+                        <input data-fill="" value="2291229900" type="phone" class="form-control " id="employee_phone" required>
                     </div>
 
                     <div class="col-md-6">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="employee_amount" class="form-label">Monto Solicitado</label>
-                        <input data-fill="mtntzd" type="number" value="1200" class="form-control " id="employee_amount">
+                        <input data-fill="mtntzd" type="number" value="1200" class="form-control " id="employee_amount" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">INE Frente</label>

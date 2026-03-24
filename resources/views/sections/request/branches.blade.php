@@ -107,7 +107,7 @@
                         <button type="button" class="btn btn-outline-primary w-100" data-prev="tab-employee">Anterior</button>
                     </div>
                     <div class="col-md-auto ms-auto col-7">
-                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-review">Resumen</button>
+                        <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" disabled>Resumen</button>
                         <!-- <button type="button" class="btn btn-primary w-100" onclick="updateReview()" id="continue-branches-button" data-next="tab-annexed">Validación</button> -->
                     </div>
                 </div>
