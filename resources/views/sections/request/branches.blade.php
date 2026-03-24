@@ -14,18 +14,10 @@
                     <div class="col-md-12">
                         <label class="form-label">Número de promotor *</label>
                         <div class="input-group mb-3">
-                            <input type="text" name="employee" id="promotor_id" value="22" class="form-control " placeholder="Ingresa tu número de empleado">
-                            <button class="btn btn-primary " onclick="searchEmployee(event)" type="button" id="button-addon2">
+                            <input type="text" name="employee" id="promotor_id" value="{{$promotor}}" class="form-control " placeholder="Ingresa tu número de empleado">
+                            <button class="btn btn-primary " onclick="searchEmployee(event)" type="button" id="searchButton">
                                 Buscar
                             </button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 d-none">
-                        <label class="form-label">RFC *</label>
-                        <div class="input-group mb-3">
-                            <input type="text" name="rfc" id="rfc" value="PASK820101XYZ" class="form-control " placeholder="Ingresa tu RFC">
-
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,9 @@ class ContisignController extends Controller
                 'employee_name' => 'required|string',
                 'employee_email' => 'required|email',
 
+                'document_id' => 'required|string',
+                'company_id' => 'required|string',
+
                 'employee_firstname' => 'required|string',
                 'employee_lastname' => 'required|string',
                 'employee_lastname2' => 'required|string',
@@ -51,13 +54,15 @@ class ContisignController extends Controller
                 'monto_prestamo' => $request->input("employee_amount"),
                 'uuid_ultimo_pago' => $request->input("employee_lastid"),
                 'id_promotor' => $request->input("promotor_id"),
-                'id_empresa' => null,
-                'id_documento' => null,
+                'id_empresa' => $request->input("company_id"),
+                'id_documento' => $request->input("document_id"),
                 'id_contisign' => null,
                 'unikey' => null,
                 'document_url' => null,
+                'status' => null,
                 'template_id' => $template_id,
             ];
+            // dd($obj);
 
             $this->contisign->login($email, $password);
 
@@ -87,7 +92,7 @@ class ContisignController extends Controller
             $annexed = $request->file('annexed');
             // RequestController::store($obj);
             // return SuccessResponse(200, "Documento generado", __METHOD__, $obj);
-            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj);
+            // $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj);
             return SuccessResponse(200, "Documento generado", __METHOD__, $data);
         } catch (\Exception $e) {
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);

@@ -1,15 +1,13 @@
 async function buildDetails() {
     let chosen = document.getElementById("templates_choose");
-    console.log(chosen);
-    if(chosen.value){
+    if (chosen.value) {
         let content = JSON.parse(chosen.value);
-        console.log(content);
-        let image = content.image;
+        let id = chosen.children[chosen.selectedIndex].getAttribute("document_id");
         let name = content.TemplateName;
-        document.getElementById("main_img").src = image ?? "img/logo.png";
         document.getElementById("main_name").textContent = name;
         let template_id = content.id;
         document.getElementById("send_template_id").value = template_id;
+        document.getElementById("send_document_id").value = id;
         // console.log(template_id);
         let template = content.Templates;
         let fields = await getFields(content.Fields);
@@ -20,8 +18,8 @@ async function buildDetails() {
         await buildTemplateHtml(template);
         manualNavigate("tab-employee");
 
-    }else{
-                showAlert("Seleccione Plantilla", "Favor de seleccionar la plantilla para iniciar proceso");
+    } else {
+        showAlert("Seleccione Plantilla", "Favor de seleccionar la plantilla para iniciar proceso");
 
     }
 
@@ -203,43 +201,74 @@ async function fillTemplateFields() {
 }
 
 
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('searchButton').click();
 
-        const sucursalSelect = document.getElementById("employee_sucursal");
-        const dependenciaSelect = document.getElementById("employee_direction");
 
-        // Populate sucursal
-        let option = document.createElement("option");
-        option.value = null;
-        option.textContent = "Selecciona Sucursal";
-            sucursalSelect.appendChild(option);
+    const sucursalSelect = document.getElementById("employee_sucursal");
+    const dependenciaSelect = document.getElementById("employee_direction");
+    const templateSelect = document.getElementById("templates_choose");
 
-        Object.keys(documents).forEach(sucursal => {
+    // Populate sucursal
+    let option = document.createElement("option");
+    option.value = null;
+    option.textContent = "Selecciona Sucursal";
+    sucursalSelect.appendChild(option);
+
+    Object.keys(documents).forEach(sucursal => {
+        const option = document.createElement("option");
+        option.value = sucursal;
+        option.textContent = sucursal;
+        sucursalSelect.appendChild(option);
+    });
+
+    // When sucursal changes
+    sucursalSelect.addEventListener("change", function () {
+
+        const sucursal = this.value;
+
+        dependenciaSelect.innerHTML = '<option value="">Seleccione dependencia</option>';
+
+        if (!documents[sucursal]) return;
+
+        Object.keys(documents[sucursal]).forEach(dep => {
             const option = document.createElement("option");
-            option.value = sucursal;
-            option.textContent = sucursal;
-            sucursalSelect.appendChild(option);
+            option.value = dep;
+            option.textContent = dep;
+            dependenciaSelect.appendChild(option);
         });
 
-        // When sucursal changes
-        sucursalSelect.addEventListener("change", function() {
+    });
 
-            const sucursal = this.value;
+    dependenciaSelect.addEventListener("change", function () {
 
-            dependenciaSelect.innerHTML = '<option value="">Seleccione dependencia</option>';
+        const sucursal = sucursalSelect.value;
+        const dependencia = this.value;
 
-            if (!documents[sucursal]) return;
+        templateSelect.innerHTML = '<option value="">Seleccione plantilla</option>';
 
-            Object.keys(documents[sucursal]).forEach(dep => {
+        if (!documents[sucursal] || !documents[sucursal][dependencia]) return;
+
+        const docs = documents[sucursal][dependencia];
+
+        docs.forEach(doc => {
+
+            const template = templates.find(t => t.doc_id === doc.doc_id);
+
+            if (template) {
                 const option = document.createElement("option");
-                option.value = dep;
-                option.textContent = dep;
-                dependenciaSelect.appendChild(option);
-            });
+                console.log(doc);
+                option.setAttribute("document_id", doc.documento_id);
+                option.value = template.content;
+                option.textContent = template.name;
+                templateSelect.appendChild(option);
+            }
 
         });
 
     });
+
+});
 
 
 window.buildDetails = buildDetails;

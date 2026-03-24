@@ -73,8 +73,8 @@
             </div>
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                    <label class="form-check-label text-primary" for="checkDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="checkReview">
+                    <label class="form-check-label text-primary" for="checkReview">
                         Aceptar términos y condiciones
                     </label>
                 </div>
@@ -97,6 +97,8 @@
                         <form>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input name="template_id" type="hidden" id="send_template_id">
+                            <input name="document_id" type="hidden" id="send_document_id">
+                            <input name="company_id" type="hidden" value="{{$empresa}}" id="send_company_id">
                             <input class="d-none" name="annexed" type="file" id="annexed_input">
                             <input name="fields" type="hidden" id="send_template_fields">
 

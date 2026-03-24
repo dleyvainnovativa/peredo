@@ -41,28 +41,48 @@ class PageController extends Controller
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
         }
     }
-    public function index()
+    public function index(Request $request)
     {
+        $promotor = $request->input("promotor") ?? null;
+        $empresa = $request->input("empresa") ?? null;
+        $logo = asset('img/logo.png');
+        $empresa_flag = false;
+        // dd($promotor, $empresa, $request);
         $templates = [];
         $content = getJsonData("templates/templates.json");
+        $companies = getJsonData("company/companies.json");
         $documentsRaw = getJsonData("company/documents.json");
         $documents = [];
-        foreach ($documentsRaw as $doc) {
 
+        foreach ($companies as $key => $company) {
+            if ($company["IDENTIFICADOR"] == $empresa) {
+                $logo = asset("img/$empresa.png");
+                $empresa_flag = true;
+            }
+        }
+
+        $data["logo"] = $logo;
+
+        if ($empresa_flag == false) {
+            $data["title"] = "¡Empresa no encontrada!";
+            $data["subtitle"] = "La empresa que estás intentando consultar no se encuentra registrada en nuestro sistema.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        }
+
+        foreach ($documentsRaw as $doc) {
             $sucursal = $doc['SUCURSAL'];
             $dependencia = $doc['DEPENDENCIA'];
-
             if (!isset($documents[$sucursal])) {
                 $documents[$sucursal] = [];
             }
-
             if (!isset($documents[$sucursal][$dependencia])) {
                 $documents[$sucursal][$dependencia] = [];
             }
-
             $documents[$sucursal][$dependencia][] = [
                 "doc_id" => self::getTemplateID($doc['DOCUMENTO']),
                 "documento" => $doc['DOCUMENTO'],
+                "documento_id" => $doc['ID_DOCUMENTO'],
                 "campos" => explode(",", $doc['CAMPOS'])
             ];
         }
@@ -78,6 +98,8 @@ class PageController extends Controller
         }
         // dd($templates);
         $data["templates"] = $templates;
+        $data["empresa"] = $empresa;
+        $data["promotor"] = $promotor;
         $data["documents"] = $documents;
         return view('pages.request', $data);
     }

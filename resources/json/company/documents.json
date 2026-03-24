@@ -1,65 +1,76 @@
 [
     {
+        "ID_DOCUMENTO": "7",
         "SUCURSAL": "CAMPECHE",
         "DEPENDENCIA": "SNTE",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "6",
         "SUCURSAL": "DISTRITO FEDERAL",
         "DEPENDENCIA": "SERV DE SALUD PUBLICA DEL DF",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "3",
         "SUCURSAL": "DURANGO",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "1",
         "SUCURSAL": "OAXACA",
         "DEPENDENCIA": "BUROCRATAS",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "2",
         "SUCURSAL": "OAXACA",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "5",
         "SUCURSAL": "PUEBLA",
         "DEPENDENCIA": "FEDERALES",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "4",
         "SUCURSAL": "QUERETARO",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_ETESA",
         "CAMPOS": "NUMERO_EMPLEADO,NOMBRE_CLIENTE,RFC"
     },
     {
+        "ID_DOCUMENTO": "8",
         "SUCURSAL": "TABASCO",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_NOMI-PAY",
         "CAMPOS": "NUMERO_EMPLEADO,RFC,NOMBRE_CLIENTE"
     },
     {
+        "ID_DOCUMENTO": "9",
         "SUCURSAL": "PUEBLA",
         "DEPENDENCIA": "FEDERALES",
         "DOCUMENTO": "REFACIL_SEP Puebla",
         "CAMPOS": "MONTO_PRESTAMO,NUMERO_EMPLEADO,NOMBRE_CLIENTE,ULTIMO_UUID"
     },
     {
+        "ID_DOCUMENTO": "10",
         "SUCURSAL": "QUERETARO",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_ETESA_NOMIPAY",
         "CAMPOS": "RFC,NUMERO_EMPLEADO,NOMBRE_CLIENTE"
     },
     {
+        "ID_DOCUMENTO": "11",
         "SUCURSAL": "MICHOACAN",
         "DEPENDENCIA": "FEDERAL",
         "DOCUMENTO": "REFACIL_BENEFIT",

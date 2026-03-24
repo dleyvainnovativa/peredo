@@ -2,7 +2,7 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between container">
             <a class="navbar-brand" href="{{env('APP_URL')}}">
-                <img src="{{asset('img/logo.png')}}" id="main_img" width="150" alt="">
+                <img src="{{$logo}}" id="main_img" width="150" alt="">
 
             </a>
             <!-- <a href="#" class=" position-relative">
@@ -22,7 +22,7 @@
                 <div class="offcanvas-body ">
                     <ul class="navbar-nav justify-content-end flex-grow-1">
                         <li class="nav-item py-2">
-                            <a class="btn btn-primary fw-bold" href="{{env('APP_URL')}}book">Ver tutorial</a>
+                            <a class="btn btn-primary fw-bold" href="#">Ver tutorial</a>
                         </li>
                     </ul>
                 </div>
