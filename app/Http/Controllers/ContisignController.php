@@ -24,6 +24,8 @@ class ContisignController extends Controller
                 'annexed' => 'nullable|file',
                 'employee_name' => 'required|string',
                 'employee_email' => 'required|email',
+                'promotor_email' => 'required|email',
+                'employee_phone' => 'required|string',
 
                 'document_id' => 'required|string',
                 'company_id' => 'required|string',
@@ -75,9 +77,10 @@ class ContisignController extends Controller
                 ],
                 [
                     "type" => "PROMOTOR",
-                    "email" => "caballerodlc@outlook.com",
-                    "name" => "Daniel Leyva"
-                    // "name" => $request->input("promotor_name"),
+                    "email" => $request->input("promotor_email"),
+                    "name" => $request->input("promotor_name"),
+                    // "email" => "caballerodlc@outlook.com",
+                    // "name" => "Daniel Leyva"
                 ],
                 [
                     "type" => "ARCHIVO",
@@ -90,10 +93,13 @@ class ContisignController extends Controller
             $data = [];
             $html = $request->input("html");
             $annexed = $request->file('annexed');
+
+            $peredo = PeredoController::setDatosSolicitud($obj);
+
             // RequestController::store($obj);
             // return SuccessResponse(200, "Documento generado", __METHOD__, $obj);
-            // $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj);
-            return SuccessResponse(200, "Documento generado", __METHOD__, $data);
+            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj);
+            return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
         } catch (\Exception $e) {
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
             // return response()->json(['error' => $e->getMessage()], 500);

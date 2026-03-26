@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 
 class PeredoController extends Controller
@@ -70,6 +72,7 @@ class PeredoController extends Controller
             'phone' => $promotor['CELULAR_PROMOTOR'] ?? null,
         ];
     }
+
     public static function setDatosSolicitud($obj)
     {
         $token = self::getToken();
@@ -78,22 +81,23 @@ class PeredoController extends Controller
         if (!$token) {
             return null;
         }
+        Log::debug([$obj, "Payload SetDatosSolicitud"]);
 
         $response = Http::withHeaders([
             'Authorization' => $token
         ])->asForm()->post("$url", [
-            'nombre' => $obj,
-            'apellido_paterno' => $obj,
-            'apellido_materno' => $obj,
-            'rfc' => $obj,
-            'email' => $obj,
-            'celular' => $obj,
-            'id_empresa' => $obj,
-            'id_documento' => $obj,
-            'numero_empleado' => $obj,
-            'monto_prestamo' => $obj,
-            'id_documento ' => $obj,
-            'id_documento ' => $obj,
+            'nombre' => $obj["nombre"],
+            'apellido_paterno' => $obj["apellido_paterno"],
+            'apellido_materno' => $obj["apellido_materno"],
+            'rfc' => $obj["rfc"],
+            'email' => $obj["email"],
+            'celular' => $obj["celular"],
+            'id_empresa' => $obj["id_empresa"],
+            'id_documento' => $obj["id_documento"],
+            'numero_empleado' => $obj["numero_empleado"],
+            'monto_prestamo' => $obj["monto_prestamo"],
+            'uuid_ultimo_pago' => $obj["uuid_ultimo_pago"],
+            'id_promotor' => $obj["id_promotor"],
         ]);
 
         if (!$response->successful()) {
@@ -102,16 +106,19 @@ class PeredoController extends Controller
 
         $json = $response->json();
 
+        Log::debug([$json, "RESPONSE SetDatosSolicitud"]);
+
+
         if ($json['data'] === "null" || empty($json['data'])) {
-            return null;
+            throw new Exception($json["message"] ?? "Error al procesar solicitud");
         }
 
-        $promotor = $json['data'][0];
+        $solicitud = $json['data'][0];
+        Log::debug([$solicitud, "RESPONSE Solicitud SetDatosSolicitud"]);
 
         return (object) [
-            'name'  => $promotor['NOMBRE_PROMOTOR'] ?? null,
-            'email' => $promotor['CORREO_PROMOTOR'] ?? null,
-            'phone' => $promotor['CELULAR_PROMOTOR'] ?? null,
+            'id'  => $solicitud['IDENTIFICADOR'] ?? null,
+            'folio' => $solicitud['FOLIO_SOLICITUD'] ?? null,
         ];
     }
 }
