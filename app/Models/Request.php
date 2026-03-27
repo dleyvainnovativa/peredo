@@ -29,6 +29,7 @@ class Request extends Model
         'email',
         'celular',
         'numero_empleado',
+        'status',
         'monto_prestamo',
         'uuid_ultimo_pago',
         'id_promotor',
@@ -38,5 +39,7 @@ class Request extends Model
         'unikey',
         'document_url',
         'template_id',
+        'peredo_id',
+        'peredo_folio',
     ];
 }

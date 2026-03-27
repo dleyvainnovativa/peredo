@@ -17,7 +17,7 @@ async function uploadDocument(event) {
             null,
             "me-2 fas fa-check-circle"
         );
-        // location.reload();
+        location.reload();
     }
 }
 window.uploadDocument = uploadDocument;

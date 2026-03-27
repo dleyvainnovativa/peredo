@@ -13,7 +13,7 @@ class TemplateController extends Controller
 
     // gixtepan@sistemascontino.com.mx
     // achavez@sistemascontino.com.mx
-    public static function template($contisign, $requestSignatures, $template, $fields, $html, $request, $annexed, $register)
+    public static function template($contisign, $requestSignatures, $template, $fields, $html, $request, $annexed, $register, $peredo)
     {
 
         $dataTemplatesFields = [];
@@ -181,14 +181,21 @@ class TemplateController extends Controller
         $data = [
             'unikey' => $uniKeyData['unikey'],
             'documentId' => $dataTemplateData['id'],
+            'status' => $dataTemplateData['Signsstatus'],
             'message' => $signsData['Message'] ?? 'Documento generado correctamente'
         ];
 
         $register["id_contisign"] = $dataTemplateData['id'];
         $register["unikey"] = $uniKeyData['unikey'];
+        $register["status"] = $dataTemplateData['Signsstatus'];
         $register["document_url"] = $dataTemplateData['documentUrl'];
 
         RequestController::store($register);
+        PeredoController::updateDatosSolicitud($register, 5);
+        PeredoController::updateDatosSolicitud($register, 6);
+        PeredoController::updateDatosSolicitud($register, 8);
+        PeredoController::updateDatosSolicitud($register, 9);
+
 
 
         Log::debug([$data]);

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('celular', 15)->nullable();
 
             $table->string('numero_empleado')->nullable();
+            $table->text('status')->nullable();
             $table->decimal('monto_prestamo', 10, 2);
 
             $table->string('uuid_ultimo_pago')->nullable();
@@ -31,6 +32,8 @@ return new class extends Migration {
             $table->string('unikey')->nullable();
             $table->text('document_url')->nullable();
             $table->text('template_id')->nullable();
+            $table->text('peredo_id')->nullable();
+            $table->text('peredo_folio')->nullable();
 
             $table->timestamps();
         });

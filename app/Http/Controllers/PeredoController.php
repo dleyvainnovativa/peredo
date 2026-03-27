@@ -121,4 +121,65 @@ class PeredoController extends Controller
             'folio' => $solicitud['FOLIO_SOLICITUD'] ?? null,
         ];
     }
+    public static function updateDatosSolicitud($obj, $movimiento)
+    {
+        $token = self::getToken();
+        $url = env("PEREDO_URL") . "?accion=setSeguimientoSolicitud";
+        if (!$token) {
+            return null;
+        }
+
+        $new_value = null;
+        switch ($movimiento) {
+            // case 1:
+            //     $new_value = $obj["document_url"];
+            //     break;
+            case 5:
+                $new_value = date('Y-m-d');
+                break;
+            case 6:
+                $new_value = $obj["document_url"];
+                break;
+            case 8:
+                $new_value = $obj["id_contisign"];
+                break;
+            case 9:
+                $new_value = $obj["status"];
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        Log::debug([[
+            'id_solicitud ' => $obj["peredo_id"],
+            'id_movimiento' => $movimiento,
+            'dato_nuevo' => $new_value,
+        ], "Payload setSeguimientoSolicitud"]);
+
+        if ($new_value != null) {
+
+            $response = Http::withHeaders([
+                'Authorization' => $token
+            ])->asForm()->post("$url", [
+                'id_solicitud ' => $obj["peredo_id"],
+                'id_movimiento' => $movimiento,
+                'dato_nuevo' => $new_value,
+            ]);
+
+            if (!$response->successful()) {
+                return null;
+            }
+
+            $json = $response->json();
+
+            Log::debug([$json, "RESPONSE setSeguimientoSolicitud"]);
+        }
+
+        // if ($json['error'] != 0) {
+        //     throw new Exception($json["message"] ?? "Error al procesar solicitud");
+        // }
+        return;
+    }
 }

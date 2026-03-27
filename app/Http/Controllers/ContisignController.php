@@ -96,9 +96,12 @@ class ContisignController extends Controller
 
             $peredo = PeredoController::setDatosSolicitud($obj);
 
+            $obj["peredo_id"] = $peredo->id;
+            $obj["peredo_folio"] = $peredo->folio;
+
             // RequestController::store($obj);
             // return SuccessResponse(200, "Documento generado", __METHOD__, $obj);
-            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj);
+            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj, $peredo);
             return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
         } catch (\Exception $e) {
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
