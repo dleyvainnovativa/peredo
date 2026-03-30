@@ -153,7 +153,7 @@ class PeredoController extends Controller
         }
 
         Log::debug([[
-            'id_solicitud ' => $obj["peredo_id"],
+            'id_solicitud' => $obj["peredo_id"],
             'id_movimiento' => $movimiento,
             'dato_nuevo' => $new_value,
         ], "Payload setSeguimientoSolicitud"]);
@@ -163,7 +163,7 @@ class PeredoController extends Controller
             $response = Http::withHeaders([
                 'Authorization' => $token
             ])->asForm()->post("$url", [
-                'id_solicitud ' => $obj["peredo_id"],
+                'id_solicitud' => $obj["peredo_id"],
                 'id_movimiento' => $movimiento,
                 'dato_nuevo' => $new_value,
             ]);
