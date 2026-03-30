@@ -135,7 +135,7 @@ class PeredoController extends Controller
             //     $new_value = $obj["document_url"];
             //     break;
             case 5:
-                $new_value = date('Y-m-d');
+                $new_value = date('d/m/Y H:i:s');
                 break;
             case 6:
                 $new_value = $obj["document_url"];
