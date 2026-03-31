@@ -66,7 +66,7 @@ class ContisignController extends Controller
             ];
             // dd($obj);
 
-            $this->contisign->login($email, $password);
+            // $this->contisign->login($email, $password);
 
             $template = self::getTemplate($template_id);
             $signatures = [

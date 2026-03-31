@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class TemplateController extends Controller
 {
@@ -191,10 +192,19 @@ class TemplateController extends Controller
         $register["document_url"] = $dataTemplateData['documentUrl'];
 
         RequestController::store($register);
-        PeredoController::updateDatosSolicitud($register, 5);
-        PeredoController::updateDatosSolicitud($register, 6);
-        PeredoController::updateDatosSolicitud($register, 8);
-        PeredoController::updateDatosSolicitud($register, 9);
+        $updated = [
+            "id_solicitud" => $register["peredo_id"],
+            "fecha_genera_doc" => self::formatDate($dataTemplateData["created_at"]),
+            "id_contisign" => $dataTemplateData['id'],
+            "estatus_contisign" => $dataTemplateData['Signsstatus'],
+            "liga_cliente" => null,
+            "fecha_firma_cliente" => null,
+            "liga_promotor" => null,
+            "fecha_firma_promotor" => null,
+            "rutaQR_XML" => $dataTemplateData['ConstancyRC'],
+            "rutaQR_PDF" => $dataTemplateData["documentUrl"]
+        ];
+        PeredoController::updateDatosSolicitud($updated);
 
 
 
@@ -255,6 +265,15 @@ class TemplateController extends Controller
         // Concatenate OU
         $unikey = 'OU' . $letters;
         return $unikey;
+    }
+
+    public static function formatDate($date)
+    {
+        $formatted = null;
+        if ($date) {
+            $formatted = Carbon::parse($date)->format('d/m/Y H:i:s');
+        }
+        return $formatted;
     }
 
 

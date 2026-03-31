@@ -121,7 +121,7 @@ class PeredoController extends Controller
             'folio' => $solicitud['FOLIO_SOLICITUD'] ?? null,
         ];
     }
-    public static function updateDatosSolicitud($obj, $movimiento)
+    public static function updateDatosSolicitud($obj)
     {
         $token = self::getToken();
         $url = env("PEREDO_URL") . "?accion=setSeguimientoSolicitud";
@@ -129,57 +129,21 @@ class PeredoController extends Controller
             return null;
         }
 
-        $new_value = null;
-        switch ($movimiento) {
-            // case 1:
-            //     $new_value = $obj["document_url"];
-            //     break;
-            case 5:
-                $new_value = date('d/m/Y H:i:s');
-                break;
-            case 6:
-                $new_value = $obj["document_url"];
-                break;
-            case 8:
-                $new_value = $obj["id_contisign"];
-                break;
-            case 9:
-                $new_value = $obj["status"];
-                break;
+        Log::debug([$obj, "Payload setSeguimientoSolicitud"]);
 
-            default:
-                # code...
-                break;
+        $response = Http::withHeaders([
+            'Authorization' => $token
+        ])->asForm()->post("$url", $obj);
+
+        if (!$response->successful()) {
+            return null;
         }
+        // Log::debug([$response->body(), "RESPONSE RAW setSeguimientoSolicitud"]);
 
-        Log::debug([[
-            'id_solicitud' => $obj["peredo_id"],
-            'id_movimiento' => $movimiento,
-            'dato_nuevo' => $new_value,
-        ], "Payload setSeguimientoSolicitud"]);
+        $json = $response->json();
 
-        if ($new_value != null) {
+        Log::debug([$json, "RESPONSE setSeguimientoSolicitud"]);
 
-            $response = Http::withHeaders([
-                'Authorization' => $token
-            ])->asForm()->post("$url", [
-                'id_solicitud' => $obj["peredo_id"],
-                'id_movimiento' => $movimiento,
-                'dato_nuevo' => $new_value,
-            ]);
-
-            if (!$response->successful()) {
-                return null;
-            }
-
-            $json = $response->json();
-
-            Log::debug([$json, "RESPONSE setSeguimientoSolicitud"]);
-        }
-
-        // if ($json['error'] != 0) {
-        //     throw new Exception($json["message"] ?? "Error al procesar solicitud");
-        // }
         return;
     }
 }

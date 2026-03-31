@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ContisignService
 {
@@ -12,25 +14,26 @@ class ContisignService
     /**
      * Login and store token
      */
+
     public function login(string $email, string $password)
     {
         $response = Http::post("{$this->baseUrl}/auth/signin", [
             'email' => $email,
             'password' => $password
         ]);
+        Log::debug("login");
 
         if ($response->failed()) {
             throw new \Exception('Login failed: ' . $response->body());
         }
-
         $data = $response->json();
-        $this->token = $data['token'] ?? null;
+        $token = $data['token'] ?? null;
 
-        if (!$this->token) {
+        if (!$token) {
             throw new \Exception('Token not returned from login.');
         }
-
-        return $data;
+        Cache::put('contisign_token', $token, now()->addHour());
+        return $token;
     }
 
     /**
@@ -38,14 +41,30 @@ class ContisignService
      */
     protected function withAuth()
     {
-        if (!$this->token) {
-            throw new \Exception('Token not set. Call login() first.');
+        $token = Cache::get('contisign_token');
+
+        if (!$token) {
+            // Auto login if no token
+            $token = $this->login(
+                env('CONTISIGN_EMAIL'),
+                env('CONTISIGN_PASSWORD')
+            );
         }
-        // dd($this->token);
 
         return Http::withHeaders([
-            'Authorization' => $this->token
+            'Authorization' => $token
         ]);
+    }
+
+    public function getDocument($id)
+    {
+        $response = $this->withAuth()->get("{$this->baseUrl}/document/$id");
+
+        if ($response->failed()) {
+            throw new \Exception('Error creating UniKey: ' . $response->body());
+        }
+
+        return $response->json();
     }
 
     /**
