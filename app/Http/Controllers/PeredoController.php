@@ -138,7 +138,7 @@ class PeredoController extends Controller
         if (!$response->successful()) {
             return null;
         }
-        // Log::debug([$response->body(), "RESPONSE RAW setSeguimientoSolicitud"]);
+        Log::debug([$response->body(), "RESPONSE RAW setSeguimientoSolicitud"]);
 
         $json = $response->json();
 
