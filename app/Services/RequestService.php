@@ -102,6 +102,10 @@ class RequestService
 
     private function formatDate($date)
     {
-        return $date ? Carbon::parse($date)->format('d/m/Y H:i:s') : null;
+        return $date
+            ? Carbon::parse($date)
+            ->setTimezone('America/Mexico_City')
+            ->format('d/m/Y H:i:s')
+            : null;
     }
 }
