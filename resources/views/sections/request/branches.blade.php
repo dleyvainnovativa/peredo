@@ -31,7 +31,7 @@
                     <input data-fill="ndpc" type="hidden" id="employee_dep">
                     <input data-fill="uuid" type="hidden" id="employee_id">
                     <input data-fill="nmlp" type="hidden" id="employee_num"> -->
-                    <input data-fill="fch" type="hidden" id="today" value="2026-03-17">
+                    <input data-fill="fch" type="hidden" id="today" value="{{date('Y-m-d')}}">
                     <input data-fill="diasol" type="hidden" id="days_taken">
                     <input data-fill="fechapersol" type="hidden" id="fill_date_init">
                     <input data-fill="fchsl" type="hidden" id="fill_date_end">

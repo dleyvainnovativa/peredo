@@ -26,7 +26,8 @@ class TemplateController extends Controller
 
         $moreTags = self::buildMoreTags($request);
 
-        $limit_date = date('Y-m-d', strtotime('+1 month'));
+        // $limit_date = date('Y-m-d', strtotime('+1 month'));
+        $limit_date = date('Y-m-d', strtotime('+3 days'));
 
         // // === 1. Create UniKey ===
         // // Use the ID from the JSON template
