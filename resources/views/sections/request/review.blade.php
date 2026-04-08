@@ -14,22 +14,22 @@
                         <h5 class="fw-bold mb-4"><i class="fas fa-user me-2 text-primary" aria-hidden="true"></i> Datos del Empleado</h5>
                         <div class="row g-3">
                             <div class="col-12 col-md-6">
-                                <p><b>Número de Empleado: </b><span id="review_employee_num">082907558</span></p>
+                                <p><b>Número de Empleado: </b><span id="review_employee_num"></span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>Nombre: </b><span id="review_employee_name">Pedro Pérez</span></p>
+                                <p><b>Nombre: </b><span id="review_employee_name"></span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>RFC: </b><span id="review_employee_rfc">NONA820101XYZ</span></p>
+                                <p><b>RFC: </b><span id="review_employee_rfc"></span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>Correo electrónico: </b><span id="review_employee_email">pedrop@correo.com</span></p>
+                                <p><b>Correo electrónico: </b><span id="review_employee_email"></span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>Dependencia: </b><span id="review_dependencia">Ventas</span></p>
+                                <p><b>Dependencia: </b><span id="review_dependencia"></span></p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <p><b>UUID: </b><span id="review_employee_department">1</span></p>
+                                <p><b>UUID: </b><span id="review_employee_department"></span></p>
                             </div>
                         </div>
                     </div>

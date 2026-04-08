@@ -33,7 +33,7 @@ class ContisignController extends Controller
                 'employee_firstname' => 'required|string',
                 'employee_lastname' => 'required|string',
                 'employee_lastname2' => 'required|string',
-                'employee_rfc' => 'required|string',
+                'employee_rfc' => 'nullable|string',
 
             ]);
 
@@ -91,8 +91,12 @@ class ContisignController extends Controller
             $fields = json_decode($request->input("fields"), true);
 
             $data = [];
+            $peredo = [];
+
             $html = $request->input("html");
             $annexed = $request->file('annexed');
+            $obj["peredo_id"] = null;
+            $obj["peredo_folio"] = null;
 
             $peredo = PeredoController::setDatosSolicitud($obj);
 

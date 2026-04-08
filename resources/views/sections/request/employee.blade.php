@@ -11,13 +11,13 @@
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Número de empleado *</label>
                         <div class="input-group mb-3">
-                            <input data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control" placeholder="Ingresa tu número de empleado" required>
+                            <input data-field="NUMERO_EMPLEADO" data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control" placeholder="Ingresa tu número de empleado" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label fw-bold">RFC *</label>
-                        <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
+                        <input data-fill="rtbfjc" data-field="RFC" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
                     </div>
 
                     <div class="col-md-4">
@@ -45,11 +45,11 @@
 
                     <div class="col-md-6">
                         <label for="payment" class="form-label fw-bold">Último UUID (Si aplica)</label>
-                        <input data-fill="uuid" type="text" class="form-control " value="1" id="employee_last_id">
+                        <input data-fill="uuid" data-field="ULTIMO_UUID" type="text" class="form-control " value="1" id="employee_last_id">
                     </div>
                     <div class="col-md-6">
                         <label for="employee_amount" class="form-label fw-bold">Monto Solicitado</label>
-                        <input data-fill="mtntzd" type="number" value="1200" class="form-control " id="employee_amount" required>
+                        <input data-fill="mtntzd" data-field="MONTO_PRESTAMO" type="number" value="1200" class="form-control " id="employee_amount" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-bold">INE Frente</label>

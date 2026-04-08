@@ -20,7 +20,7 @@ return new class extends Migration {
 
             $table->string('numero_empleado')->nullable();
             $table->text('status')->nullable();
-            $table->decimal('monto_prestamo', 10, 2);
+            $table->decimal('monto_prestamo', 10, 2)->nullable();
 
             $table->string('uuid_ultimo_pago')->nullable();
             $table->unsignedBigInteger('id_promotor');

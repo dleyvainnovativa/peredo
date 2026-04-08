@@ -3,6 +3,8 @@ async function buildDetails() {
     if (chosen.value) {
         let content = JSON.parse(chosen.value);
         let id = chosen.children[chosen.selectedIndex].getAttribute("document_id");
+        let requiredFields = JSON.parse(chosen.children[chosen.selectedIndex].getAttribute("fields"));
+        await blockFields(requiredFields);
         let name = content.TemplateName;
         document.getElementById("main_name").textContent = name;
         let template_id = content.id;
@@ -12,7 +14,7 @@ async function buildDetails() {
         let template = content.Templates;
         let fields = await getFields(content.Fields);
         let annexed = await content.Annexed;
-        console.log(fields);
+        // console.log(fields);
         await buildFormControls(fields);
         await buildAnexed(annexed);
         await buildTemplateHtml(template);
@@ -26,6 +28,25 @@ async function buildDetails() {
 
     // console.log(template);
     // console.log(fields);
+}
+
+async function blockFields(fields) {
+    console.log(fields);
+    let form = document.getElementById("employee_form");
+    let inputs = form.querySelectorAll("input[data-field]");
+
+    inputs.forEach(input => {
+        let field = input.getAttribute("data-field");
+
+        if (fields.includes(field)) {
+            input.disabled = false;
+            input.required = true;
+        } else {
+            input.disabled = true;
+            input.required = false;
+            input.value = null;
+        }
+    });
 }
 
 async function getFields(all_fields) {
@@ -78,7 +99,7 @@ async function buildFormControls(jsonData) {
 async function buildAnexed(jsonData) {
     const container = document.getElementById("template_annexed");
     container.innerHTML = ""; // Clear before building
-    console.log(jsonData);
+    // console.log(jsonData);
     jsonData.forEach(field => {
         // <label for="book-vacation" class="form-label">Sube archivo Anexo</label>
         //             <input type="file" class="form-control" required />
@@ -228,6 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sucursal = this.value;
 
         dependenciaSelect.innerHTML = '<option value="">Seleccione dependencia</option>';
+        templateSelect.innerHTML = '<option value="">Seleccione plantilla</option>';
 
         if (!documents[sucursal]) return;
 
@@ -257,8 +279,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (template) {
                 const option = document.createElement("option");
-                console.log(doc);
+                // console.log(doc);
                 option.setAttribute("document_id", doc.documento_id);
+                option.setAttribute("fields", JSON.stringify(doc.campos));
                 option.value = template.content;
                 option.textContent = template.name;
                 templateSelect.appendChild(option);

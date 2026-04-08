@@ -54,6 +54,7 @@ class PageController extends Controller
         $documentsRaw = getJsonData("company/documents.json");
         $documents = [];
 
+
         foreach ($companies as $key => $company) {
             if ($company["IDENTIFICADOR"] == $empresa) {
                 $logo = asset("img/$empresa.png");
@@ -63,6 +64,20 @@ class PageController extends Controller
 
         $data["logo"] = $logo;
 
+        if (!$promotor) {
+            $data["title"] = "¡No hay promotor asignado!";
+            $data["subtitle"] = "Falta agregar el promotor en la petición.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        } else {
+            $employee = PeredoController::searchByIdentificador($promotor);
+            if (!$employee) {
+                $data["title"] = "¡Promotor no identificado!";
+                $data["subtitle"] = "El promotor que estás intentando consultar no se encuentra registrado en nuestro sistema.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+                return view('error', $data);
+            }
+        }
         if ($empresa_flag == false) {
             $data["title"] = "¡Empresa no encontrada!";
             $data["subtitle"] = "La empresa que estás intentando consultar no se encuentra registrada en nuestro sistema.
