@@ -17,7 +17,7 @@
 
                     <div class="col-md-6">
                         <label class="form-label fw-bold">RFC *</label>
-                        <input data-fill="rtbfjc" data-field="RFC" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
+                        <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
                     </div>
 
                     <div class="col-md-4">

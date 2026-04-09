@@ -5,7 +5,10 @@
                 <img src="{{$logo}}" id="main_img" width="150" alt="">
 
             </a>
-            <!-- <a href="#" class=" position-relative">
+            <div class="ms-auto w-100 text-end">
+                <span class="badge text-bg-primary" id="template_badge"></span>
+            </div>
+            <!-- <a href="#" class="position-relative">
                 <button id="themeToggle" class="btn btn-primary">
                     <i class="fas fa-sun"></i>
                 </button>
@@ -19,12 +22,12 @@
                     </a>
                     <button type="button" class="btn btn-dark ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fas fa-xmark fa-lg text-dark"></i></button>
                 </div>
-                <div class="offcanvas-body ">
-                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                <div class="offcanvas-body">
+                    <!-- <ul class="navbar-nav justify-content-end flex-grow-1">
                         <li class="nav-item py-2">
                             <a class="btn btn-primary fw-bold" href="#">Ver tutorial</a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <div class="offcanvas-footer">
                     <div class="d-block d-lg-none pt-4">

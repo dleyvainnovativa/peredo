@@ -4,6 +4,7 @@ async function buildDetails() {
         let content = JSON.parse(chosen.value);
         let id = chosen.children[chosen.selectedIndex].getAttribute("document_id");
         let requiredFields = JSON.parse(chosen.children[chosen.selectedIndex].getAttribute("fields"));
+        document.getElementById("template_badge").textContent = chosen.children[chosen.selectedIndex].getAttribute("formato");
         await blockFields(requiredFields);
         let name = content.TemplateName;
         document.getElementById("main_name").textContent = name;
@@ -245,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // When sucursal changes
     sucursalSelect.addEventListener("change", function () {
+        document.getElementById("template_badge").textContent ="";
 
         const sucursal = this.value;
 
@@ -263,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     dependenciaSelect.addEventListener("change", function () {
-
+document.getElementById("template_badge").textContent ="";
         const sucursal = sucursalSelect.value;
         const dependencia = this.value;
 
@@ -282,6 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 // console.log(doc);
                 option.setAttribute("document_id", doc.documento_id);
                 option.setAttribute("fields", JSON.stringify(doc.campos));
+                option.setAttribute("formato", doc.formato);
+                
                 option.value = template.content;
                 option.textContent = template.name;
                 templateSelect.appendChild(option);

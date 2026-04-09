@@ -33,6 +33,7 @@ class RequestService
                     if (
                         $document["Signsstatus"] == "Este documento no ha sido firmado" ||
                         $document["Signsstatus"] == "Parcialmente firmado" ||
+                        $document["Signsstatus"] == "Documento rechazado" ||
                         $document["Signsstatus"] == "Totalmente firmado"
                     ) {
 

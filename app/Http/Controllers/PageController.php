@@ -98,6 +98,7 @@ class PageController extends Controller
                 "doc_id" => self::getTemplateID($doc['DOCUMENTO']),
                 "documento" => $doc['DOCUMENTO'],
                 "documento_id" => $doc['ID_DOCUMENTO'],
+                "formato" => $doc['FORMATO'],
                 "campos" => explode(",", $doc['CAMPOS'])
             ];
         }

@@ -1,0 +1,22 @@
+[
+    {
+        "document": "REFACIL_ETESA",
+        "format": "FORMATO_1"
+    },
+    {
+        "document": "REFACIL_NOMI-PAY",
+        "format": "FORMATO_2"
+    },
+    {
+        "document": "REFACIL_SEP Puebla",
+        "format": "FORMATO_3"
+    },
+    {
+        "document": "REFACIL_ETESA_NOMIPAY",
+        "format": "FORMATO_4"
+    },
+    {
+        "document": "REFACIL_BENEFIT",
+        "format": "FORMATO_5"
+    }
+]
