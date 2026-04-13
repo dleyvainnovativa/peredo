@@ -45,7 +45,7 @@ function saveImage() {
     bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
 }
 
-async function generatePDF(frontFile, backFile) {
+async function generatePDF(frontFile, backFile, selfieFile) {
     const {
         jsPDF
     } = window.jspdf;
@@ -53,9 +53,10 @@ async function generatePDF(frontFile, backFile) {
     const pdf = new jsPDF();
 
     await addImageToPDF(pdf, frontFile);
-
     pdf.addPage();
     await addImageToPDF(pdf, backFile);
+    pdf.addPage();
+    await addImageToPDF(pdf, selfieFile);
 
     return pdf.output('blob');
 }
@@ -123,12 +124,12 @@ async function prepareEmployee() {
 
 
 
-    if (!window.ine_front || !window.ine_back) {
-        showAlert('Error al ingresar datos', 'Debes subir INE frente y reverso');
+    if (!window.ine_front || !window.ine_back || !window.selfie_photo) {
+        showAlert('Error al ingresar datos', 'Debes subir INE frente y reverso y un Selfie');
         return;
     }
     try {
-        const pdfBlob = await generatePDF(window.ine_front, window.ine_back);
+        const pdfBlob = await generatePDF(window.ine_front, window.ine_back, window.selfie_photo);
         const pdfFile = blobToFile(pdfBlob, 'annexed.pdf');
         const input = document.getElementById('annexed_input');
         const dataTransfer = new DataTransfer();

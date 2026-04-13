@@ -51,20 +51,28 @@
                         <label for="employee_amount" class="form-label fw-bold">Monto Solicitado</label>
                         <input data-fill="mtntzd" data-field="MONTO_PRESTAMO" type="number" value="1200" class="form-control " id="employee_amount" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label fw-bold">INE Frente</label>
                         <div class="upload-card" onclick="openUploadModal('ine_front')">
                             <div id="preview_ine_front" class="text-center p-4 border rounded">
-                                <span><i class="fas fa-camera me-2"></i> Subir INE Frente</span>
+                                <span><i class="fas fa-address-card me-2"></i> Subir INE Frente</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label fw-bold">INE Reverso</label>
                         <div class="upload-card" onclick="openUploadModal('ine_back')">
                             <div id="preview_ine_back" class="text-center p-4 border rounded">
-                                <span><i class="fas fa-camera me-2"></i> Subir INE Reverso</span>
+                                <span><i class="fas fa-credit-card me-2"></i> Subir INE Reverso</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Selfie</label>
+                        <div class="upload-card" onclick="openUploadModal('selfie_photo')">
+                            <div id="preview_selfie_photo" class="text-center p-4 border rounded">
+                                <span><i class="fas fa-image-portrait me-2"></i> Subir Selfie</span>
                             </div>
                         </div>
                     </div>
