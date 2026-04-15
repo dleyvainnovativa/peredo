@@ -145,7 +145,7 @@ class TemplateController extends Controller
                 "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
                 "positionRequired" => $template['positionRequired'],
                 "UniKey" => $uniKeyData['unikey'],
-                "html" => ($html),
+                "html" => $html,
                 "templateId" => $template['id'],
                 "documentUrl" => null,
                 "ConstancePSC" => $template['PSCreq'],

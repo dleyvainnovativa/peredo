@@ -125,6 +125,10 @@ class ContisignController extends Controller
                 'REFACIL_BENEFIT' => 'FORMATO_5',
             ];
             $template["Formato"] = $formatArray[$baseName] ?? null;
+            $html = self::fillTemplateHTML($template["Templates"], $fields);
+
+
+
             $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);
 
             return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
