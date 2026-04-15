@@ -51,22 +51,7 @@ class PageController extends Controller
         $templates = [];
         $content = getJsonData("templates/templates.json");
         $companies = getJsonData("company/companies.json");
-        $documentsRaw = PeredoController::getDatosDocumentos($promotor);
-        // $documentsRaw2 = getJsonData("company/documents.json");
-        $documents = [];
-        $formatArray = [
-            'FORMATO_1' => 'REFACIL_ETESA',
-            'FORMATO_2' => 'REFACIL_NOMI-PAY',
-            'FORMATO_3' => 'REFACIL_SEP Puebla',
-            'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
-            'FORMATO_5' => 'REFACIL_BENEFIT',
-        ];
-        foreach ($documentsRaw as &$doc) {
-            $formato = $doc['DOCUMENTO'] ?? null;
 
-            $doc['FORMATO'] = $formatArray[$formato] ?? null;
-        }
-        unset($doc);
 
         // dd($documentsRaw, $documentsRaw2);
 
@@ -99,6 +84,23 @@ class PageController extends Controller
                                     Verifica la información proporcionada o contacta al administrador para más detalles.";
             return view('error', $data);
         }
+
+        $documentsRaw = PeredoController::getDatosDocumentos($promotor);
+        // $documentsRaw2 = getJsonData("company/documents.json");
+        $documents = [];
+        $formatArray = [
+            'FORMATO_1' => 'REFACIL_ETESA',
+            'FORMATO_2' => 'REFACIL_NOMI-PAY',
+            'FORMATO_3' => 'REFACIL_SEP Puebla',
+            'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
+            'FORMATO_5' => 'REFACIL_BENEFIT',
+        ];
+        foreach ($documentsRaw as &$doc) {
+            $formato = $doc['DOCUMENTO'] ?? null;
+
+            $doc['FORMATO'] = $formatArray[$formato] ?? null;
+        }
+        unset($doc);
 
         foreach ($documentsRaw as $doc) {
             $sucursal = $doc['SUCURSAL'];
