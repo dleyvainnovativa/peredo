@@ -14,8 +14,8 @@
                     <div class="col-md-12">
                         <label class="form-label">Número de promotor *</label>
                         <div class="input-group mb-3">
-                            <input type="text" name="employee" id="promotor_id" value="{{$promotor}}" class="form-control " placeholder="Ingresa tu número de empleado">
-                            <button class="btn btn-primary " onclick="searchEmployee(event)" type="button" id="searchButton">
+                            <input type="text" name="employee" disabled id="promotor_id" value="{{$promotor}}" class="form-control rounded" placeholder="Ingresa tu número de empleado">
+                            <button class="btn btn-primary d-none" onclick="searchEmployee(event)" type="button" id="searchButton">
                                 Buscar
                             </button>
                         </div>

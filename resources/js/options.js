@@ -290,7 +290,7 @@ document.getElementById("template_badge").textContent ="";
                 
                 option.value = template.content;
                 option.textContent = template.name;
-                option.textContent = doc.formato;
+                option.textContent = doc.documento;
                 templateSelect.appendChild(option);
             }
 
