@@ -54,14 +54,14 @@ class RequestService
                         $ineFile = null;
                         $selfieFile = null;
 
-                        // foreach ($document["annexed"] as $key => $annexed) {
-                        //     if ($key == 0) {
-                        //         $ineFile = $annexed["FieldUrl"];
-                        //     }
-                        //     if ($key == 1) {
-                        //         $selfieFile = $annexed["FieldUrl"];
-                        //     }
-                        // }
+                        foreach ($document["annexed"] as $key => $annexed) {
+                            if ($key == 0) {
+                                $ineFile = $annexed["FieldUrl"];
+                            }
+                            if ($key == 1) {
+                                $selfieFile = $annexed["FieldUrl"];
+                            }
+                        }
 
                         foreach ($document["signatures"] as $signature) {
                             if ($signature["Charge"] == "Signed" && $signature["Type"] == "Firma autógrafa") {
