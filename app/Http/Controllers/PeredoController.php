@@ -39,6 +39,33 @@ class PeredoController extends Controller
     /**
      * Search using token
      */
+    public static function getDatosDocumentos($identificador)
+    {
+        $token = self::getToken();
+        $url = env("PEREDO_URL") . "?accion=getDatosDocumentos&identificador=$identificador";
+
+        if (!$token) {
+            return null;
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => $token
+        ])->asForm()->post("$url", [
+            'identificador' => $identificador
+        ]);
+
+        if (!$response->successful()) {
+            return null;
+        }
+
+        $json = $response->json();
+
+        if ($json['data'] === "null" || empty($json['data'])) {
+            return null;
+        }
+
+        return $json['data'];
+    }
     public static function searchByIdentificador($identificador)
     {
         $token = self::getToken();

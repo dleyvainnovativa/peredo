@@ -11,8 +11,23 @@ function openUploadModal(field) {
 }
 
 document.getElementById('fileInput').addEventListener('change', function (e) {
-    const file = e.target.files[0];
+    const input = e.target;
+    const file = input.files[0];
+
     if (!file) return;
+
+    // ✅ Validate it's an image
+    if (!file.type.startsWith('image/')) {
+        showAlert('Archivo no es una imagen', 'Favor de ingresar una imagen');
+
+        // Reset input
+        input.value = '';
+
+        // Optional: clear preview
+        document.getElementById('imagePreview').innerHTML = '';
+
+        return;
+    }
 
     currentFile = file;
 
@@ -45,18 +60,20 @@ function saveImage() {
     bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
 }
 
-async function generatePDF(frontFile, backFile, selfieFile) {
-    const {
-        jsPDF
-    } = window.jspdf;
-
+async function generatePDF(files) {
+    const { jsPDF } = window.jspdf;
     const pdf = new jsPDF();
 
-    await addImageToPDF(pdf, frontFile);
-    pdf.addPage();
-    await addImageToPDF(pdf, backFile);
-    pdf.addPage();
-    await addImageToPDF(pdf, selfieFile);
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        await addImageToPDF(pdf, file);
+
+        // Add page ONLY if it's not the last file
+        if (i < files.length - 1) {
+            pdf.addPage();
+        }
+    }
 
     return pdf.output('blob');
 }
@@ -129,13 +146,20 @@ async function prepareEmployee() {
         return;
     }
     try {
-        const pdfBlob = await generatePDF(window.ine_front, window.ine_back, window.selfie_photo);
-        const pdfFile = blobToFile(pdfBlob, 'annexed.pdf');
-        const input = document.getElementById('annexed_input');
+        const pdfBlobINE = await generatePDF([window.ine_front, window.ine_back]);
+        const pdfFileINE = blobToFile(pdfBlobINE, 'annexed.pdf');
+        const inputINE = document.getElementById('annexed_input');
         const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(pdfFile);
-        input.files = dataTransfer.files;
-        console.log('PDF listo:', input.files[0]);
+        dataTransfer.items.add(pdfFileINE);
+        inputINE.files = dataTransfer.files;
+        
+        const pdfBlobSelfie = await generatePDF([window.selfie_photo]);
+        const pdfFileSelfie = blobToFile(pdfBlobSelfie, 'annexed_selfie.pdf');
+        const inputSelfie = document.getElementById('annexed_selfie_input');
+        const dataTransferSelfie = new DataTransfer();
+        dataTransferSelfie.items.add(pdfFileSelfie);
+        inputSelfie.files = dataTransferSelfie.files;
+
         await manualNavigate("tab-branches");
 
     } catch (error) {

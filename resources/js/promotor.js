@@ -42,7 +42,6 @@ const validateBtn = document.getElementById("validateDetails");
 
 // Update preview section
 async function updateReview() {
-    console.log("update Review");
     await fillFields();
     await fillTemplateFields();
     await fillTemplateHTML();

@@ -22,6 +22,7 @@ class ContisignController extends Controller
                 'html' => 'required|string',
                 'template_id' => 'required|string',
                 'annexed' => 'nullable|file',
+                'annexed_selfie' => 'nullable|file',
                 'employee_name' => 'required|string',
                 'employee_email' => 'required|email',
                 'promotor_email' => 'required|email',
@@ -90,22 +91,42 @@ class ContisignController extends Controller
             ];
             $fields = json_decode($request->input("fields"), true);
 
+
             $data = [];
             $peredo = [];
 
             $html = $request->input("html");
             $annexed = $request->file('annexed');
+            $annexedSelfie = $request->file('annexed_selfie');
             $obj["peredo_id"] = null;
             $obj["peredo_folio"] = null;
 
-            $peredo = PeredoController::setDatosSolicitud($obj);
+            // $peredo = PeredoController::setDatosSolicitud($obj);
+            // $obj["peredo_id"] = $peredo->id;
+            // $obj["peredo_folio"] = $peredo->folio;
+            foreach ($fields as $key => &$field) {
+                if ($field["name"] == "uuid" && $field["value"] == "") {
+                    $field["value"] = $obj["peredo_folio"];
+                }
+                if ($field["name"] == "nmtbj") {
+                    $field["value"] = $request->input("employee_name");
+                }
+            }
 
-            $obj["peredo_id"] = $peredo->id;
-            $obj["peredo_folio"] = $peredo->folio;
+            $templateName = $template["TemplateName"] ?? '';
+            $baseName = trim(str_replace('Solicitud', '', $templateName));
+            $baseName = strtoupper($baseName);
+            $baseName = str_replace(['-', ' '], ['_', '_'], $baseName);
+            $formatArray = [
+                'REFACIL_ETESA' => 'FORMATO_1',
+                'REFACIL_NOMIPAY' => 'FORMATO_2',
+                'REFACIL_SEP_PUEBLA' => 'FORMATO_3',
+                'REFACIL_ETESA_NOMIPAY' => 'FORMATO_4',
+                'REFACIL_BENEFIT' => 'FORMATO_5',
+            ];
+            $template["Formato"] = $formatArray[$baseName] ?? null;
+            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);
 
-            // RequestController::store($obj);
-            // return SuccessResponse(200, "Documento generado", __METHOD__, $obj);
-            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $obj, $peredo);
             return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
         } catch (\Exception $e) {
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
@@ -123,6 +144,23 @@ class ContisignController extends Controller
             }
         }
         return $template;
+    }
+
+    function fillTemplateHTML($html, $fields)
+    {
+        foreach ($fields as $field) {
+            $key = $field['name'];
+            $value = $field['value'] ?? '';
+
+            // Replace <s>key</s> (case insensitive like your JS "gi")
+            $html = preg_replace(
+                '/<s>' . preg_quote($key, '/') . '<\/s>/i',
+                $value,
+                $html
+            );
+        }
+
+        return $html;
     }
 
     public function test(Request $request)

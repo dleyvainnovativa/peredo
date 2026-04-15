@@ -11,45 +11,110 @@
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Número de empleado *</label>
                         <div class="input-group mb-3">
-                            <input data-field="NUMERO_EMPLEADO" data-fill="nmlp" id="employee_number" type="text" name="employee" value="012993558" class="form-control" placeholder="Ingresa tu número de empleado" required>
+                            <input data-field="NUMERO_EMPLEADO" data-fill="nmlp" id="employee_number"
+                                type="text" min="1" max="15" name="employee" value="012993558"
+                                class="form-control"
+                                placeholder="Ingresa tu número de empleado" required>
+
+                            <div class="invalid-feedback">
+                                Ingresa tu número de empleado.
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label fw-bold">RFC *</label>
-                        <input data-fill="rtbfjc" type="text" name="rfc" id="employee_rfc" value="NONA820101XYZ" class="form-control " placeholder="Ingresa tu RFC" required>
+                        <input data-fill="rtbfjc"
+                            type="text"
+                            minlength="12"
+                            maxlength="13"
+                            pattern="^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$"
+                            name="rfc"
+                            id="employee_rfc"
+                            value="NONA820101XYZ"
+                            class="form-control"
+                            placeholder="Ingresa tu RFC"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Ingresa un RFC válido.
+                        </div>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="full_name" class="form-label fw-bold">Nombre <b>*</b></label>
-                        <input data-fill="nmtbj" value="Pedro" type="text" class="form-control " id="employee_full_name" required>
+                        <label class="form-label fw-bold">Nombre *</label>
+                        <input value="Pedro" type="text" class="form-control" id="employee_full_name" required>
+                        <input data-fill="nmtbj" value="" type="hidden" class="form-control " id="employee_complete_name">
+
+                        <div class="invalid-feedback">
+                            Ingresa tu nombre.
+                        </div>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="lastname" class="form-label fw-bold">Apellido Paterno</label>
-                        <input data-fill="lastname" type="text" value="Pérez" class="form-control " id="lastname" required>
+                        <label class="form-label fw-bold">Apellido Paterno *</label>
+                        <input data-fill="lastname" type="text" value="Pérez" class="form-control" id="lastname" required>
+                        <div class="invalid-feedback">
+                            Ingresa tu apellido paterno.
+                        </div>
                     </div>
+
                     <div class="col-md-4">
-                        <label for="lastname2" class="form-label fw-bold">Apellido Materno</label>
-                        <input data-fill="lastname2" type="text" value="Jiménez" class="form-control " id="lastname2">
+                        <label class="form-label fw-bold">Apellido Materno</label>
+                        <input data-fill="lastname2" type="text" value="Jiménez" class="form-control" id="lastname2">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="email" class="form-label fw-bold">Correo electrónico <b>*</b></label>
-                        <input data-fill="" value="dancaballerodlc@gmail.com" type="email" class="form-control " id="employee_email" required>
+                        <label class="form-label fw-bold">Correo electrónico *</label>
+                        <input data-fill="" value="dancaballerodlc@gmail.com"
+                            type="email"
+                            class="form-control"
+                            id="employee_email"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Ingresa un correo válido.
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label for="phone" class="form-label fw-bold">Teléfono Celular <b>*</b></label>
-                        <input data-fill="" value="2291229900" type="phone" class="form-control " id="employee_phone" required>
+                        <label class="form-label fw-bold">Teléfono Celular *</label>
+                        <input data-fill=""
+                            minlength="10"
+                            maxlength="10"
+                            pattern="^[0-9]{10}$"
+                            value="2291229900"
+                            type="tel"
+                            class="form-control"
+                            id="employee_phone"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Ingresa un número de 10 dígitos.
+                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="payment" class="form-label fw-bold">Último UUID (Si aplica)</label>
                         <input data-fill="uuid" data-field="ULTIMO_UUID" type="text" class="form-control " value="1" id="employee_last_id">
+                        <div class="invalid-feedback">
+                            Ingresa un UUID válido
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label for="employee_amount" class="form-label fw-bold">Monto Solicitado</label>
-                        <input data-fill="mtntzd" data-field="MONTO_PRESTAMO" type="number" value="1200" class="form-control " id="employee_amount" required>
+                        <label class="form-label fw-bold">Monto Solicitado *</label>
+                        <input data-fill="mtntzd"
+                            data-field="MONTO_PRESTAMO"
+                            type="number"
+                            value="1200"
+                            class="form-control"
+                            id="employee_amount"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Ingresa un monto válido.
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold">INE Frente</label>

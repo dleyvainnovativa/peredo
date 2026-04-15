@@ -51,9 +51,24 @@ class PageController extends Controller
         $templates = [];
         $content = getJsonData("templates/templates.json");
         $companies = getJsonData("company/companies.json");
-        $documentsRaw = getJsonData("company/documents.json");
+        $documentsRaw = PeredoController::getDatosDocumentos($promotor);
+        // $documentsRaw2 = getJsonData("company/documents.json");
         $documents = [];
+        $formatArray = [
+            'FORMATO_1' => 'REFACIL_ETESA',
+            'FORMATO_2' => 'REFACIL_NOMI-PAY',
+            'FORMATO_3' => 'REFACIL_SEP Puebla',
+            'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
+            'FORMATO_5' => 'REFACIL_BENEFIT',
+        ];
+        foreach ($documentsRaw as &$doc) {
+            $formato = $doc['DOCUMENTO'] ?? null;
 
+            $doc['FORMATO'] = $formatArray[$formato] ?? null;
+        }
+        unset($doc);
+
+        // dd($documentsRaw, $documentsRaw2);
 
         foreach ($companies as $key => $company) {
             if ($company["IDENTIFICADOR"] == $empresa) {
@@ -95,7 +110,7 @@ class PageController extends Controller
                 $documents[$sucursal][$dependencia] = [];
             }
             $documents[$sucursal][$dependencia][] = [
-                "doc_id" => self::getTemplateID($doc['DOCUMENTO']),
+                "doc_id" => self::getTemplateID($doc['FORMATO']),
                 "documento" => $doc['DOCUMENTO'],
                 "documento_id" => $doc['ID_DOCUMENTO'],
                 "formato" => $doc['FORMATO'],

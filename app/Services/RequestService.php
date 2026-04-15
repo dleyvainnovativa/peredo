@@ -51,6 +51,17 @@ class RequestService
                             "promotor_date" => null,
                             "document_end" => null,
                         ];
+                        $ineFile = null;
+                        $selfieFile = null;
+
+                        foreach ($document["annexed"] as $key => $annexed) {
+                            if ($key == 0) {
+                                $ineFile = $annexed["FieldUrl"];
+                            }
+                            if ($key == 1) {
+                                $selfieFile = $annexed["FieldUrl"];
+                            }
+                        }
 
                         foreach ($document["signatures"] as $signature) {
                             if ($signature["Charge"] == "Signed" && $signature["Type"] == "Firma autógrafa") {
@@ -88,7 +99,9 @@ class RequestService
                             "liga_promotor" => $obj["promotor_url"],
                             "fecha_firma_promotor" => $this->formatDate($obj["promotor_date"]),
                             "rutaQR_XML" => $obj["constancy_url"],
-                            "rutaQR_PDF" => $obj["document_url"]
+                            "rutaQR_PDF" => $obj["document_url"],
+                            "ruta_INE" => $ineFile,
+                            "ruta_Selfie" => $selfieFile,
                         ];
 
                         PeredoController::updateDatosSolicitud($updated);

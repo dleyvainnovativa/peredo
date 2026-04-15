@@ -32,7 +32,6 @@ async function buildDetails() {
 }
 
 async function blockFields(fields) {
-    console.log(fields);
     let form = document.getElementById("employee_form");
     let inputs = form.querySelectorAll("input[data-field]");
 
@@ -131,6 +130,9 @@ async function fillTemplateHTML() {
     let content = JSON.parse(chosen.value);
     let template = content.Templates;
     await buildTemplateHtml(template);
+
+    document.getElementById("employee_complete_name").value = `${document.getElementById("employee_full_name").value} ${document.getElementById("lastname").value} ${document.getElementById("lastname2").value}`;
+
 
     const container = document.getElementById("template_html");
 
@@ -284,7 +286,7 @@ document.getElementById("template_badge").textContent ="";
                 // console.log(doc);
                 option.setAttribute("document_id", doc.documento_id);
                 option.setAttribute("fields", JSON.stringify(doc.campos));
-                option.setAttribute("formato", doc.formato);
+                option.setAttribute("formato", doc.documento);
                 
                 option.value = template.content;
                 option.textContent = template.name;
