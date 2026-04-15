@@ -101,9 +101,9 @@ class ContisignController extends Controller
             $obj["peredo_id"] = null;
             $obj["peredo_folio"] = null;
 
-            // $peredo = PeredoController::setDatosSolicitud($obj);
-            // $obj["peredo_id"] = $peredo->id;
-            // $obj["peredo_folio"] = $peredo->folio;
+            $peredo = PeredoController::setDatosSolicitud($obj);
+            $obj["peredo_id"] = $peredo->id;
+            $obj["peredo_folio"] = $peredo->folio;
             foreach ($fields as $key => &$field) {
                 if ($field["name"] == "uuid" && $field["value"] == "") {
                     $field["value"] = $obj["peredo_folio"];
