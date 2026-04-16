@@ -46,12 +46,19 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $date = new DateTime('now', new DateTimeZone('America/Mexico_City'));
-        $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
+        $password = '19p3r3d096c0nsorc1o2109';
+        // $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
 
+        $promotorHsh = self::encryptWithPassword(22, $password);
+        $empresaHsh = self::encryptWithPassword(3, $password);
         $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
         $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
 
-        // dd($promotor, $empresa, date("Ymd"));
+        // dd($promotorHsh, $empresaHsh);
+
+        // r3B5wTMgGROnAoGCPk3TBonKU4YNyJJLF/Zh1zuewdA=
+        // WjutvRrlVUZCve/iNWk1c7G9zzVQ8uvoLXv6fG6yf9A=
+        // dd($password, $request->input("promotor"), $request->input("empresa"), $promotor, $empresa, $date->format('Ymd'));
 
         $logo = asset('img/logo.png');
         $empresa_flag = false;
