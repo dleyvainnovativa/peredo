@@ -45,16 +45,19 @@ class PageController extends Controller
     }
     public function index(Request $request)
     {
-        $date = new DateTime('now', new DateTimeZone('America/Mexico_City'));
-        $password = '19p3r3d096c0nsorc1o2109';
-        // $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
+        $promotor = ($request->input("promotor")) ?? null;
+        $empresa = ($request->input("empresa")) ?? null;
+        // $date = new DateTime('now', new DateTimeZone('America/Mexico_City'));
+        // $passClave = '19p3r3d096c0nsorc1o2109';
+        // $password = '19p3r3d096c0nsorc1o2109';
+        // // $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
 
-        $promotorHsh = self::encryptWithPassword(22, $password);
-        $empresaHsh = self::encryptWithPassword(3, $password);
-        $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
-        $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
+        // $promotorHsh = self::encryptWithPassword(22, $password);
+        // $empresaHsh = self::encryptWithPassword(3, $password);
+        // $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
+        // $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
 
-        // dd($promotorHsh, $empresaHsh);
+        // dd($promotorHsh, $empresaHsh, $request->input("promotor"), $request->input("empresa"), $promotor, $empresa);
 
         // r3B5wTMgGROnAoGCPk3TBonKU4YNyJJLF/Zh1zuewdA=
         // WjutvRrlVUZCve/iNWk1c7G9zzVQ8uvoLXv6fG6yf9A=
@@ -161,21 +164,22 @@ class PageController extends Controller
 
     private function decryptWithPassword($encryptedData, $password)
     {
-        // Generar misma clave
-        $key = hash('sha256', $password, true);
+        $encryptedData = strtr($encryptedData, '-_', '+/');
 
-        // Decodificar base64
+        $remainder = strlen($encryptedData) % 4;
+        if ($remainder) {
+            $encryptedData .= str_repeat('=', 4 - $remainder);
+        }
+
         $data = base64_decode($encryptedData);
 
-        // Separar IV y ciphertext
         $iv = substr($data, 0, 16);
         $ciphertext = substr($data, 16);
 
-        // Desencriptar
-        return  openssl_decrypt(
+        return openssl_decrypt(
             $ciphertext,
             'AES-256-CBC',
-            $key,
+            $key = hash('sha256', $password, true),
             OPENSSL_RAW_DATA,
             $iv
         );
@@ -184,6 +188,22 @@ class PageController extends Controller
     {
         $key = hash('sha256', $password, true);
         $iv = random_bytes(16);
+
+        $encrypted = openssl_encrypt(
+            $data,
+            'AES-256-CBC',
+            $key,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
+
+        return rtrim(strtr(base64_encode($iv . $encrypted), '+/', '-_'), '=');
+    }
+    private static function encryptWithPassword2($data, $password)
+    {
+        $key = hash('sha256', $password, true);
+        $iv = random_bytes(16);
+
         $encrypted = openssl_encrypt(
             $data,
             'AES-256-CBC',
