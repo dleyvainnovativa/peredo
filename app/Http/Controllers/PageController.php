@@ -43,8 +43,13 @@ class PageController extends Controller
     }
     public function index(Request $request)
     {
-        $promotor = $request->input("promotor") ?? null;
-        $empresa = $request->input("empresa") ?? null;
+        $password = '19p3r3d096c0nsorc1o2109' . date("Ymd");
+
+        $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
+        $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
+
+        // dd($promotor, $empresa, date("Ymd"));
+
         $logo = asset('img/logo.png');
         $empresa_flag = false;
         // dd($promotor, $empresa, $request);
@@ -142,5 +147,40 @@ class PageController extends Controller
         $name_id = str_replace(' solicitud', '', $name_id);
         $name_id = preg_replace('/[^a-z0-9_]/', '', $name_id);
         return $name_id;
+    }
+
+    private function decryptWithPassword($encryptedData, $password)
+    {
+        // Generar misma clave
+        $key = hash('sha256', $password, true);
+
+        // Decodificar base64
+        $data = base64_decode($encryptedData);
+
+        // Separar IV y ciphertext
+        $iv = substr($data, 0, 16);
+        $ciphertext = substr($data, 16);
+
+        // Desencriptar
+        return  openssl_decrypt(
+            $ciphertext,
+            'AES-256-CBC',
+            $key,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
+    }
+    private static function encryptWithPassword($data, $password)
+    {
+        $key = hash('sha256', $password, true);
+        $iv = random_bytes(16);
+        $encrypted = openssl_encrypt(
+            $data,
+            'AES-256-CBC',
+            $key,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
+        return base64_encode($iv . $encrypted);
     }
 }
