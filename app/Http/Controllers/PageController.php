@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use DateTimeZone;
 use Exception;
 
 use Illuminate\Http\Request;
@@ -43,7 +45,8 @@ class PageController extends Controller
     }
     public function index(Request $request)
     {
-        $password = '19p3r3d096c0nsorc1o2109' . date("Ymd");
+        $date = new DateTime('now', new DateTimeZone('America/Mexico_City'));
+        $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
 
         $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
         $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
