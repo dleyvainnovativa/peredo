@@ -135,7 +135,8 @@ async function prepareEmployee() {
     const form = document.querySelector('#employee_form.needs-validation')
     if (!form.checkValidity()) {
         showAlert('Faltan datos', 'Ingrese todos los campos obligatorios');
-        return
+        form.classList.add('was-validated');
+        return;
     }
     form.classList.add('was-validated');
 

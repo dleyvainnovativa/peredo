@@ -12,7 +12,7 @@
                         <label class="form-label fw-bold">Número de empleado *</label>
                         <div class="input-group mb-3">
                             <input data-field="NUMERO_EMPLEADO" data-fill="nmlp" id="employee_number"
-                                type="text" min="1" max="15" name="employee" value="012993558"
+                                type="text" min="1" max="15" name="employee" value=""
                                 class="form-control"
                                 placeholder="Ingresa tu número de empleado" required>
 
@@ -31,7 +31,7 @@
                             pattern="^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$"
                             name="rfc"
                             id="employee_rfc"
-                            value="NONA820101XYZ"
+                            value=""
                             class="form-control"
                             placeholder="Ingresa tu RFC"
                             required>
@@ -43,7 +43,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Nombre *</label>
-                        <input value="Pedro" type="text" class="form-control" id="employee_full_name" required>
+                        <input value="" type="text" class="form-control" id="employee_full_name" required>
                         <input data-fill="nmtbj" value="" type="hidden" class="form-control " id="employee_complete_name">
 
                         <div class="invalid-feedback">
@@ -53,7 +53,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Apellido Paterno *</label>
-                        <input data-fill="lastname" type="text" value="Pérez" class="form-control" id="lastname" required>
+                        <input data-fill="lastname" type="text" value="" class="form-control" id="lastname" required>
                         <div class="invalid-feedback">
                             Ingresa tu apellido paterno.
                         </div>
@@ -61,12 +61,12 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Apellido Materno</label>
-                        <input data-fill="lastname2" type="text" value="Jiménez" class="form-control" id="lastname2">
+                        <input data-fill="lastname2" type="text" value="" class="form-control" id="lastname2">
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Correo electrónico *</label>
-                        <input data-fill="" value="dancaballerodlc@gmail.com"
+                        <input data-fill="" value=""
                             type="email"
                             class="form-control"
                             id="employee_email"
@@ -83,7 +83,7 @@
                             minlength="10"
                             maxlength="10"
                             pattern="^[0-9]{10}$"
-                            value="2291229900"
+                            value=""
                             type="tel"
                             class="form-control"
                             id="employee_phone"
@@ -107,7 +107,7 @@
                         <input data-fill="mtntzd"
                             data-field="MONTO_PRESTAMO"
                             type="number"
-                            value="1200"
+                            value=""
                             class="form-control"
                             id="employee_amount"
                             required>
