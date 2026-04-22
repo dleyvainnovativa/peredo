@@ -27,6 +27,7 @@ class RequestService
             if ($request->status != "Totalmente firmado") {
 
                 $document = $this->contisign->getDocument($request->id_contisign);
+                Log::debug(["Signsstaus", $request->status, $document["Signsstatus"]]);
 
                 /*NEW VALIDATION*/
                 if ($document["Signsstatus"] != $request->status) {
