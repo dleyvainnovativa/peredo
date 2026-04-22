@@ -84,10 +84,9 @@ class RequestService
 
                         if ($document["Signsstatus"] == "Totalmente firmado") {
                             $obj["document_end"] = $document["updated_at"];
-
-                            Request::where('id', $request->id)
-                                ->update(['status' => "Totalmente firmado"]);
                         }
+                        Request::where('id', $request->id)
+                            ->update(['status' => $document["Signsstatus"]]);
 
                         $updated = [
                             "id_solicitud" => $obj["peredo_id"],
