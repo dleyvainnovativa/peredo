@@ -39,7 +39,7 @@ class TemplateController extends Controller
             $uniKeyPayload = [
                 "UniKey" => self::generateUniKey($template["TemplateName"]), // This might also be dynamic
                 "thisTemplateId" => $template['id'],
-                "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5", // This should be the current user's ID
+                "user_id" => env('CONTISIGN_ID'), // This should be the current user's ID
                 "version" => false
             ];
             Log::debug(["UniKey Payload:", $uniKeyPayload]);
@@ -142,7 +142,7 @@ class TemplateController extends Controller
                     $moreTags
                 ),
                 "Emptytemplate" => null,
-                "user_id" => "e5127f46-e604-4f27-811e-f8cba04591f5",
+                "user_id" => env('CONTISIGN_ID'),
                 "positionRequired" => $template['positionRequired'],
                 "UniKey" => $uniKeyData['unikey'],
                 "html" => $html,

@@ -127,8 +127,6 @@ class ContisignController extends Controller
             $template["Formato"] = $formatArray[$baseName] ?? null;
             $html = self::fillTemplateHTML($template["Templates"], $fields);
 
-
-
             $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);
 
             return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
@@ -170,7 +168,7 @@ class ContisignController extends Controller
     public function test(Request $request)
     {
         try {
-            $companyId = 'e5127f46-e604-4f27-811e-f8cba04591f5';
+            $companyId = env('CONTISIGN_ID');
             $startDate = '2025-09-01';
             $endDate = '2025-09-30';
 
