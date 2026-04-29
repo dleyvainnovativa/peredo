@@ -169,6 +169,14 @@ async function prepareEmployee() {
     }
 }
 
+document.getElementById('employee_rfc').addEventListener('input', function () {
+    this.value = this.value.toUpperCase();
+});
+document.getElementById('employee_phone').addEventListener('input', function (e) {
+    // Replace anything that is NOT a number
+    this.value = this.value.replace(/\D/g, '');
+});
+
 window.openUploadModal = openUploadModal;
 window.saveImage = saveImage;
 window.prepareEmployee = prepareEmployee;

@@ -12,6 +12,7 @@ async function searchEmployee(event) {
         document.getElementById('review_employee_rfc').textContent = null;
         document.getElementById('review_employee_email').textContent = null;
         document.getElementById('review_dependencia').textContent = null;
+        document.getElementById('review_employee_department').textContent = null;
         document.getElementById('review_name').textContent = null;
         document.getElementById('review_email').textContent = null;
         document.getElementById('review_phone').textContent = null;
@@ -60,6 +61,7 @@ async function fillFields(){
         document.getElementById('review_employee_rfc').textContent = document.getElementById("employee_rfc").value;
         document.getElementById('review_employee_email').textContent = document.getElementById("employee_email").value;
         document.getElementById('review_dependencia').textContent = document.getElementById("employee_direction").value;
+        document.getElementById('review_employee_department').textContent = document.getElementById("employee_last_id").value;
         
 }
 

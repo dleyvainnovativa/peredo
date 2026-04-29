@@ -69,6 +69,8 @@
                         <input data-fill="" value=""
                             type="email"
                             class="form-control"
+                            pattern="^[^\s@]+@[^\s@]+\.(com|mx)$"
+
                             id="employee_email"
                             required>
 
@@ -83,6 +85,7 @@
                             minlength="10"
                             maxlength="10"
                             pattern="^[0-9]{10}$"
+                            inputmode="numeric"
                             value=""
                             type="tel"
                             class="form-control"
@@ -95,7 +98,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="payment" class="form-label fw-bold">Último UUID (Si aplica)</label>
+                        <label for="payment" class="form-label fw-bold">UUID del último talón de cheques</label>
                         <input data-fill="uuid" data-field="ULTIMO_UUID" type="text" class="form-control " value="1" id="employee_last_id">
                         <div class="invalid-feedback">
                             Ingresa un UUID válido
@@ -103,21 +106,24 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Monto Solicitado *</label>
-                        <input data-fill="mtntzd"
-                            data-field="MONTO_PRESTAMO"
-                            type="number"
-                            value=""
-                            class="form-control"
-                            id="employee_amount"
-                            required>
+                        <label class="form-label fw-bold">Monto Solicitado</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">$</span>
+                            <input data-fill="mtntzd"
+                                data-field="MONTO_PRESTAMO"
+                                type="number"
+                                value=""
+                                class="form-control"
+                                id="employee_amount"
+                                required>
+                        </div>
 
                         <div class="invalid-feedback">
                             Ingresa un monto válido.
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-bold">INE Frente</label>
+                        <label class="form-label fw-bold">INE Frente *</label>
                         <div class="upload-card" onclick="openUploadModal('ine_front')">
                             <div id="preview_ine_front" class="text-center p-4 border rounded">
                                 <span><i class="fas fa-address-card me-2"></i> Subir INE Frente</span>
@@ -126,7 +132,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label fw-bold">INE Reverso</label>
+                        <label class="form-label fw-bold">INE Reverso *</label>
                         <div class="upload-card" onclick="openUploadModal('ine_back')">
                             <div id="preview_ine_back" class="text-center p-4 border rounded">
                                 <span><i class="fas fa-credit-card me-2"></i> Subir INE Reverso</span>
@@ -134,7 +140,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-bold">Selfie</label>
+                        <label class="form-label fw-bold">Selfie *</label>
                         <div class="upload-card" onclick="openUploadModal('selfie_photo')">
                             <div id="preview_selfie_photo" class="text-center p-4 border rounded">
                                 <span><i class="fas fa-image-portrait me-2"></i> Subir Selfie</span>
@@ -166,7 +172,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
 
-            <h5>Subir documento</h5>
+            <h5>Subir archivo</h5>
+            <p class="text-muted">Subir archivo tipo imagen (.png, .jpg, .jpeg)</p>
 
             <input type="file"
                 id="fileInput"

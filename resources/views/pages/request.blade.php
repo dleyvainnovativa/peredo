@@ -15,6 +15,21 @@
         @include('sections.request.review')
     </div>
 </div>
+<script>
+    const missingFields = @json($missingFields);
+    document.addEventListener("DOMContentLoaded", () => {
+
+        if (missingFields.length > 0) {
+            missingFields.forEach(field => {
+
+                showAlert(
+                    "Dato vacío del promotor",
+                    `El campo ${field} está vacío`
+                );
+            });
+        }
+    });
+</script>
 @include("components.filters")
 @include("modals.add_item")
 

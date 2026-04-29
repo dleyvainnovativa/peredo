@@ -152,6 +152,21 @@ class PageController extends Controller
         $data["empresa"] = $empresa;
         $data["promotor"] = $promotor;
         $data["documents"] = $documents;
+        $data["employee"] = $employee;
+        $missingFields = [];
+
+        if (empty($employee->name)) {
+            $missingFields[] = 'Nombre';
+        }
+
+        if (empty($employee->email)) {
+            $missingFields[] = 'Correo';
+        }
+
+        if (empty($employee->phone)) {
+            $missingFields[] = 'Teléfono';
+        }
+        $data["missingFields"] = $missingFields;
         return view('pages.request', $data);
     }
     private static function getTemplateID($name)
