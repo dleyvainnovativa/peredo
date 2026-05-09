@@ -106,6 +106,7 @@
                             <input name="promotor_id" type="hidden" id="send_promotor_id">
                             <input name="promotor_name" type="hidden" id="send_promotor_name">
                             <input name="promotor_email" type="hidden" id="send_promotor_email">
+                            <input name="promotor_phone" type="hidden" id="send_promotor_phone">
 
                             <input name="employee_name" type="hidden" id="send_employee_name">
                             <input name="employee_rfc" type="hidden" id="send_employee_rfc">

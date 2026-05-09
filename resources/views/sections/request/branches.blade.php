@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Teléfono</label>
-                        <input data-fill="" disabled type="phone" class="form-control " id="phone">
+                        <input data-fill="" disabled type="phone" class="form-control " id="promotor_phone">
                     </div>
 
 

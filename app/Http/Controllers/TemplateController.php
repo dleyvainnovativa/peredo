@@ -42,7 +42,7 @@ class TemplateController extends Controller
                 "user_id" => env('CONTISIGN_ID'), // This should be the current user's ID
                 "version" => false
             ];
-            Log::debug(["UniKey Payload:", $uniKeyPayload]);
+            Log::debug(["UniKey Payload:", json_encode($uniKeyPayload, JSON_UNESCAPED_UNICODE)]);
             $uniKeyData = $contisign->createUniKey($uniKeyPayload);
             Log::debug(["UniKey Data:", $uniKeyData]);
             // $uniKeyData["contractId"] = "test";
@@ -56,6 +56,8 @@ class TemplateController extends Controller
                     if (strtolower($rSign["type"]) == strtolower($userSign["Name"])) {
                         $userEmail = $rSign["email"];
                         $userName = $rSign["name"];
+                        $userPhone = $rSign["phone"];
+                        $userStatus = $rSign["status"];
                     }
                 }
                 if ($userSign["Charge"] == "Signed") {
@@ -73,9 +75,14 @@ class TemplateController extends Controller
                         "width" => $userSign['width'] ?? null,
                         "height" => $userSign['height'] ?? null,
                         "dimension" => $userSign['dimension'] ?? ['w' => 599, 'h' => 846],
-                        "Status" => "Esperando",
-                        "currentUserExternal" => $userSign['external'],
+                        "page" => 0,
+                        "Status" => $userStatus,
+                        "AditionalInformation" => [],
+                        "editing" => false,
+                        // "currentUserExternal" => $userSign['external'],
                         "LimitDate" => $limit_date,
+                        "PhoneNumber" => "$userPhone",
+                        "phone" => "$userPhone"
                         // Assuming SignType has at least one value
                         // "Type" => $template['SignType'][0] ?? "Firma sencilla"
                     ];
@@ -88,6 +95,7 @@ class TemplateController extends Controller
                         "height" => $signature['height'],
                         "bgcolor" => "#" . $signature['bgColor'],
                         "name" => $signature['Name'],
+                        "page" => 0,
                         "dimensions" => $signature['dimension']
                     ];
                 } else {
@@ -98,17 +106,27 @@ class TemplateController extends Controller
                         "Position" => $userSign['Position'],
                         "BusinessName" => $userSign['BusinessName'],
                         "Order" => null,
-                        "external" => false,
-                        "Status" => "Esperando",
-                        "currentUserExternal" => $userSign['external'],
+                        "external" => true,
+                        "Status" => $userStatus,
+                        "AditionalInformation" => [],
+                        "editing" => false,
+                        // "currentUserExternal" => $userSign['external'],
+                        "LimitDate" => $limit_date,
+                        "PhoneNumber" => "$userPhone",
+                        "phone" => "$userPhone",
                         "Type" => $template['SignType'][0] ?? "Firma sencilla",
-                        "LimitDate" => $limit_date
                     ];
 
                     // Add AditionalInformation for compatibility
                     $signature["AditionalInformation"] = [
                         "bgcolor" => "#undefined",
-                        "name" => $signature['Name']
+                        "name" => $signature['Name'],
+                        "dimensions" => [
+                            "w" => 612,
+                            "h" => 792,
+                            "pageHeight" => 792,
+                            "pages" => 1
+                        ]
                     ];
                 }
 
@@ -151,10 +169,11 @@ class TemplateController extends Controller
                 "ConstancePSC" => $template['PSCreq'],
                 "OnlyNOM151" => $template['OnlyNOM151'],
                 "Fields" => null, // This is often set to null when DataTemplates is used
+                "requireSMS" => $template['requireSMS'],
                 "signatures" => $signatures
             ];
             // dd(json_encode($dataTemplatePayload));
-            Log::debug(["Data Template Payload:", $dataTemplatePayload]);
+            Log::debug(["Data Template Payload:", json_encode($dataTemplatePayload, JSON_UNESCAPED_UNICODE)]);
             $dataTemplateData = $contisign->createDataTemplate($dataTemplatePayload);
             Log::debug(["Data Template Data:", $dataTemplateData]);
 
@@ -167,13 +186,13 @@ class TemplateController extends Controller
                 return $sig;
             }, $signatures);
 
-            Log::debug(["Signs Payload Signatures:", $signsPayloadSignatures]);
 
             $signsPayload = [
                 "signs" => $signsPayloadSignatures,
-                "firmas" => 999999 // This seems like a static value
+                "firmas" => 3 // This seems like a static value
             ];
 
+            Log::debug(["Signs Payload Signatures:", json_encode($signsPayload, JSON_UNESCAPED_UNICODE)]);
 
             $signsData = $contisign->sendSigns($signsPayload);
             Log::debug(["Signs Data:", $signsData]);
@@ -306,7 +325,8 @@ class TemplateController extends Controller
             return
                 [
                     "FileName" => $name,
-                    "FieldUrl" => $data['ImageUrl'] ?? null
+                    "FieldUrl" => $data['ImageUrl'] ?? null,
+                    "Path" => $data['path'] ?? null,
                 ];
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

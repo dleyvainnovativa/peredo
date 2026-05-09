@@ -25,8 +25,10 @@ class ContisignController extends Controller
                 'annexed_selfie' => 'nullable|file',
                 'employee_name' => 'required|string',
                 'employee_email' => 'required|email',
-                'promotor_email' => 'required|email',
                 'employee_phone' => 'required|string',
+
+                'promotor_name' => 'required|string',
+                'promotor_email' => 'required|email',
 
                 'document_id' => 'required|string',
                 'company_id' => 'required|string',
@@ -57,6 +59,7 @@ class ContisignController extends Controller
                 'monto_prestamo' => $request->input("employee_amount"),
                 'uuid_ultimo_pago' => $request->input("employee_lastid"),
                 'id_promotor' => $request->input("promotor_id"),
+                'promotor_name' => $request->input("promotor_name"),
                 'id_empresa' => $request->input("company_id"),
                 'id_documento' => $request->input("document_id"),
                 'id_contisign' => null,
@@ -74,19 +77,37 @@ class ContisignController extends Controller
                 [
                     "type" => "CLIENTE",
                     "email" => $request->input("employee_email"),
-                    "name" => $request->input("employee_name"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('employee_name')
+                    ),
+                    "status" => "Pendiente",
+                    "phone" => $request->input("employee_phone"),
                 ],
                 [
                     "type" => "PROMOTOR",
                     "email" => $request->input("promotor_email"),
-                    "name" => $request->input("promotor_name"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('promotor_name')
+                    ),
+                    "status" => "Esperando",
+                    "phone" => $request->input("promotor_phone") ?? null,
                     // "email" => "caballerodlc@outlook.com",
                     // "name" => "Daniel Leyva"
                 ],
                 [
                     "type" => "ARCHIVO",
                     "email" => $request->input("employee_email"),
-                    "name" => $request->input("employee_name"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('employee_name')
+                    ),
+                    "status" => "Pendiente",
+                    "phone" => $request->input("employee_phone"),
                 ],
             ];
             $fields = json_decode($request->input("fields"), true);
@@ -125,6 +146,12 @@ class ContisignController extends Controller
                 'REFACIL_BENEFIT' => 'FORMATO_5',
             ];
             $template["Formato"] = $formatArray[$baseName] ?? null;
+            usort($template['UserSigns'], function ($a, $b) {
+                if ($a['Order'] === null) return 1;
+                if ($b['Order'] === null) return -1;
+                return $a['Order'] <=> $b['Order'];
+            });
+            // dd($template["UserSigns"]);
             $html = self::fillTemplateHTML($template["Templates"], $fields);
 
             $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);

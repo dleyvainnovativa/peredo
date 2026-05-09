@@ -169,6 +169,7 @@ async function fillDocument() {
     document.getElementById("send_promotor_id").value = document.getElementById("promotor_id").value;
     document.getElementById("send_promotor_name").value = document.getElementById("full_name").value;
     document.getElementById("send_promotor_email").value = document.getElementById("email").value;
+    document.getElementById("send_promotor_phone").value = document.getElementById("promotor_phone").value;
     document.getElementById("send_employee_rfc").value = document.getElementById("employee_rfc").value;
     document.getElementById("send_employee_phone").value = document.getElementById("employee_phone").value;
     document.getElementById("send_employee_name").value = `${document.getElementById("employee_full_name").value} ${document.getElementById("lastname").value} ${document.getElementById("lastname2").value}`;

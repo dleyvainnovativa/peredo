@@ -5,7 +5,7 @@
 // Async search employee
 async function searchEmployee(event) {
         document.getElementById('full_name').value = null;
-        document.getElementById('phone').value =  null;
+        document.getElementById('promotor_phone').value =  null;
         document.getElementById('email').value =  null;
         document.getElementById('review_employee_num').textContent = null;
         document.getElementById('review_employee_name').textContent = null;
@@ -23,7 +23,7 @@ async function searchEmployee(event) {
     if (data) {
         let employee = data;
         document.getElementById('full_name').value = employee.name;
-        document.getElementById('phone').value = employee.phone;
+        document.getElementById('promotor_phone').value = employee.phone;
         document.getElementById('email').value = employee.email;
         // Promotor
         document.getElementById('review_name').textContent = employee.name;
