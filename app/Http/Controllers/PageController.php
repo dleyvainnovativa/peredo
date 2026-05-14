@@ -232,7 +232,7 @@ class PageController extends Controller
     public function showPdf($id)
     {
         $data = app(ContisignService::class)->getFullDocument($id);
-        // dd($data);
+        dd($data);
         if (!isset($data['documentUrl'])) {
             abort(404, 'PDF not available');
         }
