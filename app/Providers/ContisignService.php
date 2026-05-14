@@ -96,7 +96,7 @@ class ContisignService
     }
     public function getFullDocument($id)
     {
-        dd(sys_get_temp_dir());
+        // dd(sys_get_temp_dir());
         $payload = [
             "email" => "sistemas@contactocp.com.mx",
             "name" => "Johan Narvaez"
