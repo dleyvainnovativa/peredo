@@ -94,6 +94,27 @@ class ContisignService
 
         return $response->json();
     }
+    public function getFullDocument($id)
+    {
+        dd(sys_get_temp_dir());
+        $payload = [
+            "email" => "sistemas@contactocp.com.mx",
+            "name" => "Johan Narvaez"
+        ];
+        // dd("{$this->baseUrl}/v2/viewfulldocument/$id");
+        // $response = $this->withAuth()->put("{$this->baseUrl}/v2/viewfulldocument/$id", $payload);
+        $response = $this->withAuth()
+            ->withOptions([
+                'stream' => false,
+            ])
+            ->get("{$this->baseUrl}/v2/viewfulldocument/$id", $payload);
+
+        if ($response->failed()) {
+            throw new \Exception('Error creating DataTemplate: ' . $response->body());
+        }
+        // dd("{$this->baseUrl}/v2/viewfulldocument/$id", $payload, $response->body());
+        return $response->json();
+    }
 
     /**
      * Send Signs

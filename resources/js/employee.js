@@ -15,22 +15,21 @@ document.getElementById('fileInput').addEventListener('change', function (e) {
     const file = input.files[0];
 
     if (!file) return;
-
-    // ✅ Validate it's an image
     if (!file.type.startsWith('image/')) {
         showAlert('Archivo no es una imagen', 'Favor de ingresar una imagen');
-
-        // Reset input
         input.value = '';
-
-        // Optional: clear preview
         document.getElementById('imagePreview').innerHTML = '';
-
+        return;
+    }
+    const maxSize = 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+        showAlert('Imágen muy grande', 'Sube una imagen de menor calidad');
+        input.value = '';
+        document.getElementById('imagePreview').innerHTML = '';
         return;
     }
 
     currentFile = file;
-
     const reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById('imagePreview').innerHTML = `
@@ -130,6 +129,7 @@ function blobToFile(blob, filename) {
 }
 
 async function prepareEmployee() {
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
 
     // Initialize Form Validation & Submit
     const form = document.querySelector('#employee_form.needs-validation')
@@ -149,6 +149,10 @@ async function prepareEmployee() {
     try {
         const pdfBlobINE = await generatePDF([window.ine_front, window.ine_back]);
         const pdfFileINE = blobToFile(pdfBlobINE, 'annexed.pdf');
+        if (pdfFileINE.size > maxSize) {
+            showAlert('Imágenes muy grandes', 'Sube una imagen de tu INE de menor calidad');
+            return;
+        }
         const inputINE = document.getElementById('annexed_input');
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(pdfFileINE);
@@ -156,6 +160,11 @@ async function prepareEmployee() {
         
         const pdfBlobSelfie = await generatePDF([window.selfie_photo]);
         const pdfFileSelfie = blobToFile(pdfBlobSelfie, 'annexed_selfie.pdf');
+        if (pdfFileSelfie.size > maxSize) {
+            showAlert('Imágenes muy grandes', 'Sube una imagen de Selfie de menor calidad');
+            return;
+        }
+
         const inputSelfie = document.getElementById('annexed_selfie_input');
         const dataTransferSelfie = new DataTransfer();
         dataTransferSelfie.items.add(pdfFileSelfie);

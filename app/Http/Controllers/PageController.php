@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ContisignService;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -227,5 +228,17 @@ class PageController extends Controller
             $iv
         );
         return base64_encode($iv . $encrypted);
+    }
+    public function showPdf($id)
+    {
+        $data = app(ContisignService::class)->getFullDocument($id);
+        // dd($data);
+        if (!isset($data['documentUrl'])) {
+            abort(404, 'PDF not available');
+        }
+        $pdfContent = base64_decode($data['documentUrl']);
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="document.pdf"');
     }
 }
