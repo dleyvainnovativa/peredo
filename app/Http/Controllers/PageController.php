@@ -232,11 +232,22 @@ class PageController extends Controller
     public function showPdf($id)
     {
         $data = app(ContisignService::class)->getFullDocument($id);
-        dd($data);
+
         if (!isset($data['documentUrl'])) {
             abort(404, 'PDF not available');
         }
-        $pdfContent = base64_decode($data['documentUrl']);
+
+        $base64 = $data['documentUrl'];
+
+        // Remove data URI prefix
+        $base64 = preg_replace(
+            '/^data:application\/pdf;base64,/',
+            '',
+            $base64
+        );
+
+        $pdfContent = base64_decode($base64);
+
         return response($pdfContent, 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="document.pdf"');
