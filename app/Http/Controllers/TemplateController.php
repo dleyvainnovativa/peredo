@@ -222,7 +222,8 @@ class TemplateController extends Controller
                 "liga_promotor" => null,
                 "fecha_firma_promotor" => null,
                 "rutaQR_XML" => $dataTemplateData['ConstancyRC'],
-                "rutaQR_PDF" => $dataTemplateData["documentUrl"],
+                "rutaQR_PDF" => route("home") . "/pdf/" . $dataTemplateData['id'],
+                // "rutaQR_PDF" => $dataTemplateData["documentUrl"],
                 "ruta_INE" => $annexedFile["FieldUrl"],
                 "ruta_Selfie" => $annexedSelfieFile["FieldUrl"],
             ];

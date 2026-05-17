@@ -5,8 +5,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PageController::class, 'index']);
-Route::get('/{id}', [PageController::class, 'showPdf']);
+Route::get('/', [PageController::class, 'index'])->name("home");
+Route::get('/pdf/{id}', [PageController::class, 'showPdf']);
 Route::get('/request', function () {
     return view('pages.warehouse');
 });

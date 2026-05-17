@@ -96,7 +96,7 @@ class RequestService
                             "liga_promotor" => $obj["promotor_url"],
                             "fecha_firma_promotor" => $this->formatDate($obj["promotor_date"]),
                             "rutaQR_XML" => $obj["constancy_url"],
-                            "rutaQR_PDF" => $obj["document_url"],
+                            "rutaQR_PDF" => route("home") . "/pdf/" . $obj["id_contisign"],
                             "ruta_INE" => $ineFile,
                             "ruta_Selfie" => $selfieFile,
                         ];
