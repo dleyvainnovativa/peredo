@@ -122,17 +122,17 @@ class ContisignController extends Controller
             $obj["peredo_id"] = null;
             $obj["peredo_folio"] = null;
 
-            // $peredo = PeredoController::setDatosSolicitud($obj);
-            // $obj["peredo_id"] = $peredo->id;
-            // $obj["peredo_folio"] = $peredo->folio;
-            // foreach ($fields as $key => &$field) {
-            //     if ($field["name"] == "uuid" && $field["value"] == "") {
-            //         $field["value"] = $obj["peredo_folio"];
-            //     }
-            //     if ($field["name"] == "nmtbj") {
-            //         $field["value"] = $request->input("employee_name");
-            //     }
-            // }
+            $peredo = PeredoController::setDatosSolicitud($obj);
+            $obj["peredo_id"] = $peredo->id;
+            $obj["peredo_folio"] = $peredo->folio;
+            foreach ($fields as $key => &$field) {
+                if ($field["name"] == "uuid" && $field["value"] == "") {
+                    $field["value"] = $obj["peredo_folio"];
+                }
+                if ($field["name"] == "nmtbj") {
+                    $field["value"] = $request->input("employee_name");
+                }
+            }
 
             $templateName = $template["TemplateName"] ?? '';
             $baseName = trim(str_replace('Solicitud', '', $templateName));
