@@ -120,8 +120,9 @@ class RequestController extends Controller
 
                         // PeredoController::updateDatosSolicitud($updated);
                         $documents[] = $updated;
+                        dd($updated);
                     }
-                    dd($request, $document);
+                    dd($request, $document, $documents);
                 }
             }
         }
