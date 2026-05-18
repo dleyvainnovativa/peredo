@@ -135,9 +135,10 @@ class ContisignController extends Controller
             }
 
             $templateName = $template["TemplateName"] ?? '';
-            $baseName = trim(str_replace('Solicitud', '', $templateName));
-            $baseName = strtoupper($baseName);
-            $baseName = str_replace(['-', ' '], ['_', '_'], $baseName);
+            // $baseName = trim(str_replace('Solicitud', '', $templateName));
+            // $baseName = strtoupper($baseName);
+            // $baseName = str_replace(['-', ' '], ['_', '_'], $baseName);
+            $baseName = self::getTemplateID($templateName);
             $formatArray = [
                 'REFACIL_ETESA' => 'FORMATO_1',
                 'REFACIL_NOMIPAY' => 'FORMATO_2',
@@ -146,6 +147,7 @@ class ContisignController extends Controller
                 'REFACIL_BENEFIT' => 'FORMATO_5',
             ];
             $template["Formato"] = $formatArray[$baseName] ?? null;
+            // dd($template["Formato"], $templateName, $baseName, $template);
             usort($template['UserSigns'], function ($a, $b) {
                 if ($a['Order'] === null) return 1;
                 if ($b['Order'] === null) return -1;
@@ -161,6 +163,19 @@ class ContisignController extends Controller
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
             // return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    private static function getTemplateID($name)
+    {
+        $name_id = strtolower($name);
+        $name_id = str_replace(' solicitud', '', $name_id);
+        $name_id = str_replace('-', '', $name_id);
+        $name_id = preg_replace('/\s+/', '_', $name_id);
+        $name_id = preg_replace('/[^a-z0-9_]/', '', $name_id);
+        $name_id = preg_replace('/_+/', '_', $name_id);
+        $name_id = trim($name_id, '_');
+        $name_id = strtoupper($name_id);
+        return $name_id;
     }
 
     private static function getTemplate($id)

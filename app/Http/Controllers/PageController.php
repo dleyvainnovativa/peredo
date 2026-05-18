@@ -172,25 +172,12 @@ class PageController extends Controller
     private static function getTemplateID($name)
     {
         $name_id = strtolower($name);
-
-        // Remove " solicitud"
         $name_id = str_replace(' solicitud', '', $name_id);
-
-        // Remove hyphens completely
         $name_id = str_replace('-', '', $name_id);
-
-        // Convert spaces to underscores
         $name_id = preg_replace('/\s+/', '_', $name_id);
-
-        // Remove invalid characters except underscore
         $name_id = preg_replace('/[^a-z0-9_]/', '', $name_id);
-
-        // Remove duplicate underscores
         $name_id = preg_replace('/_+/', '_', $name_id);
-
-        // Trim underscores
         $name_id = trim($name_id, '_');
-
         return $name_id;
     }
 
