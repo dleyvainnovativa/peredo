@@ -13,6 +13,6 @@ Route::get('/request', function () {
 Route::get('/almacen', function () {
     return view('pages.requests');
 });
-// Route::get('/validate', [RequestController::class, 'validate']);
+Route::get('/validate', [RequestController::class, 'validate']);
 Route::post('/employees/search', [PageController::class, 'search']);
 Route::post('contisign/send', [ContisignController::class, 'generateDocument']);

@@ -110,13 +110,12 @@ class PageController extends Controller
         $formatArray = [
             'FORMATO_1' => 'REFACIL_ETESA',
             'FORMATO_2' => 'REFACIL_NOMI-PAY',
-            'FORMATO_3' => 'REFACIL_SEP Puebla',
+            'FORMATO_3' => 'REFACIL_SEP_Puebla',
             'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
             'FORMATO_5' => 'REFACIL_BENEFIT',
         ];
         foreach ($documentsRaw as &$doc) {
             $formato = $doc['DOCUMENTO'] ?? null;
-
             $doc['FORMATO'] = $formatArray[$formato] ?? null;
         }
         unset($doc);
@@ -148,7 +147,7 @@ class PageController extends Controller
             $templateObj["content"] = json_encode($template);
             $templates[] = $templateObj;
         }
-        // dd($templates);
+        // dd($templates, $documents);
         $data["templates"] = $templates;
         $data["empresa"] = $empresa;
         $data["promotor"] = $promotor;
@@ -173,8 +172,25 @@ class PageController extends Controller
     private static function getTemplateID($name)
     {
         $name_id = strtolower($name);
+
+        // Remove " solicitud"
         $name_id = str_replace(' solicitud', '', $name_id);
+
+        // Remove hyphens completely
+        $name_id = str_replace('-', '', $name_id);
+
+        // Convert spaces to underscores
+        $name_id = preg_replace('/\s+/', '_', $name_id);
+
+        // Remove invalid characters except underscore
         $name_id = preg_replace('/[^a-z0-9_]/', '', $name_id);
+
+        // Remove duplicate underscores
+        $name_id = preg_replace('/_+/', '_', $name_id);
+
+        // Trim underscores
+        $name_id = trim($name_id, '_');
+
         return $name_id;
     }
 

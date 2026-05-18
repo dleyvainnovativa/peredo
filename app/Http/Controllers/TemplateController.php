@@ -224,8 +224,8 @@ class TemplateController extends Controller
                 "rutaQR_XML" => $dataTemplateData['ConstancyRC'],
                 "rutaQR_PDF" => route("home") . "/pdf/" . $dataTemplateData['id'],
                 // "rutaQR_PDF" => $dataTemplateData["documentUrl"],
-                "ruta_INE" => $annexedFile["FieldUrl"],
-                "ruta_Selfie" => $annexedSelfieFile["FieldUrl"],
+                "ruta_INE" => $annexedFile["FieldUrl"] ?? null,
+                "ruta_Selfie" => $annexedSelfieFile["FieldUrl"] ?? null,
             ];
             PeredoController::updateDatosSolicitud($updated);
 

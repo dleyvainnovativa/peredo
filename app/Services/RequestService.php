@@ -54,10 +54,10 @@ class RequestService
 
                         foreach ($document["annexed"] as $key => $annexed) {
                             if ($key == 0) {
-                                $ineFile = $annexed["FieldUrl"];
+                                $ineFile = $annexed["FieldUrl"] ?? null;
                             }
                             if ($key == 1) {
-                                $selfieFile = $annexed["FieldUrl"];
+                                $selfieFile = $annexed["FieldUrl"] ?? null;
                             }
                         }
 
