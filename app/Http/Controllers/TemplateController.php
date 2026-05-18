@@ -227,7 +227,7 @@ class TemplateController extends Controller
                 "ruta_INE" => $annexedFile["FieldUrl"],
                 "ruta_Selfie" => $annexedSelfieFile["FieldUrl"],
             ];
-            PeredoController::updateDatosSolicitud($updated);
+            // PeredoController::updateDatosSolicitud($updated);
 
 
 
