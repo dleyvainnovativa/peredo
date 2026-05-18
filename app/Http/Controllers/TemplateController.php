@@ -323,6 +323,7 @@ class TemplateController extends Controller
                 throw new \Exception('Error al subir archivo a Contisign');
             }
             $data = $response->json();
+            Log::debug(["Contisign Annexed Upload Response:", $data]);
             return
                 [
                     "FileName" => $name,

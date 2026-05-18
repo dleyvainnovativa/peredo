@@ -49,17 +49,17 @@ class RequestService
                             "promotor_date" => null,
                             "document_end" => null,
                         ];
-                        $ineFile = null;
-                        $selfieFile = null;
+                        // $ineFile = null;
+                        // $selfieFile = null;
 
-                        foreach ($document["annexed"] as $key => $annexed) {
-                            if ($key == 0) {
-                                $ineFile = $annexed["FieldUrl"] ?? null;
-                            }
-                            if ($key == 1) {
-                                $selfieFile = $annexed["FieldUrl"] ?? null;
-                            }
-                        }
+                        // foreach ($document["annexed"] as $key => $annexed) {
+                        //     if ($key == 0) {
+                        //         $ineFile = $annexed["FieldUrl"] ?? null;
+                        //     }
+                        //     if ($key == 1) {
+                        //         $selfieFile = $annexed["FieldUrl"] ?? null;
+                        //     }
+                        // }
 
                         foreach ($document["signatures"] as $signature) {
                             if ($signature["Charge"] == "Signed" && $signature["Type"] == "Firma autógrafa") {
@@ -97,8 +97,8 @@ class RequestService
                             "fecha_firma_promotor" => $this->formatDate($obj["promotor_date"]),
                             "rutaQR_XML" => $obj["constancy_url"],
                             "rutaQR_PDF" => route("home") . "/pdf/" . $obj["id_contisign"],
-                            "ruta_INE" => $ineFile,
-                            "ruta_Selfie" => $selfieFile,
+                            // "ruta_INE" => $ineFile,
+                            // "ruta_Selfie" => $selfieFile,
                         ];
 
                         PeredoController::updateDatosSolicitud($updated);
