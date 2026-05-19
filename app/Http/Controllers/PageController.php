@@ -292,7 +292,14 @@ class PageController extends Controller
                 '',
                 $base64
             );
-            dd(base64_decode($base64), $document);
+            // Remove spaces/newlines
+            $base64 = str_replace(
+                ["\r", "\n", " "],
+                '',
+                $base64
+            );
+            $fileContent = base64_decode($base64, true);
+            dd($fileContent === false);
             $fileContent = base64_decode($base64);
 
             return response($fileContent, 200)
