@@ -287,11 +287,7 @@ class PageController extends Controller
                 abort(404, 'Document path not available');
             }
             $base64 = $document['path'];
-            $base64 = preg_replace(
-                '/^data:.*;base64,/',
-                '',
-                $base64
-            );
+            $base64 = explode(',', $document['path'], 2)[1] ?? '';
             // Remove spaces/newlines
             $base64 = str_replace(
                 ["\r", "\n", " "],
