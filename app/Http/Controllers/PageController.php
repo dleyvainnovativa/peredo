@@ -299,8 +299,8 @@ class PageController extends Controller
                 $base64
             );
             $fileContent = base64_decode($base64, true);
-            dd($fileContent === false);
-            $fileContent = base64_decode($base64);
+            // dd($fileContent === false);
+            // $fileContent = base64_decode($base64);
 
             return response($fileContent, 200)
                 ->header('Content-Type', $document['mimetype'])
