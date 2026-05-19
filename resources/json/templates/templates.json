@@ -57,7 +57,7 @@
                 "totalPages": 1
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779152802883.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779232725631.pdf",
         "TemplateName": "REFACIL_BENEFIT Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -82,8 +82,8 @@
                 "Order": 1,
                 "external": false,
                 "bgColor": "3c156b",
-                "x": 390,
-                "y": 362,
+                "x": 389,
+                "y": 386,
                 "width": 136,
                 "height": 40,
                 "dimension": {
@@ -95,13 +95,13 @@
                 "page": 0,
                 "documentPageNum": 0,
                 "AditionalInformation": {
-                    "xNorm": 0.637015806322529,
-                    "yNorm": 0.45705526813303554,
+                    "xNorm": 0.6353491396558624,
+                    "yNorm": 0.4879831031845819,
                     "wNorm": 0.22176470588235295,
                     "hNorm": 0.0502447151931688,
                     "page": 0,
-                    "x": 390,
-                    "y": 362,
+                    "x": 389,
+                    "y": 386,
                     "width": 136,
                     "height": 40,
                     "name": "CLIENTE",
@@ -126,7 +126,7 @@
                 "external": false,
                 "bgColor": "1e88e5",
                 "x": 388,
-                "y": 434,
+                "y": 442,
                 "width": 136,
                 "height": 37,
                 "dimension": {
@@ -139,12 +139,12 @@
                 "documentPageNum": 0,
                 "AditionalInformation": {
                     "xNorm": 0.6340369481125783,
-                    "yNorm": 0.5481216781548297,
+                    "yNorm": 0.5584309565053451,
                     "wNorm": 0.22176470588235295,
                     "hNorm": 0.046378735811725504,
                     "page": 0,
                     "x": 388,
-                    "y": 434,
+                    "y": 442,
                     "width": 136,
                     "height": 37,
                     "name": "PROMOTOR",
@@ -175,7 +175,7 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:58:16.107Z",
-        "updated_at": "2026-05-19T01:07:09.420Z",
+        "updated_at": "2026-05-19T23:19:08.757Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
