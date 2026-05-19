@@ -235,24 +235,68 @@ class PageController extends Controller
     public function showPdf($id)
     {
         $data = app(ContisignService::class)->getFullDocument($id);
-
         if (!isset($data['documentUrl'])) {
             abort(404, 'PDF not available');
         }
-
         $base64 = $data['documentUrl'];
-
         // Remove data URI prefix
         $base64 = preg_replace(
             '/^data:application\/pdf;base64,/',
             '',
             $base64
         );
-
         $pdfContent = base64_decode($base64);
-
         return response($pdfContent, 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="document.pdf"');
+    }
+    public function showAnnexed($id, $type)
+    {
+        $data = app(ContisignService::class)->getFullDocument($id);
+        // $path = storage_path('app/public/document.json');
+        // $data = json_decode(file_get_contents($path), true);
+        // if (!isset($data['annexed'])) {
+        //     abort(404, 'Annexed documents not available');
+        // }
+        switch ($type) {
+
+            case 'ine':
+                $searchKeyword = 'ine';
+                break;
+
+            case 'selfie':
+                $searchKeyword = 'selfie';
+                break;
+
+            default:
+                abort(404, 'Invalid annexed type');
+        }
+        $document = collect($data['annexed'])
+            ->first(function ($item) use ($searchKeyword) {
+
+                return str_contains(
+                    strtolower($item['FileName']),
+                    strtolower($searchKeyword)
+                );
+            });
+        if (!$document) {
+            abort(404, 'Document not found');
+        }
+        if (!isset($document["path"])) {
+            abort(404, 'Document path not available');
+        }
+        $base64 = $document['path'];
+        $base64 = preg_replace(
+            '/^data:.*;base64,/',
+            '',
+            $base64
+        );
+        $fileContent = base64_decode($base64);
+        return response($fileContent, 200)
+            ->header('Content-Type', $document['mimetype'])
+            ->header(
+                'Content-Disposition',
+                'inline; filename="' . $document['originalName'] . '"'
+            );
     }
 }
