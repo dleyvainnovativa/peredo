@@ -294,14 +294,6 @@ class PageController extends Controller
                 '',
                 $base64
             );
-            dd(
-                $data,
-                $document,
-                $document['path'],
-                strlen($base64),
-                substr($base64, 0, 100),
-                substr($base64, -100)
-            );
             $fileContent = base64_decode($base64);
 
             return response($fileContent, 200)
