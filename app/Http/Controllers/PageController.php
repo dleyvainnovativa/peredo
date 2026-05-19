@@ -299,6 +299,9 @@ class PageController extends Controller
                 $base64
             );
             dd(
+                $data,
+                $document,
+                $document['path'],
                 strlen($base64),
                 substr($base64, 0, 100),
                 substr($base64, -100)
