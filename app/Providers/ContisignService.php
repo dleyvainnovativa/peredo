@@ -113,7 +113,9 @@ class ContisignService
             throw new \Exception('Error creating DataTemplate: ' . $response->body());
         }
         // dd("{$this->baseUrl}/v2/viewfulldocument/$id", $payload, $response->body());
-        return $response->json();
+        // return $response->json();
+        $data = json_decode($response->body(), true, 512, JSON_BIGINT_AS_STRING);
+        return $data;
     }
 
     /**
