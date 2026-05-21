@@ -145,6 +145,7 @@ class ContisignController extends Controller
                 'REFACIL_SEP_PUEBLA' => 'FORMATO_3',
                 'REFACIL_ETESA_NOMIPAY' => 'FORMATO_4',
                 'REFACIL_BENEFIT' => 'FORMATO_5',
+                'REFACIL_ETESA_TABASCO' => 'FORMATO_6',
             ];
             $template["Formato"] = $formatArray[$baseName] ?? null;
             // dd($template["Formato"], $templateName, $baseName, $template);

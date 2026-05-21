@@ -113,6 +113,7 @@ class PageController extends Controller
             'FORMATO_3' => 'REFACIL_SEP_Puebla',
             'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
             'FORMATO_5' => 'REFACIL_BENEFIT',
+            'FORMATO_6' => 'REFACIL_ETESA_TABASCO',
         ];
         foreach ($documentsRaw as &$doc) {
             $formato = $doc['DOCUMENTO'] ?? null;

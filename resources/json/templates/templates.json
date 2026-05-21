@@ -615,6 +615,190 @@
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
+        "id": "f19c7e43-cef5-410c-9240-f428a0532045",
+        "signOrdered": true,
+        "checkEdition": false,
+        "positionRequired": true,
+        "postCommentsRequired": false,
+        "WithoutInitialPage": false,
+        "OnlyNOM151": false,
+        "Active": true,
+        "Fields": [
+            {
+                "variable": "fch",
+                "description": "Fecha de hoy",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "date",
+                "lists": "",
+                "unique": false
+            },
+            {
+                "variable": "mntrlq",
+                "description": "Monto autorizado",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false
+            },
+            {
+                "variable": "nmpml",
+                "description": "Numero de empleado",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false
+            },
+            {
+                "variable": "nmbpml",
+                "description": "Nombre de empleado",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false
+            },
+            {
+                "variable": "prmlp",
+                "description": "Nombre del promotor",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false
+            }
+        ],
+        "Templates": "<figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:100px;\" rowspan=\"2\"><img class=\"image_resized\" style=\"width:61.52%;\" src=\"1779323639788_1779323630017.png\"></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:495px;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">EDICIONES TRATADOS Y EQUIPOS S.A. DE C.V. (ETESA)</span></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:495px;\"><p style=\"text-align:right;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">Villahermosa, Tabasco, a <s>fch</s></span></p></td></tr></tbody></table></figure><p>&nbsp;</p><p style=\"text-align:center;\"><span style=\"font-family:Tahoma, Geneva, sans-serif;\"><strong>AUTORIZACIÓN RESERVA DE CAPACIDAD CREDITICIA EN PLATAFORMA NOMIPAY&nbsp;</strong></span></p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\"><p style=\"text-align:center;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\"><strong>&nbsp;</strong></span></p><p>&nbsp;</p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">Por este conducto autorizo expresamente a para que por medio de sus funcionarios facultados lleve a cabo la reservación de mi liquidez por el monto de <strong>$</strong><s>mntrlq</s> para el trámite de una operación con descuento vía nómina solicitado por el suscrito.&nbsp;</span></p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">* Número de Empleado: <s>nmpml</s></span></p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">* Nombre del Empleado: <s>nmbpml</s></span></p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">* Firma del Empleado:</span></p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">• Nombre del promotor: <s>prmlp</s></span></p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">• Firma del promotor:</span></p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">Para uso exclusivo de: <u>E T E S A</u>&nbsp;</span></p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:justify;\"><span style=\"font-family:Arial, Helvetica, sans-serif;\">NOTA: Este formato cuenta con una vigencia de 30 días naturales posteriores a la fecha de firma. Deberá ser llenada con tinta azul y escaneada a color en formato PDF para su carga en la plataforma Nomipay.</span></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
+        "FileMetadata": {
+            "dimensions": {
+                "width": 612,
+                "height": 792,
+                "totalPages": 1
+            }
+        },
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779323947665.pdf",
+        "TemplateName": "REFACIL_ETESA_TABASCO",
+        "Category": "Uso general",
+        "Grouped": null,
+        "Annexed": [],
+        "AnnexedQuantity": 0,
+        "PSCreq": false,
+        "SignType": [
+            "Firma sencilla",
+            "Firma autógrafa"
+        ],
+        "UserSigns": [
+            {
+                "Name": "CLIENTE",
+                "Email": "",
+                "Charge": "Signed",
+                "Position": "",
+                "BusinessName": "",
+                "PhoneNumber": "",
+                "Order": 1,
+                "external": false,
+                "bgColor": "ddc283",
+                "x": 457,
+                "y": 360,
+                "width": 104,
+                "height": 42,
+                "page": 0,
+                "documentPageNum": 0,
+                "AditionalInformation": {
+                    "xNorm": 0.7466666666666666,
+                    "yNorm": 0.455,
+                    "wNorm": 0.16934046345811052,
+                    "hNorm": 0.052714646464646464,
+                    "page": 0,
+                    "x": 457,
+                    "y": 360,
+                    "width": 104,
+                    "height": 42,
+                    "name": "CLIENTE",
+                    "bgcolor": "#ddc28399",
+                    "dimensions": {
+                        "w": 612,
+                        "h": 792,
+                        "pageHeight": 792,
+                        "pages": 1,
+                        "pdfWidthPt": 612,
+                        "pdfHeightPt": 792
+                    }
+                },
+                "dimension": {
+                    "w": 612,
+                    "h": 792,
+                    "pageHeight": 792,
+                    "pages": 1
+                }
+            },
+            {
+                "Name": "PROMOTOR",
+                "Email": "",
+                "Charge": "Signed",
+                "Position": "",
+                "BusinessName": "",
+                "PhoneNumber": "",
+                "Order": 2,
+                "external": false,
+                "bgColor": "7ef335",
+                "x": 456,
+                "y": 443,
+                "width": 107,
+                "height": 40,
+                "page": 0,
+                "documentPageNum": 0,
+                "AditionalInformation": {
+                    "xNorm": 0.744983164983165,
+                    "yNorm": 0.5591666666666666,
+                    "wNorm": 0.17439096850861557,
+                    "hNorm": 0.0501104797979798,
+                    "page": 0,
+                    "x": 456,
+                    "y": 443,
+                    "width": 107,
+                    "height": 40,
+                    "name": "PROMOTOR",
+                    "bgcolor": "#7ef33599",
+                    "dimensions": {
+                        "w": 612,
+                        "h": 792,
+                        "pageHeight": 792,
+                        "pages": 1,
+                        "pdfWidthPt": 612,
+                        "pdfHeightPt": 792
+                    }
+                },
+                "dimension": {
+                    "w": 612,
+                    "h": 792,
+                    "pageHeight": 792,
+                    "pages": 1
+                }
+            },
+            {
+                "Name": "ARCHIVO",
+                "Email": "",
+                "Charge": "Notification",
+                "Position": "",
+                "BusinessName": "",
+                "PhoneNumber": "",
+                "Order": null,
+                "external": false
+            }
+        ],
+        "ShowQR": false,
+        "Status": null,
+        "allowBulkUpload": false,
+        "requireSMS": false,
+        "FilePath": "previewFile/1779323947665.pdf",
+        "created_at": "2026-05-21T00:40:06.099Z",
+        "updated_at": "2026-05-21T00:40:06.099Z",
+        "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
+    },
+    {
         "id": "7d7c96d8-5a99-41a4-89fc-c82d3172e846",
         "signOrdered": true,
         "checkEdition": false,
