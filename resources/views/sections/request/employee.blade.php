@@ -43,7 +43,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Nombre *</label>
-                        <input value="Pruebas" type="text" class="form-control" id="employee_full_name" required>
+                        <input value="" type="text" class="form-control" id="employee_full_name" required>
                         <input data-fill="nmtbj" value="" type="hidden" class="form-control " id="employee_complete_name">
 
                         <div class="invalid-feedback">
@@ -53,7 +53,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Apellido Paterno *</label>
-                        <input data-fill="lastname" type="text" value="Pruebas" class="form-control" id="lastname" required>
+                        <input data-fill="lastname" type="text" value="" class="form-control" id="lastname" required>
                         <div class="invalid-feedback">
                             Ingresa tu apellido paterno.
                         </div>
@@ -61,7 +61,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Apellido Materno</label>
-                        <input data-fill="lastname2" type="text" value="Pruebas" class="form-control" id="lastname2">
+                        <input data-fill="lastname2" type="text" value="" class="form-control" id="lastname2">
                     </div>
 
                     <div class="col-md-6">
