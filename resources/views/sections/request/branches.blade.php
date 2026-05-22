@@ -44,11 +44,11 @@
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input data-fill="" type="email" class="form-control " id="email">
+                        <input data-fill="" disabled type="email" class="form-control " id="email">
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Teléfono</label>
-                        <input data-fill="" type="phone" class="form-control " id="promotor_phone">
+                        <input data-fill="" disabled type="phone" class="form-control " id="promotor_phone">
                     </div>
 
 
