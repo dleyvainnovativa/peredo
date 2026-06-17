@@ -54,10 +54,10 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779232725631.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737688987.pdf",
         "TemplateName": "REFACIL_BENEFIT Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -67,10 +67,9 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma autógrafa",
-            "Firma sencilla"
+            "Firma autógrafa"
         ],
         "UserSigns": [
             {
@@ -90,7 +89,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -108,9 +107,9 @@
                     "bgcolor": "#3c156b99",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -133,7 +132,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -151,22 +150,13 @@
                     "bgcolor": "#1e88e599",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -175,7 +165,474 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:58:16.107Z",
-        "updated_at": "2026-05-19T23:19:08.757Z",
+        "updated_at": "2026-06-17T23:08:12.283Z",
+        "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
+    },
+    {
+        "id": "27b06828-3a61-40ab-b0dc-f3f4b638e329",
+        "signOrdered": true,
+        "checkEdition": false,
+        "positionRequired": true,
+        "postCommentsRequired": false,
+        "WithoutInitialPage": false,
+        "OnlyNOM151": false,
+        "Active": true,
+        "Fields": [
+            {
+                "variable": "deu_______________________________________dor",
+                "description": "Nombre del deudor",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "dom________________________________________lio",
+                "description": "Domicilio del deudor",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "f__li",
+                "description": "Folio del adeudo",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Proviene del adeudo del deudor",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "cntdd",
+                "description": "Adeudo Pendiente $",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Es la deuda reconocida por el deudor",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "cntdd__________________ltr",
+                "description": "Adeudo Pendiente en letra",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Es la deuda reconocida por el deudor",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "cn",
+                "description": "Centavos del adeudo pendiente",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "a_m",
+                "description": "Amortizaciones quincenales",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "De la cantidad que se reconoce tener suscrito en contrato",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "am___qc",
+                "description": "Cantidad a pagar en amortizaciones quincenales $",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "De la cantidad que se reconoce tener suscrito en contrato",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "amqc____________________________________________ltr",
+                "description": "Cantidad en letra a pagar en amortizaciones quincenales",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "De la cantidad que se reconoce tener suscrito en contrato",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "paq",
+                "description": "Taza anual fija de amortizaciones quincenales",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "De la cantidad que se reconoce tener suscrito en contrato",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "ad___ac",
+                "description": "Adeudo actual $",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "adac___________________________________ltr",
+                "description": "Adeudo actual en letra",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "pri____pi",
+                "description": "Pago de intención $",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Es lo que el deudor se compromete a cubrir en primera instancia",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "pripi________________ltr",
+                "description": "Pago de intención en letra",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Es lo que el deudor se compromete a cubrir en primera instancia",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "no_____qu",
+                "description": "Número de quincena en que inicia el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Ejemplo: Primera, Segunda",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "m___________se",
+                "description": "Mes de quincena en que inicia el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "añ_1q",
+                "description": "Año de quincena en que inicia el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "no2qu",
+                "description": "Número de quincena en que termina el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "tooltip": "Ejemplo: Primera, Segunda",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "m_____2se",
+                "description": "Mes de quincena en que termina el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "añ__2q",
+                "description": "Año de quincena en que termina el pago",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "cts________________________rfa",
+                "description": "Cuentas bancarias en donde se realizará el pago señalado en la cláusula",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "dd",
+                "description": "Dia de firma de contrato/duplicado/pagare",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "number",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "m__ss",
+                "description": "Mes de firma de contrato/duplicado/pagare",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "añ_nñ",
+                "description": "Año de firma de contrato/duplicado/pagare",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "cd______________________________________pg",
+                "description": "Ciudad de la firma de pagaré",
+                "autocomplete": "",
+                "showlist": "",
+                "dataType": "text",
+                "lists": "",
+                "unique": false,
+                "separate": false
+            },
+            {
+                "variable": "deu_______________________________________dor"
+            },
+            {
+                "variable": "dom________________________________________lio"
+            },
+            {
+                "variable": "f__li"
+            },
+            {
+                "variable": "cntdd"
+            },
+            {
+                "variable": "cntdd__________________ltr"
+            },
+            {
+                "variable": "cn"
+            },
+            {
+                "variable": "a_m"
+            },
+            {
+                "variable": "am___qc"
+            },
+            {
+                "variable": "amqc____________________________________________ltr"
+            },
+            {
+                "variable": "paq"
+            },
+            {
+                "variable": "ad___ac"
+            },
+            {
+                "variable": "adac___________________________________ltr"
+            },
+            {
+                "variable": "pri____pi"
+            },
+            {
+                "variable": "pripi________________ltr"
+            },
+            {
+                "variable": "no_____qu"
+            },
+            {
+                "variable": "m___________se"
+            },
+            {
+                "variable": "añ_1q"
+            },
+            {
+                "variable": "no2qu"
+            },
+            {
+                "variable": "m_____2se"
+            },
+            {
+                "variable": "añ__2q"
+            },
+            {
+                "variable": "cts________________________rfa"
+            },
+            {
+                "variable": "dd"
+            },
+            {
+                "variable": "m__ss"
+            },
+            {
+                "variable": "añ_nñ"
+            },
+            {
+                "variable": "cd______________________________________pg"
+            }
+        ],
+        "Templates": "<p style=\"text-align:center;\"><span class=\"text-huge\"><strong>CONVENIO DE REGULARIZACIÓN DE CREDITO</strong></span></p><p style=\"text-align:justify;\">PRIMERO.- MANIFIESTA REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R., ESTAR LEGALMENTE CONSTITUIDA, Y TENER SU DOMICILIO EN AV. COYOACAN 707, COLONIA DEL VALLE CENTRO, BENITO JUAREZ CD. DE MEXICO.&nbsp;</p><p style=\"text-align:justify;\">SEGUNDO.- LA C. <s>deu_______________________________________dor</s> QUIEN EN LO SUBSECUENTE SE LE DENOMINARÁ DEUDOR, MANIFIESTA SER MEXICANO MAYOR DE EDAD, EN PLENO GOCE Y EJERCICIO DE SUS DERECHOS CIVILES Y TENER SU DOMICILIO EN <s>dom________________________________________lio</s>.&nbsp;</p><p style=\"text-align:justify;\">TERCERO.- EL DEUDOR RECONOCE QUE ESTE CONVENIO DERIVA DEL ADEUDO DEL FOLIO R- <s>f__li</s>, CUARTO.- EL DEUDOR EN ESTE ACTO MANIFIESTA RECONOCER LA EXISTENCIA DEL ADEUDO PENDIENTE DE CUBRIR CON REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R. A QUIEN EN LO SUBSECUENTE SE LE DENOMINARA REFACIL, POR LA CANTIDAD DE $ <s>cntdd</s> (<s>cntdd__________________ltr</s>) PESOS <s>cn</s>/100 M.N.) COMPROMETIENDOSE A CUBRIRLO EN LAS CONDICIONES Y TERMINOS QUE A CONTINUACIÓN SE PRECISAN:</p><p style=\"text-align:center;\"><strong>C L A U S U L A S:</strong></p><p style=\"text-align:justify;\">I. AMBAS PARTES RECONOCEN TENER SUSCRITO UN CONTRATO POR LA CANTIDAD DE $<s>cntdd</s> (<s>cntdd__________________ltr</s>) Mismo que sería pagado en <s>a_m</s> amortizaciones quincenales de $<s>am___qc</s> (<s>amqc____________________________________________ltr</s>) con TASA ANUAL FIJA DEL <s>paq</s>%&nbsp;</p><p style=\"text-align:justify;\">II. El adeudo actual que mantiene con REFACIL, cuyo monto asciende por la cantidad de $<s>ad___ac</s> (<s>adac___________________________________ltr</s> PESOS 00/100 M.N.) como se precisa en el Antecedente&nbsp;</p><p style=\"text-align:justify;\">III. El DEUDOR, se compromete a cubrir en primera instancia UN PAGO DE INTENCION por la cantidad de $<s>pri____pi</s>.00 (<s>pripi________________ltr</s> 00/100 M.N.) a la fecha de firma de este contrato y por otra parte el pago pactado por $<s>am___qc</s>.00 (<s>amqc____________________________________________ltr</s> 00/100 M.N.), de manera quincenal durante (<s>a_m</s>) amortizaciones a partir de la <s>no_____qu</s> quincena del mes de <s>m___________se</s> del año <s>añ_1q</s>, y hasta <s>no2qu</s> quincena del mes de <s>m_____2se</s> quincena del año <s>añ__2q</s>. Actualizándose la TASA ANUAL FIJA DEL <s>paq</s>%&nbsp;</p><p style=\"text-align:justify;\">IV. El pago señalado en la cláusula que antecede se realizará vía bancaria de manera quincenal, a las cuentas <s>cts________________________rfa</s>.&nbsp;</p><p style=\"text-align:justify;\">V. El DEUDOR se compromete a notificar a REFACIL el pago efectuado, por lo que en caso de que el deudor no cubra el abono pactado en la fecha y montos especificados en este convenio, deberá cubrirlo en un plazo no mayor de 5 días, inclusive el día de su vencimiento.; por lo tanto, una vez realizado el pago, deberá enviar el comprobante del mismo vía fax al teléfono 800 001 7896.&nbsp;</p><p style=\"text-align:justify;\">VI. El deudor firmante en este acto otorga el consentimiento expresado en la cláusula DECIMA CUARTA, respecto a las causas de recisión del contrato que origina este convenio.&nbsp;</p><p style=\"text-align:justify;\">VII. A la firma de este Convenio el DEUDOR deberá proporcionar el nombre, domicilios completos y número telefónico, de dos referencias personales, estos son, de un familiar que viva en domicilio distinto del deudor y en la misma localidad, y, de un conocido, mayores de edad.&nbsp;</p><p style=\"text-align:justify;\">VIII. El DEUDOR se obliga a exhibir copia fotostática de su credencial de elector vigente y un comprobante de domicilio reciente.&nbsp;</p><p style=\"text-align:justify;\">IX. Manifiestan las partes intervinientes que en la celebración del presente convenio no existió error, dolo o mala fe o coacción alguna.&nbsp;</p><p style=\"text-align:justify;\">SE FIRMA POR DUPLICADO EL PRESENTE A LOS <s>dd</s> DIAS DEL MES DE <s>m__ss</s> DE <s>añ_nñ</s>, FIRMANDO LAS PARTES UNA VEZ QUE FUE LEIDO Y ENTENDIDO SU ALCANCE E INTENCIÓN.&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p style=\"text-align:center;\"><strong>REFACIL</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><strong>REFACIL SERVICIOS</strong></p><p style=\"text-align:center;\"><strong>INTEGRALES S.A. DE C.V.</strong></p><p style=\"text-align:center;\"><strong>SOFOM E.N.R.</strong>&nbsp;</p></td><td style=\"border:1px solid hsl(0, 0%, 100%);vertical-align:top;width:297.5px;\"><p style=\"text-align:center;\"><strong>DEUDOR</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><s>deu_______________________________________dor</s></p><p style=\"text-align:center;\"><strong>Nombre y firma</strong></p></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:right;\"><strong>BUENO POR $</strong> <s>cntdd</s></p><p style=\"text-align:center;\"><strong>PAGARÉ</strong></p><p style=\"text-align:justify;\">En la Ciudad de <s>cd______________________________________pg</s> a <s>dd</s> del mes de <s>m__ss</s> del año <s>añ_nñ</s>.</p><p style=\"text-align:justify;\">Por el presente pagaré, <s>deu_______________________________________dor</s>, en lo sucesivo el “Cliente”, promete pagar incondicionalmente a favor de Refácil Servicios Integrales, S.A DE C.V. SOFOM E.N.R., en lo sucesivo \"REFÁCIL \", el importe de $<s>cntdd</s> (<s>cntdd__________________ltr</s> <s>cn</s>/100 M.N.) pesos M.N. que causará intereses a razón de <s>paq</s>% anual. &nbsp;</p><p style=\"text-align:justify;\">El importe del presente pagaré será pagado por el Cliente en forma quincenal, mediante <s>a_m</s> amortizaciones periódicas, iguales y sucesivas, cada uno por el cada uno por el importe de $<s>am___qc</s> (<s>amqc____________________________________________ltr</s> /100 M.N.), los días 15 y último de cada mes.&nbsp;</p><p style=\"text-align:justify;\">En caso que el Cliente no pague en forma oportuna y/o completa cualquier importe del presente pagaré, el importe insoluto de que se trate, en tanto no sea pagado, causará intereses moratorios sobre la tasa anual que resulte de multiplicar por uno punto cinco (1.5) veces la tasa ordinaria de interés. En caso de que el Cliente omita el pago de cualquier pago parcial en la fecha de pago de que se trate, REFÁCIL dará por vencido anticipadamente el presente pagaré y, por lo tanto, el Cliente estará obligado a pagar a REFÁCIL, el saldo insoluto del importe del presente pagaré, así como los saldos de los intereses ordinarios y moratorios que sean causados.&nbsp;</p><p style=\"text-align:justify;\">La ley aplicable al presente Pagaré es la Ley General de Títulos y Operaciones de Crédito. Para toda controversia o litigio de cualquier tipo en relación con el presente pagaré, el Cliente está de acuerdo en someterse expresamente a la jurisdicción correspondiente al domicilio de REFÁCIL. Por lo tanto, el Cliente renuncia a fuero territorial distinto que por cualquier causa pudiere corresponderle, ya sea en lo presente o en lo futuro.</p>",
+        "FileMetadata": {
+            "dimensions": {
+                "width": 612,
+                "height": 792,
+                "totalPages": 3
+            }
+        },
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737705527.pdf",
+        "TemplateName": "REFACIL_Convenio de regularización de Crédito",
+        "Category": "Uso general",
+        "Grouped": null,
+        "Annexed": [
+            "INE",
+            "Selfie"
+        ],
+        "AnnexedQuantity": 2,
+        "PSCreq": true,
+        "SignType": [
+            "Firma autógrafa"
+        ],
+        "UserSigns": [
+            {
+                "Name": "CLIENTE",
+                "Email": "",
+                "Charge": "Signed",
+                "Position": "",
+                "BusinessName": "",
+                "PhoneNumber": "",
+                "Order": 1,
+                "external": false,
+                "bgColor": "e2dd24",
+                "x": 90,
+                "y": 304,
+                "width": 150,
+                "height": 50,
+                "page": 1,
+                "documentPageNum": 1,
+                "AditionalInformation": {
+                    "xNorm": 0.14657223796033994,
+                    "yNorm": 0.3841575492341357,
+                    "wNorm": 0.24509803921568626,
+                    "hNorm": 0.06313131313131314,
+                    "page": 1,
+                    "x": 90,
+                    "y": 304,
+                    "width": 150,
+                    "height": 50,
+                    "name": "CLIENTE",
+                    "bgcolor": "#e2dd2499",
+                    "dimensions": {
+                        "w": 612,
+                        "h": 2376,
+                        "pageHeight": 792,
+                        "pages": 3,
+                        "pdfWidthPt": 612,
+                        "pdfHeightPt": 792
+                    }
+                },
+                "dimension": {
+                    "w": 612,
+                    "h": 792,
+                    "pageHeight": 792,
+                    "pages": 3
+                }
+            },
+            {
+                "Name": "PROMOTOR",
+                "Email": "",
+                "Charge": "Signed",
+                "Position": "",
+                "BusinessName": "",
+                "PhoneNumber": "",
+                "Order": 2,
+                "external": false,
+                "bgColor": "bdbe93",
+                "x": 320,
+                "y": 303,
+                "width": 150,
+                "height": 50,
+                "page": 1,
+                "documentPageNum": 1,
+                "AditionalInformation": {
+                    "xNorm": 0.523342776203966,
+                    "yNorm": 0.38306345733041575,
+                    "wNorm": 0.24509803921568626,
+                    "hNorm": 0.06313131313131314,
+                    "page": 1,
+                    "x": 320,
+                    "y": 303,
+                    "width": 150,
+                    "height": 50,
+                    "name": "PROMOTOR",
+                    "bgcolor": "#bdbe9399",
+                    "dimensions": {
+                        "w": 612,
+                        "h": 2376,
+                        "pageHeight": 792,
+                        "pages": 3,
+                        "pdfWidthPt": 612,
+                        "pdfHeightPt": 792
+                    }
+                },
+                "dimension": {
+                    "w": 612,
+                    "h": 792,
+                    "pageHeight": 792,
+                    "pages": 3
+                }
+            }
+        ],
+        "ShowQR": false,
+        "Status": null,
+        "allowBulkUpload": false,
+        "requireSMS": true,
+        "FilePath": "previewFile/1781633612711.pdf",
+        "created_at": "2026-06-16T18:14:46.019Z",
+        "updated_at": "2026-06-17T23:08:30.080Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -272,10 +729,10 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779153190598.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737728232.pdf",
         "TemplateName": "REFACIL_ETESA NOMI-PAY Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -285,10 +742,9 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma autógrafa",
-            "Firma sencilla"
+            "Firma autógrafa"
         ],
         "UserSigns": [
             {
@@ -308,7 +764,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -326,9 +782,9 @@
                     "bgcolor": "#8a459099",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -351,7 +807,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -369,22 +825,13 @@
                     "bgcolor": "#3f0fcc99",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -393,7 +840,7 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:46:46.957Z",
-        "updated_at": "2026-05-19T01:13:50.086Z",
+        "updated_at": "2026-06-17T23:08:52.605Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -490,10 +937,10 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779153239757.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737748419.pdf",
         "TemplateName": "REFACIL_ETESA Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -503,9 +950,8 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma sencilla",
             "Firma autógrafa"
         ],
         "UserSigns": [
@@ -526,7 +972,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -544,9 +990,9 @@
                     "bgcolor": "#e6d36899",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -569,7 +1015,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -587,22 +1033,13 @@
                     "bgcolor": "#dab1f999",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -611,7 +1048,7 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:49:34.041Z",
-        "updated_at": "2026-05-19T01:14:30.831Z",
+        "updated_at": "2026-06-17T23:09:11.924Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -639,6 +1076,8 @@
                 "description": "Monto autorizado",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
+                "lists": "",
                 "unique": false,
                 "separate": false
             },
@@ -647,6 +1086,8 @@
                 "description": "Numero de empleado (a)",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
+                "lists": "",
                 "unique": false,
                 "separate": false
             },
@@ -655,6 +1096,8 @@
                 "description": "Nombre de trabajador (a)",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
+                "lists": "",
                 "unique": false,
                 "separate": false
             },
@@ -663,6 +1106,8 @@
                 "description": "Nombre de promotor",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
+                "lists": "",
                 "unique": false,
                 "separate": false
             },
@@ -687,18 +1132,17 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779482112116.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737782434.pdf",
         "TemplateName": "REFACIL_ETESA_TABASCO",
         "Category": "Uso general",
         "Grouped": null,
         "Annexed": [],
         "AnnexedQuantity": 0,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma sencilla",
             "Firma autógrafa"
         ],
         "UserSigns": [
@@ -732,9 +1176,9 @@
                     "bgcolor": "#ddc28399",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -743,7 +1187,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 }
             },
             {
@@ -776,9 +1220,9 @@
                     "bgcolor": "#7ef33599",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -787,18 +1231,8 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "PhoneNumber": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -807,7 +1241,7 @@
         "requireSMS": true,
         "FilePath": "previewFile/1779323947665.pdf",
         "created_at": "2026-05-21T00:40:06.099Z",
-        "updated_at": "2026-05-22T20:36:53.970Z",
+        "updated_at": "2026-06-17T23:10:20.359Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -904,10 +1338,10 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779153284896.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737844719.pdf",
         "TemplateName": "REFACIL_NOMIPAY Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -917,9 +1351,8 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma sencilla",
             "Firma autógrafa"
         ],
         "UserSigns": [
@@ -940,7 +1373,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -958,9 +1391,9 @@
                     "bgcolor": "#2f9fa699",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -983,7 +1416,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -1001,22 +1434,13 @@
                     "bgcolor": "#394ffc99",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -1025,7 +1449,7 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T20:01:59.759Z",
-        "updated_at": "2026-05-19T01:15:10.416Z",
+        "updated_at": "2026-06-17T23:10:50.001Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -1122,10 +1546,10 @@
             "dimensions": {
                 "width": 612,
                 "height": 792,
-                "totalPages": 1
+                "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1779153330682.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1781737872104.pdf",
         "TemplateName": "REFACIL_SEP Puebla Solicitud",
         "Category": "Uso general",
         "Grouped": null,
@@ -1135,9 +1559,8 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
-        "PSCreq": false,
+        "PSCreq": true,
         "SignType": [
-            "Firma sencilla",
             "Firma autógrafa"
         ],
         "UserSigns": [
@@ -1158,7 +1581,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -1176,9 +1599,9 @@
                     "bgcolor": "#426b1899",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
@@ -1201,7 +1624,7 @@
                     "w": 612,
                     "h": 792,
                     "pageHeight": 792,
-                    "pages": 1
+                    "pages": 2
                 },
                 "page": 0,
                 "documentPageNum": 0,
@@ -1219,22 +1642,13 @@
                     "bgcolor": "#e841aa99",
                     "dimensions": {
                         "w": 612,
-                        "h": 792,
+                        "h": 1584,
                         "pageHeight": 792,
-                        "pages": 1,
+                        "pages": 2,
                         "pdfWidthPt": 612,
                         "pdfHeightPt": 792
                     }
                 }
-            },
-            {
-                "Name": "ARCHIVO",
-                "Email": "",
-                "Charge": "Notification",
-                "Position": "",
-                "BusinessName": "",
-                "Order": null,
-                "external": false
             }
         ],
         "ShowQR": false,
@@ -1243,7 +1657,7 @@
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:54:12.487Z",
-        "updated_at": "2026-05-19T01:15:48.559Z",
+        "updated_at": "2026-06-17T23:11:20.123Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     }
 ]
