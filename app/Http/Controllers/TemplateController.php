@@ -114,7 +114,7 @@ class TemplateController extends Controller
                         "LimitDate" => $limit_date,
                         "PhoneNumber" => "$userPhone",
                         "phone" => "$userPhone",
-                        "Type" => $template['SignType'][0] ?? "Firma sencilla",
+                        "Type" => "Firma sencilla",
                     ];
 
                     // Add AditionalInformation for compatibility
