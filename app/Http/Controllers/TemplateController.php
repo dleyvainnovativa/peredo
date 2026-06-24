@@ -136,7 +136,7 @@ class TemplateController extends Controller
                         $signatures[] = $signature;
                     }
                 } else {
-                    $signatures[] = $signature;
+                    // $signatures[] = $signature;
                 }
             }
             Log::debug(["Signatures:", $signatures]);

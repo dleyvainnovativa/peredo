@@ -99,6 +99,40 @@ class PeredoController extends Controller
             'phone' => $promotor['CELULAR_PROMOTOR'] ?? null,
         ];
     }
+    public static function searchByCredito($identificador, $empresa)
+    {
+        $token = self::getToken();
+        $url = env("PEREDO_URL") . "?accion=getDatosRegularizacion";
+
+        if (!$token) {
+            return null;
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => $token
+        ])->asForm()->post("$url", [
+            'idEmpresa' => $empresa,
+            'idCredito' => $identificador,
+        ]);
+
+        if (!$response->successful()) {
+            return null;
+        }
+
+        $json = $response->json();
+
+        if ($json['data'] === "null" || empty($json['data'])) {
+            return null;
+        }
+
+        $data = $json['data'][0];
+        return $data;
+        // return (object) [
+        //     'name'  => $promotor['NOMBRE_PROMOTOR'] ?? null,
+        //     'email' => $promotor['CORREO_PROMOTOR'] ?? null,
+        //     'phone' => $promotor['CELULAR_PROMOTOR'] ?? null,
+        // ];
+    }
 
     public static function setDatosSolicitud($obj)
     {

@@ -48,41 +48,18 @@ class PageController extends Controller
     {
         $promotor = ($request->input("promotor")) ?? null;
         $empresa = ($request->input("empresa")) ?? null;
-        // $date = new DateTime('now', new DateTimeZone('America/Mexico_City'));
-        // $passClave = '19p3r3d096c0nsorc1o2109';
-        // $password = '19p3r3d096c0nsorc1o2109';
-        // // $password = '19p3r3d096c0nsorc1o2109' . $date->format('Ymd');
-
-        // $promotorHsh = self::encryptWithPassword(22, $password);
-        // $empresaHsh = self::encryptWithPassword(3, $password);
-        // $promotor = self::decryptWithPassword($request->input("promotor"), $password) ?? null;
-        // $empresa = self::decryptWithPassword($request->input("empresa"), $password) ?? null;
-
-        // dd($promotorHsh, $empresaHsh, $request->input("promotor"), $request->input("empresa"), $promotor, $empresa);
-
-        // r3B5wTMgGROnAoGCPk3TBonKU4YNyJJLF/Zh1zuewdA=
-        // WjutvRrlVUZCve/iNWk1c7G9zzVQ8uvoLXv6fG6yf9A=
-        // dd($password, $request->input("promotor"), $request->input("empresa"), $promotor, $empresa, $date->format('Ymd'));
-
         $logo = asset('img/logo.png');
         $empresa_flag = false;
-        // dd($promotor, $empresa, $request);
         $templates = [];
         $content = getJsonData("templates/templates.json");
         $companies = getJsonData("company/companies.json");
-
-
-        // dd($documentsRaw, $documentsRaw2);
-
         foreach ($companies as $key => $company) {
             if ($company["IDENTIFICADOR"] == $empresa) {
                 $logo = asset("img/$empresa.png");
                 $empresa_flag = true;
             }
         }
-
         $data["logo"] = $logo;
-
         if (!$promotor) {
             $data["title"] = "¡No hay promotor asignado!";
             $data["subtitle"] = "Falta agregar el promotor en la petición.
@@ -105,7 +82,6 @@ class PageController extends Controller
         }
 
         $documentsRaw = PeredoController::getDatosDocumentos($promotor);
-        // $documentsRaw2 = getJsonData("company/documents.json");
         $documents = [];
         $formatArray = [
             'FORMATO_1' => 'REFACIL_ETESA',
@@ -170,6 +146,160 @@ class PageController extends Controller
         $data["missingFields"] = $missingFields;
         return view('pages.request', $data);
     }
+    public function regularizacion(Request $request)
+    {
+        $credito = ($request->input("credito")) ?? null;
+        $empresa = ($request->input("empresa")) ?? null;
+        $logo = asset('img/logo.png');
+        $empresa_flag = false;
+        $templates = [];
+        $content = getJsonData("templates/templates.json");
+        $companies = getJsonData("company/companies.json");
+        $credito_data = [];
+        foreach ($companies as $key => $company) {
+            if ($company["IDENTIFICADOR"] == $empresa) {
+                $logo = asset("img/$empresa.png");
+                $empresa_flag = true;
+            }
+        }
+        // dd($request);
+        $data["logo"] = $logo;
+        if (!$credito) {
+            $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
+            $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        } else {
+            $credito_data = PeredoController::searchByCredito($credito, $empresa);
+            if (!$credito_data) {
+                $data["title"] = "Identificador del crédito a consultar no identificado!";
+                $data["subtitle"] = "El ID que estás intentando consultar no se encuentra registrado en nuestro sistema.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+                return view('error', $data);
+            }
+        }
+        if ($empresa_flag == false) {
+            $data["title"] = "¡Empresa no encontrada!";
+            $data["subtitle"] = "La empresa que estás intentando consultar no se encuentra registrada en nuestro sistema.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        }
+
+        $template_credito = [];
+        foreach ($content as $key => $template) {
+            if ($template["id"] == "27b06828-3a61-40ab-b0dc-f3f4b638e329") {
+                $template_credito = $template;
+            }
+        }
+        $template_fields_all = $template_credito["Fields"];
+        $template_fields = [];
+        foreach ($template_fields_all as $key => $field) {
+            if (isset($field["description"])) {
+                array_push($template_fields, $field);
+            }
+        }
+
+        $field_mapping = [
+            "deu_______________________________________dor" => "CLIENTE",
+            "dom________________________________________lio" => "DIRECCION",
+            "f__li" => "FOLIO_VENTA",
+            "cntdd" => "SALDO_NUM",
+            "cntdd__________________ltr" => "SALDO_TEXT",
+            "a_m" => "PLAZO_QUINCENAL",
+            "am___qc" => "DESCUENTO_NUM",
+            "amqc____________________________________________ltr" => "DESCUENTO_TEXT",
+            "paq" => "TASA_FIJA_DOS",
+            "ad___ac" => "SALDO_NUM",
+            "adac___________________________________ltr" => "SALDO_TEXT",
+            "pri____pi" => "PAGOINTENCION_NUM",
+            "pripi________________ltr" => "PAGOINTENCION_TEXT",
+            "cts________________________rfa" => "CUENTAS",
+            "cd______________________________________pg" => "CIUDAD", // if you have it
+        ];
+
+        $template_values = collect($template_fields)->map(function ($field) use ($field_mapping, $credito_data) {
+            $credit_key = $field_mapping[$field['variable']] ?? null;
+            return [
+                "name" => $field['variable'],
+                "description" => $field['description'],
+                "type" => $field['dataType'],
+                "value" => $credit_key ? ($credito_data[$credit_key] ?? '') : ''
+            ];
+        })->values()->toArray();
+
+        // $data["template_fields"] = $template_fields;
+        // $data["template"] = $template_credito;
+        // $data["empresa"] = $empresa;
+        $data["credito"] = $credito_data;
+        $data["template_values"] = $template_values;
+        dd($data);
+
+        // $documentsRaw = PeredoController::getDatosDocumentos($promotor);
+        // $documents = [];
+        // $formatArray = [
+        //     'FORMATO_1' => 'REFACIL_ETESA',
+        //     'FORMATO_2' => 'REFACIL_NOMI-PAY',
+        //     'FORMATO_3' => 'REFACIL_SEP_Puebla',
+        //     'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
+        //     'FORMATO_5' => 'REFACIL_BENEFIT',
+        //     'FORMATO_6' => 'REFACIL_ETESA_TABASCO',
+        // ];
+        // foreach ($documentsRaw as &$doc) {
+        //     $formato = $doc['DOCUMENTO'] ?? null;
+        //     $doc['FORMATO'] = $formatArray[$formato] ?? null;
+        // }
+        // unset($doc);
+
+        // foreach ($documentsRaw as $doc) {
+        //     $sucursal = $doc['SUCURSAL'];
+        //     $dependencia = $doc['DEPENDENCIA'];
+        //     if (!isset($documents[$sucursal])) {
+        //         $documents[$sucursal] = [];
+        //     }
+        //     if (!isset($documents[$sucursal][$dependencia])) {
+        //         $documents[$sucursal][$dependencia] = [];
+        //     }
+        //     $documents[$sucursal][$dependencia][] = [
+        //         "doc_id" => self::getTemplateID($doc['FORMATO']),
+        //         "documento" => $doc['DOCUMENTO'],
+        //         "documento_id" => $doc['ID_DOCUMENTO'],
+        //         "formato" => $doc['FORMATO'],
+        //         "campos" => explode(",", $doc['CAMPOS'])
+        //     ];
+        // }
+        // foreach ($content as $key => $template) {
+        //     $name = $template["TemplateName"];
+        //     $image = $template["image"] ?? "";
+        //     $templateObj["doc_id"] = self::getTemplateID($name);
+        //     $templateObj["name"] = $name;
+        //     $templateObj["filename"] = "";
+        //     $templateObj["image"] = $image;
+        //     $templateObj["content"] = json_encode($template);
+        //     $templates[] = $templateObj;
+        // }
+        // // dd($templates, $documents);
+        // $data["templates"] = $templates;
+        // $data["empresa"] = $empresa;
+        // $data["promotor"] = $promotor;
+        // $data["documents"] = $documents;
+        // $data["employee"] = $employee;
+        // $missingFields = [];
+
+        // if (empty($employee->name)) {
+        //     $missingFields[] = 'Nombre';
+        // }
+
+        // if (empty($employee->email)) {
+        //     $missingFields[] = 'Correo';
+        // }
+
+        // if (empty($employee->phone)) {
+        //     $missingFields[] = 'Teléfono';
+        // }
+        // $data["missingFields"] = $missingFields;
+        return view('pages.regularizacion', $data);
+    }
+
     private static function getTemplateID($name)
     {
         $name_id = strtolower($name);
