@@ -61,7 +61,7 @@ class ContisignService
         $response = $this->withAuth()->get("{$this->baseUrl}/document/$id");
 
         if ($response->failed()) {
-            throw new \Exception('Error creating UniKey: ' . $response->body());
+            throw new \Exception('Error getDocument: ' . $response->body());
         }
 
         return $response->json();
