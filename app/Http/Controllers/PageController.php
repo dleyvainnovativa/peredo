@@ -381,6 +381,24 @@ class PageController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="document.pdf"');
     }
+    public function showXml($id)
+    {
+        $data = app(ContisignService::class)->getFullDocument($id);
+
+        if (!isset($data['constance']['base64'])) {
+            abort(404, 'XML not available');
+        }
+        $base64 = $data['constance']['base64'];
+        $xmlContent = base64_decode($base64);
+
+        if ($xmlContent === false) {
+            abort(500, 'Invalid XML content');
+        }
+
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'application/xml')
+            ->header('Content-Disposition', 'inline; filename="constancia.xml"');
+    }
     public function showAnnexed($id, $type)
     {
         try {

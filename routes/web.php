@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index'])->name("home");
 Route::get('/regularizacion', [PageController::class, 'regularizacion'])->name("regularizacion");
 Route::get('/pdf/{id}', [PageController::class, 'showPdf']);
+Route::get('/xml/{id}', [PageController::class, 'showXml']);
 Route::get('/pdf/{id}/{type}', [PageController::class, 'showAnnexed']);
 Route::get('/request', function () {
     return view('pages.warehouse');
