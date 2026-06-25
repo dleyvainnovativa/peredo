@@ -61,7 +61,7 @@ class ContisignService
         $response = $this->withAuth()->get("{$this->baseUrl}/document/$id");
 
         if ($response->failed()) {
-            throw new \Exception('Error getDocument: ' . $response->body());
+            throw new \Exception("Error getDocument: ID: $id" . $response->body());
         }
 
         return $response->json();
