@@ -182,6 +182,46 @@ class PeredoController extends Controller
             'folio' => $solicitud['FOLIO_SOLICITUD'] ?? null,
         ];
     }
+    public static function setDatosRegularizacion($obj)
+    {
+        $token = self::getToken();
+        $url = env("PEREDO_URL") . "?accion=setDatosRegularizacion";
+
+        if (!$token) {
+            return null;
+        }
+        Log::debug([$obj, "Payload SetDatosRegularizacion"]);
+
+        $response = Http::withHeaders([
+            'Authorization' => $token
+        ])->asForm()->post("$url", [
+            'idEmpresa' => $obj["id_empresa"],
+            'idCredito' => $obj["id_credito"],
+            'id_documento' => $obj["id_documento"],
+            'id_promotor' => $obj["id_promotor"],
+        ]);
+
+        if (!$response->successful()) {
+            return null;
+        }
+
+        $json = $response->json();
+
+        Log::debug([$json, "RESPONSE SetDatosRegularizacion"]);
+
+
+        if ($json['data'] === "null" || empty($json['data'])) {
+            throw new Exception($json["message"] ?? "Error al procesar solicitud");
+        }
+
+        $solicitud = $json['data'][0];
+        Log::debug([$solicitud, "RESPONSE Solicitud SetDatosRegularizacion"]);
+
+        return (object) [
+            'id'  => $solicitud['IDENTIFICADOR'] ?? null,
+            'folio' => $solicitud['FOLIO_SOLICITUD'] ?? null,
+        ];
+    }
     public static function updateDatosSolicitud($obj)
     {
         $token = self::getToken();
@@ -206,5 +246,64 @@ class PeredoController extends Controller
         Log::debug([$json, "RESPONSE setSeguimientoSolicitud"]);
 
         return;
+    }
+
+    public static function getTemplateValues($credito_data, $content)
+    {
+        $template_credito = [];
+        foreach ($content as $key => $template) {
+            if ($template["id"] == "27b06828-3a61-40ab-b0dc-f3f4b638e329") {
+                $template_credito = $template;
+            }
+        }
+        $template_fields_all = $template_credito["Fields"];
+        $template_fields = [];
+        foreach ($template_fields_all as $key => $field) {
+            if (isset($field["description"])) {
+                $objField["variable"] = $field["variable"];
+                $objField["description"] = $field["description"];
+                $objField["dataType"] = $field["dataType"];
+                array_push($template_fields, $objField);
+            }
+        }
+
+        $field_mapping = [
+            "deu_______________________________________dor" => "CLIENTE",
+            "dom________________________________________lio" => "DIRECCION",
+            "f__li" => "FOLIO_VENTA",
+            "cntdd" => "SALDO_NUM",
+            "cntdd__________________ltr" => "SALDO_TEXT",
+            "cfntdd" => "MONTOFINANCIADO_NUM",
+            "cfntdd__________________ltr" => "MONTOFINANCIADO_TEXT",
+            "a_m" => "PLAZO",
+            "am___qc" => "DESCUENTO_NUM",
+            "amqc____________________________________________ltr" => "DESCUENTO_TEXT",
+            "paq" => "TASA_FIJA_UNO",
+            "pri____pi" => "PAGOINTENCION_NUM",
+            "pripi________________ltr" => "PAGOINTENCION_TEXT",
+            "priam___qc" => "PAGOINTENCION_NUM2",
+            "priamqc____________________________________________ltr" => "PAGOINTENCION_TEXT2",
+            "a_mq" => "PLAZO_QUINCENAL",
+            "no_____________________________________________________qu" => "QUINCENA_INICIAL",
+            "no2_____________________________________________qu" => "QUINCENA_FINAL",
+            "paq2" => "TASA_FIJA_DOS",
+            "cts________________________rfa" => "CUENTAS"
+        ];
+
+        $template_values = collect($template_fields)->map(function ($field) use ($field_mapping, $credito_data) {
+            $credit_key = $field_mapping[$field['variable']] ?? null;
+            $field_value = $credit_key ? ($credito_data[$credit_key] ?? '') : '';
+            if ($field["dataType"] == "date") {
+                $field_value = date("d-m-Y");
+            }
+            return [
+                "name" => $field['variable'],
+                "description" => $field['description'],
+                "type" => $field['dataType'],
+                "credit_field" => $credit_key,
+                "value" => $field_value
+            ];
+        })->values()->toArray();
+        return $template_values;
     }
 }

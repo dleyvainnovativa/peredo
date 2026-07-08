@@ -6,6 +6,7 @@ use App\Services\ContisignService;
 use DateTime;
 use DateTimeZone;
 use Exception;
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 
@@ -150,6 +151,7 @@ class PageController extends Controller
     {
         $credito = ($request->input("credito")) ?? null;
         $empresa = ($request->input("empresa")) ?? null;
+        $promotor = ($request->input("promotor")) ?? null;
         $logo = asset('img/logo.png');
         $empresa_flag = false;
         $templates = [];
@@ -162,8 +164,15 @@ class PageController extends Controller
                 $empresa_flag = true;
             }
         }
+
         // dd($request);
         $data["logo"] = $logo;
+        if (!$promotor) {
+            $data["title"] = "¡No hay identificador del promotor a consultar asignado!";
+            $data["subtitle"] = "Falta agregar el identificador del promotor a consultar en la petición.
+                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        }
         if (!$credito) {
             $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
             $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
@@ -184,119 +193,25 @@ class PageController extends Controller
                                     Verifica la información proporcionada o contacta al administrador para más detalles.";
             return view('error', $data);
         }
-
-        $template_credito = [];
-        foreach ($content as $key => $template) {
-            if ($template["id"] == "27b06828-3a61-40ab-b0dc-f3f4b638e329") {
-                $template_credito = $template;
-            }
-        }
-        $template_fields_all = $template_credito["Fields"];
-        $template_fields = [];
-        foreach ($template_fields_all as $key => $field) {
-            if (isset($field["description"])) {
-                array_push($template_fields, $field);
-            }
-        }
-
-        $field_mapping = [
-            "deu_______________________________________dor" => "CLIENTE",
-            "dom________________________________________lio" => "DIRECCION",
-            "f__li" => "FOLIO_VENTA",
-            "cntdd" => "SALDO_NUM",
-            "cntdd__________________ltr" => "SALDO_TEXT",
-            "a_m" => "PLAZO_QUINCENAL",
-            "am___qc" => "DESCUENTO_NUM",
-            "amqc____________________________________________ltr" => "DESCUENTO_TEXT",
-            "paq" => "TASA_FIJA_DOS",
-            "ad___ac" => "SALDO_NUM",
-            "adac___________________________________ltr" => "SALDO_TEXT",
-            "pri____pi" => "PAGOINTENCION_NUM",
-            "pripi________________ltr" => "PAGOINTENCION_TEXT",
-            "cts________________________rfa" => "CUENTAS",
-            "cd______________________________________pg" => "CIUDAD", // if you have it
-        ];
-
-        $template_values = collect($template_fields)->map(function ($field) use ($field_mapping, $credito_data) {
-            $credit_key = $field_mapping[$field['variable']] ?? null;
-            return [
-                "name" => $field['variable'],
-                "description" => $field['description'],
-                "type" => $field['dataType'],
-                "value" => $credit_key ? ($credito_data[$credit_key] ?? '') : ''
+        $credito_fields = [];
+        foreach ($credito_data as $key => $value) {
+            $credito_fields[] = [
+                "name" => $key,
+                "value" => $value
             ];
-        })->values()->toArray();
-
+        }
+        // dd($credito_fields);
+        $data["credito_fields"] = $credito_fields;
+        $template_values = PeredoController::getTemplateValues($credito_data, $content);
         // $data["template_fields"] = $template_fields;
         // $data["template"] = $template_credito;
-        // $data["empresa"] = $empresa;
-        $data["credito"] = $credito_data;
-        $data["template_values"] = $template_values;
-        dd($data);
-
-        // $documentsRaw = PeredoController::getDatosDocumentos($promotor);
-        // $documents = [];
-        // $formatArray = [
-        //     'FORMATO_1' => 'REFACIL_ETESA',
-        //     'FORMATO_2' => 'REFACIL_NOMI-PAY',
-        //     'FORMATO_3' => 'REFACIL_SEP_Puebla',
-        //     'FORMATO_4' => 'REFACIL_ETESA_NOMIPAY',
-        //     'FORMATO_5' => 'REFACIL_BENEFIT',
-        //     'FORMATO_6' => 'REFACIL_ETESA_TABASCO',
-        // ];
-        // foreach ($documentsRaw as &$doc) {
-        //     $formato = $doc['DOCUMENTO'] ?? null;
-        //     $doc['FORMATO'] = $formatArray[$formato] ?? null;
-        // }
-        // unset($doc);
-
-        // foreach ($documentsRaw as $doc) {
-        //     $sucursal = $doc['SUCURSAL'];
-        //     $dependencia = $doc['DEPENDENCIA'];
-        //     if (!isset($documents[$sucursal])) {
-        //         $documents[$sucursal] = [];
-        //     }
-        //     if (!isset($documents[$sucursal][$dependencia])) {
-        //         $documents[$sucursal][$dependencia] = [];
-        //     }
-        //     $documents[$sucursal][$dependencia][] = [
-        //         "doc_id" => self::getTemplateID($doc['FORMATO']),
-        //         "documento" => $doc['DOCUMENTO'],
-        //         "documento_id" => $doc['ID_DOCUMENTO'],
-        //         "formato" => $doc['FORMATO'],
-        //         "campos" => explode(",", $doc['CAMPOS'])
-        //     ];
-        // }
-        // foreach ($content as $key => $template) {
-        //     $name = $template["TemplateName"];
-        //     $image = $template["image"] ?? "";
-        //     $templateObj["doc_id"] = self::getTemplateID($name);
-        //     $templateObj["name"] = $name;
-        //     $templateObj["filename"] = "";
-        //     $templateObj["image"] = $image;
-        //     $templateObj["content"] = json_encode($template);
-        //     $templates[] = $templateObj;
-        // }
-        // // dd($templates, $documents);
-        // $data["templates"] = $templates;
-        // $data["empresa"] = $empresa;
-        // $data["promotor"] = $promotor;
-        // $data["documents"] = $documents;
-        // $data["employee"] = $employee;
-        // $missingFields = [];
-
-        // if (empty($employee->name)) {
-        //     $missingFields[] = 'Nombre';
-        // }
-
-        // if (empty($employee->email)) {
-        //     $missingFields[] = 'Correo';
-        // }
-
-        // if (empty($employee->phone)) {
-        //     $missingFields[] = 'Teléfono';
-        // }
-        // $data["missingFields"] = $missingFields;
+        $data["empresa"] = $empresa;
+        $data["credito"] = $credito;
+        $data["promotor"] = $promotor;
+        // $data["credito"] = json_encode($credito_data);
+        // $data["template_fields"] = json_encode($template_fields);
+        $data["template_values"] = ($template_values);
+        // dd($data);
         return view('pages.regularizacion', $data);
     }
 
@@ -363,41 +278,80 @@ class PageController extends Controller
         );
         return base64_encode($iv . $encrypted);
     }
+    // public function showPdf($id)
+    // {
+    //     $data = app(ContisignService::class)->getFullDocument($id);
+    //     if (!isset($data['documentUrl'])) {
+    //         abort(404, 'PDF not available');
+    //     }
+    //     $base64 = $data['documentUrl'];
+    //     // Remove data URI prefix
+    //     $base64 = preg_replace(
+    //         '/^data:application\/pdf;base64,/',
+    //         '',
+    //         $base64
+    //     );
+    //     $pdfContent = base64_decode($base64);
+    //     return response($pdfContent, 200)
+    //         ->header('Content-Type', 'application/pdf')
+    //         ->header('Content-Disposition', 'inline; filename="document.pdf"');
+    // }
+
     public function showPdf($id)
     {
         $data = app(ContisignService::class)->getFullDocument($id);
-        if (!isset($data['documentUrl'])) {
+
+        if (empty($data['documentUrl'])) {
             abort(404, 'PDF not available');
         }
-        $base64 = $data['documentUrl'];
-        // Remove data URI prefix
-        $base64 = preg_replace(
-            '/^data:application\/pdf;base64,/',
-            '',
-            $base64
-        );
-        $pdfContent = base64_decode($base64);
-        return response($pdfContent, 200)
+
+        $response = Http::get($data['documentUrl']);
+
+        if (! $response->successful()) {
+            abort(404, 'Unable to retrieve PDF');
+        }
+
+        return response($response->body(), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="document.pdf"');
     }
+    // public function showXml($id)
+    // {
+    //     $data = app(ContisignService::class)->getFullDocument($id);
+
+    //     if (!isset($data['constance']['base64'])) {
+    //         abort(404, 'XML not available');
+    //     }
+    //     $base64 = $data['constance']['base64'];
+    //     $xmlContent = base64_decode($base64);
+
+    //     if ($xmlContent === false) {
+    //         abort(500, 'Invalid XML content');
+    //     }
+
+    //     return response($xmlContent, 200)
+    //         ->header('Content-Type', 'application/xml')
+    //         ->header('Content-Disposition', 'inline; filename="constancia.xml"');
+    // }
+
     public function showXml($id)
     {
         $data = app(ContisignService::class)->getFullDocument($id);
 
-        if (!isset($data['constance']['base64'])) {
-            abort(404, 'XML not available');
-        }
-        $base64 = $data['constance']['base64'];
-        $xmlContent = base64_decode($base64);
-
-        if ($xmlContent === false) {
-            abort(500, 'Invalid XML content');
+        if (! isset($data['constance']['base64'])) {
+            abort(404, 'ZIP not available');
         }
 
-        return response($xmlContent, 200)
-            ->header('Content-Type', 'application/xml')
-            ->header('Content-Disposition', 'inline; filename="constancia.xml"');
+        $zipContent = base64_decode($data['constance']['base64'], true);
+
+        if ($zipContent === false) {
+            abort(500, 'Invalid ZIP content');
+        }
+
+        return response($zipContent, 200)
+            ->header('Content-Type', 'application/zip')
+            ->header('Content-Disposition', 'attachment; filename="constancia.zip"')
+            ->header('Content-Length', strlen($zipContent));
     }
     public function showAnnexed($id, $type)
     {

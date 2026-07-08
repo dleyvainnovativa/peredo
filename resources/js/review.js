@@ -21,3 +21,26 @@ async function uploadDocument(event) {
     }
 }
 window.uploadDocument = uploadDocument;
+
+async function uploadDocumentRegularizacion(event) {
+    event.preventDefault();
+
+    const checkReview = document.getElementById("checkReview");
+
+    if (!checkReview.checked) {
+        showAlert("Debes aceptar los términos", "Marca la casilla de términos y condiciones para continuar.");
+        return;
+    }
+    let data = await validateForm(event, "contisign/regularizacion");
+    if (data) {
+        console.log(data);
+        await showNotification(
+            "Se ha enviado la solicitud",
+            "Se ha enviado el documento para su aprobación",
+            null,
+            "me-2 fas fa-check-circle"
+        );
+        location.reload();
+    }
+}
+window.uploadDocumentRegularizacion = uploadDocumentRegularizacion;

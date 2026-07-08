@@ -19,3 +19,4 @@ Route::get('/almacen', function () {
 Route::get('/validate', [RequestController::class, 'validate']);
 Route::post('/employees/search', [PageController::class, 'search']);
 Route::post('contisign/send', [ContisignController::class, 'generateDocument']);
+Route::post('contisign/regularizacion', [ContisignController::class, 'generateDocumentRegularizacion']);

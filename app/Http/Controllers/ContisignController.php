@@ -154,7 +154,287 @@ class ContisignController extends Controller
                 if ($b['Order'] === null) return -1;
                 return $a['Order'] <=> $b['Order'];
             });
+            $html = self::fillTemplateHTML($template["Templates"], $fields);
+
+            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);
+
+            return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
+        } catch (\Exception $e) {
+            return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
+            // return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function generateDocumentRegularizacion(Request $request)
+    {
+        try {
+            $request->validate([
+                'annexed' => 'nullable|file',
+                'annexed_selfie' => 'nullable|file',
+                'company_id' => 'required|string',
+                'credit_id' => 'required|string',
+                'promotor_id' => 'required|string',
+            ]);
+
+            // $template_id = $request["template_id"];
+            $company_id = $request["company_id"];
+            $template_id = "27b06828-3a61-40ab-b0dc-f3f4b638e329";
+            $email = env('CONTISIGN_EMAIL');
+            $password = env('CONTISIGN_PASSWORD');
+            $content = getJsonData("templates/templates.json");
+            $credito = $request["credit_id"];
+            $credito_data = PeredoController::searchByCredito($credito, $company_id);
+            $template_values = PeredoController::getTemplateValues($credito_data, $content);
+
+
+            $id = (string) Str::uuid();
+
+            $obj = [
+                'id' => $id,
+                'nombre' => $credito_data["CLIENTE"],
+                'apellido_paterno' => "Regularizacion",
+                'apellido_materno' => "Regularizacion",
+                'rfc' => $credito_data["RFC_CLIENTE"] ?? null,
+                'email' => $credito_data["EMAIL_CLIENTE"] ?? null,
+                'celular' => $credito_data["CELULAR_CLIENTE"] ?? null,
+                // 'numero_empleado' => $request->input("employee_num"),
+                // 'monto_prestamo' => $request->input("employee_amount"),
+                // 'uuid_ultimo_pago' => $request->input("employee_lastid"),
+                'id_promotor' => $request->input("promotor_id"),
+                // 'promotor_name' => $request->input("promotor_name"),
+                'id_credito' => $request->input("credit_id"),
+                'id_empresa' => $request->input("company_id"),
+                'id_documento' => $credito_data["ID_DOCUMENTO"],
+                'id_contisign' => null,
+                'unikey' => null,
+                'document_url' => null,
+                'status' => null,
+                'template_id' => $template_id,
+            ];
+            // dd($template_values, $credito_data, $obj);
+
+            // dd($obj);
+
+            // $this->contisign->login($email, $password);
+
+            $template = self::getTemplate($template_id);
+            $signatures = [
+                [
+                    "type" => "CLIENTE",
+                    // "email" => "dancaballerodlc@gmail.com" ?? null,
+                    "email" => $credito_data["EMAIL_CLIENTE"] ?? null,
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        // $request->input('employee_name')
+                        $credito_data["CLIENTE"] ?? null
+                        // "Pruebas Prueba Pruebas"
+                    ),
+                    "status" => "Pendiente",
+                    // "phone" => "2291645189" ?? null,
+                    "phone" => $credito_data["CELULAR_CLIENTE"] ?? null,
+                ],
+                // [
+                //     "type" => "PROMOTOR",
+                //     "email" => $request->input("promotor_email"),
+                //     "name" => iconv(
+                //         'UTF-8',
+                //         'ASCII//TRANSLIT',
+                //         $request->input('promotor_name')
+                //     ),
+                //     "status" => "Esperando",
+                //     "phone" => $request->input("promotor_phone") ?? null,
+                //     // "email" => "caballerodlc@outlook.com",
+                //     // "name" => "Daniel Leyva"
+                // ],
+                // [
+                //     "type" => "ARCHIVO",
+                //     "email" => $request->input("employee_email"),
+                //     "name" => iconv(
+                //         'UTF-8',
+                //         'ASCII//TRANSLIT',
+                //         $request->input('employee_name')
+                //     ),
+                //     "status" => "Pendiente",
+                //     "phone" => $request->input("employee_phone"),
+                // ],
+            ];
+            $fields = [];
+
+            foreach ($template_values as $key => $value) {
+                $fields[] = [
+                    "name" => $value["name"],
+                    "value" => $value["value"]
+                ];
+            }
+
+            $data = [];
+            $peredo = [];
+
+            $html = $request->input("html");
+            $annexed = $request->file('annexed');
+            $annexedSelfie = $request->file('annexed_selfie');
+            $obj["peredo_id"] = "91";
+            $obj["peredo_folio"] = "SOLFE00091";
+
+            $peredo = PeredoController::setDatosRegularizacion($obj);
+            $obj["peredo_id"] = $peredo->id;
+            $obj["peredo_folio"] = $peredo->folio;
+            $template["Formato"] = "FORMATO REGULARIZACION";
+            usort($template['UserSigns'], function ($a, $b) {
+                if ($a['Order'] === null) return 1;
+                if ($b['Order'] === null) return -1;
+                return $a['Order'] <=> $b['Order'];
+            });
             // dd($template["UserSigns"]);
+            $html = self::fillTemplateHTML($template["Templates"], $fields);
+            $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);
+
+            return SuccessResponse(200, "Documento generado", __METHOD__, [$obj, $peredo, $data]);
+        } catch (\Exception $e) {
+            return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
+            // return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function regularizacion(Request $request)
+    {
+        try {
+            $request->validate([
+                'html' => 'required|string',
+                'template_id' => 'required|string',
+                'annexed' => 'nullable|file',
+                'annexed_selfie' => 'nullable|file',
+                'employee_name' => 'required|string',
+                'employee_email' => 'required|email',
+                'employee_phone' => 'required|string',
+
+                'promotor_name' => 'required|string',
+                'promotor_email' => 'required|email',
+
+                'document_id' => 'required|string',
+                'company_id' => 'required|string',
+
+                'employee_firstname' => 'required|string',
+                'employee_lastname' => 'required|string',
+                'employee_lastname2' => 'required|string',
+                'employee_rfc' => 'nullable|string',
+
+            ]);
+
+            // $template_id = $request["template_id"];
+            $template_id = $request->input("template_id");
+            $email = env('CONTISIGN_EMAIL');
+            $password = env('CONTISIGN_PASSWORD');
+
+            $id = (string) Str::uuid();
+
+            $obj = [
+                'id' => $id,
+                'nombre' => $request->input("employee_firstname"),
+                'apellido_paterno' => $request->input("employee_lastname"),
+                'apellido_materno' => $request->input("employee_lastname2"),
+                'rfc' => $request->input("employee_rfc"),
+                'email' => $request->input("employee_email"),
+                'celular' => $request->input("employee_phone"),
+                'numero_empleado' => $request->input("employee_num"),
+                'monto_prestamo' => $request->input("employee_amount"),
+                'uuid_ultimo_pago' => $request->input("employee_lastid"),
+                'id_promotor' => $request->input("promotor_id"),
+                'promotor_name' => $request->input("promotor_name"),
+                'id_empresa' => $request->input("company_id"),
+                'id_documento' => $request->input("document_id"),
+                'id_contisign' => null,
+                'unikey' => null,
+                'document_url' => null,
+                'status' => null,
+                'template_id' => $template_id,
+            ];
+            // dd($obj);
+
+            // $this->contisign->login($email, $password);
+
+            $template = self::getTemplate($template_id);
+            $signatures = [
+                [
+                    "type" => "CLIENTE",
+                    "email" => $request->input("employee_email"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('employee_name')
+                    ),
+                    "status" => "Pendiente",
+                    "phone" => $request->input("employee_phone"),
+                ],
+                [
+                    "type" => "PROMOTOR",
+                    "email" => $request->input("promotor_email"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('promotor_name')
+                    ),
+                    "status" => "Esperando",
+                    "phone" => $request->input("promotor_phone") ?? null,
+                    // "email" => "caballerodlc@outlook.com",
+                    // "name" => "Daniel Leyva"
+                ],
+                [
+                    "type" => "ARCHIVO",
+                    "email" => $request->input("employee_email"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('employee_name')
+                    ),
+                    "status" => "Pendiente",
+                    "phone" => $request->input("employee_phone"),
+                ],
+            ];
+            $fields = json_decode($request->input("fields"), true);
+
+
+            $data = [];
+            $peredo = [];
+
+            $html = $request->input("html");
+            $annexed = $request->file('annexed');
+            $annexedSelfie = $request->file('annexed_selfie');
+            $obj["peredo_id"] = null;
+            $obj["peredo_folio"] = null;
+
+            // $peredo = PeredoController::setDatosSolicitud($obj);
+            // $obj["peredo_id"] = $peredo->id;
+            // $obj["peredo_folio"] = $peredo->folio;
+            foreach ($fields as $key => &$field) {
+                if ($field["name"] == "uuid" && $field["value"] == "") {
+                    $field["value"] = $obj["peredo_folio"];
+                }
+                if ($field["name"] == "nmtbj") {
+                    $field["value"] = $request->input("employee_name");
+                }
+            }
+
+            $templateName = $template["TemplateName"] ?? '';
+            // $baseName = trim(str_replace('Solicitud', '', $templateName));
+            // $baseName = strtoupper($baseName);
+            // $baseName = str_replace(['-', ' '], ['_', '_'], $baseName);
+            $baseName = self::getTemplateID($templateName);
+            $formatArray = [
+                'REFACIL_ETESA' => 'FORMATO_1',
+                'REFACIL_NOMIPAY' => 'FORMATO_2',
+                'REFACIL_SEP_PUEBLA' => 'FORMATO_3',
+                'REFACIL_ETESA_NOMIPAY' => 'FORMATO_4',
+                'REFACIL_BENEFIT' => 'FORMATO_5',
+                'REFACIL_ETESA_TABASCO' => 'FORMATO_6',
+            ];
+            $template["Formato"] = $formatArray[$baseName] ?? null;
+            // dd($template["Formato"], $templateName, $baseName, $template);
+            usort($template['UserSigns'], function ($a, $b) {
+                if ($a['Order'] === null) return 1;
+                if ($b['Order'] === null) return -1;
+                return $a['Order'] <=> $b['Order'];
+            });
             $html = self::fillTemplateHTML($template["Templates"], $fields);
 
             $data = TemplateController::template($this->contisign, $signatures, $template, $fields, $html, $request, $annexed, $annexedSelfie, $obj, $peredo);

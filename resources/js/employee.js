@@ -177,11 +177,60 @@ async function prepareEmployee() {
         alert('Error al generar el PDF');
     }
 }
+async function prepareEmployeeRegularizacion() {
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
 
-document.getElementById('employee_rfc').addEventListener('input', function () {
+    // Initialize Form Validation & Submit
+    const form = document.querySelector('#employee_form.needs-validation')
+    if (!form.checkValidity()) {
+        showAlert('Faltan datos', 'Ingrese todos los campos obligatorios');
+        form.classList.add('was-validated');
+        return;
+    }
+    form.classList.add('was-validated');
+
+
+
+    if (!window.ine_front || !window.ine_back || !window.selfie_photo) {
+        showAlert('Error al ingresar datos', 'Debes subir INE frente y reverso y un Selfie');
+        return;
+    }
+    try {
+        const pdfBlobINE = await generatePDF([window.ine_front, window.ine_back]);
+        const pdfFileINE = blobToFile(pdfBlobINE, 'annexed.pdf');
+        if (pdfFileINE.size > maxSize) {
+            showAlert('Imágenes muy grandes', 'Sube una imagen de tu INE de menor calidad');
+            return;
+        }
+        const inputINE = document.getElementById('annexed_input');
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(pdfFileINE);
+        inputINE.files = dataTransfer.files;
+        
+        const pdfBlobSelfie = await generatePDF([window.selfie_photo]);
+        const pdfFileSelfie = blobToFile(pdfBlobSelfie, 'annexed_selfie.pdf');
+        if (pdfFileSelfie.size > maxSize) {
+            showAlert('Imágenes muy grandes', 'Sube una imagen de Selfie de menor calidad');
+            return;
+        }
+
+        const inputSelfie = document.getElementById('annexed_selfie_input');
+        const dataTransferSelfie = new DataTransfer();
+        dataTransferSelfie.items.add(pdfFileSelfie);
+        inputSelfie.files = dataTransferSelfie.files;
+
+        await manualNavigate("tab-review");
+
+    } catch (error) {
+        console.error(error);
+        alert('Error al generar el PDF');
+    }
+}
+
+document.getElementById('employee_rfc')?.addEventListener('input', function () {
     this.value = this.value.toUpperCase();
 });
-document.getElementById('employee_phone').addEventListener('input', function (e) {
+document.getElementById('employee_phone')?.addEventListener('input', function (e) {
     // Replace anything that is NOT a number
     this.value = this.value.replace(/\D/g, '');
 });
@@ -189,3 +238,4 @@ document.getElementById('employee_phone').addEventListener('input', function (e)
 window.openUploadModal = openUploadModal;
 window.saveImage = saveImage;
 window.prepareEmployee = prepareEmployee;
+window.prepareEmployeeRegularizacion = prepareEmployeeRegularizacion;

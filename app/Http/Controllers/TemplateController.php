@@ -18,6 +18,8 @@ class TemplateController extends Controller
     {
         try {
             //code...
+            $limit_date = date('Y-m-d', strtotime('+3 days'));
+            // Log::debug(["Signatures:", $signatures]);
 
             $dataTemplatesFields = [];
             $annexedFile = self::setAnnexed($annexed, 'INE');
@@ -32,7 +34,6 @@ class TemplateController extends Controller
             $moreTags = self::buildMoreTags($request);
 
             // $limit_date = date('Y-m-d', strtotime('+1 month'));
-            $limit_date = date('Y-m-d', strtotime('+3 days'));
 
             // // === 1. Create UniKey ===
             // // Use the ID from the JSON template
@@ -50,6 +51,95 @@ class TemplateController extends Controller
             // $uniKeyData["unikey"] = "test";
 
             // === 2. Build Signatures from UserSigns in the template ===
+            // $signatures = [];
+            // foreach ($template['UserSigns'] as $userSign) {
+            //     foreach ($requestSignatures as $key => $rSign) {
+            //         if (strtolower($rSign["type"]) == strtolower($userSign["Name"])) {
+            //             $userEmail = $rSign["email"];
+            //             $userName = $rSign["name"];
+            //             $userPhone = $rSign["phone"];
+            //             $userStatus = $rSign["status"];
+            //         }
+            //     }
+            //     if ($userSign["Charge"] == "Signed") {
+            //         $signature = [
+            //             "Name" => $userName,
+            //             "Email" => $userEmail,
+            //             "Charge" => $userSign['Charge'],
+            //             "Position" => $userSign['Position'],
+            //             "BusinessName" => $userSign['BusinessName'],
+            //             "Order" => $userSign['Order'],
+            //             "external" => true,
+            //             "bgColor" => $userSign['bgColor'] ?? '9b039999',
+            //             "x" => $userSign['x'] ?? null,
+            //             "y" => $userSign['y'] ?? null,
+            //             "width" => $userSign['width'] ?? null,
+            //             "height" => $userSign['height'] ?? null,
+            //             "dimension" => $userSign['dimension'] ?? ['w' => 599, 'h' => 846],
+            //             "page" => 0,
+            //             "Status" => $userStatus,
+            //             "AditionalInformation" => [],
+            //             "editing" => false,
+            //             // "currentUserExternal" => $userSign['external'],
+            //             "LimitDate" => $limit_date,
+            //             "PhoneNumber" => "$userPhone",
+            //             "phone" => "$userPhone"
+            //             // Assuming SignType has at least one value
+            //             // "Type" => $template['SignType'][0] ?? "Firma sencilla"
+            //         ];
+
+            //         // Add AditionalInformation for compatibility
+            //         $signature["AditionalInformation"] = [
+            //             "x" => $signature['x'],
+            //             "y" => $signature['y'],
+            //             "width" => $signature['width'],
+            //             "height" => $signature['height'],
+            //             "bgcolor" => "#" . $signature['bgColor'],
+            //             "name" => $signature['Name'],
+            //             "page" => 0,
+            //             "dimensions" => $signature['dimension']
+            //         ];
+            //     } else {
+            //         $signature = [
+            //             "Name" => $userName,
+            //             "Email" => $userEmail,
+            //             "Charge" => $userSign['Charge'],
+            //             "Position" => $userSign['Position'],
+            //             "BusinessName" => $userSign['BusinessName'],
+            //             "Order" => null,
+            //             "external" => true,
+            //             "Status" => $userStatus,
+            //             "AditionalInformation" => [],
+            //             "editing" => false,
+            //             // "currentUserExternal" => $userSign['external'],
+            //             "LimitDate" => $limit_date,
+            //             "PhoneNumber" => "$userPhone",
+            //             "phone" => "$userPhone",
+            //             "Type" => "Firma sencilla",
+            //         ];
+
+            //         // Add AditionalInformation for compatibility
+            //         $signature["AditionalInformation"] = [
+            //             "bgcolor" => "#undefined",
+            //             "name" => $signature['Name'],
+            //             "dimensions" => [
+            //                 "w" => 612,
+            //                 "h" => 792,
+            //                 "pageHeight" => 792,
+            //                 "pages" => 1
+            //             ]
+            //         ];
+            //     }
+
+            //     if ($userSign["Charge"] == "Signed") {
+            //         foreach ($template["SignType"] as $key => $value) {
+            //             $signature["Type"] = $value;
+            //             $signatures[] = $signature;
+            //         }
+            //     } else {
+            //         // $signatures[] = $signature;
+            //     }
+            // }
             $signatures = [];
             foreach ($template['UserSigns'] as $userSign) {
                 foreach ($requestSignatures as $key => $rSign) {
@@ -60,75 +150,14 @@ class TemplateController extends Controller
                         $userStatus = $rSign["status"];
                     }
                 }
-                if ($userSign["Charge"] == "Signed") {
-                    $signature = [
-                        "Name" => $userName,
-                        "Email" => $userEmail,
-                        "Charge" => $userSign['Charge'],
-                        "Position" => $userSign['Position'],
-                        "BusinessName" => $userSign['BusinessName'],
-                        "Order" => $userSign['Order'],
-                        "external" => true,
-                        "bgColor" => $userSign['bgColor'] ?? '9b039999',
-                        "x" => $userSign['x'] ?? null,
-                        "y" => $userSign['y'] ?? null,
-                        "width" => $userSign['width'] ?? null,
-                        "height" => $userSign['height'] ?? null,
-                        "dimension" => $userSign['dimension'] ?? ['w' => 599, 'h' => 846],
-                        "page" => 0,
-                        "Status" => $userStatus,
-                        "AditionalInformation" => [],
-                        "editing" => false,
-                        // "currentUserExternal" => $userSign['external'],
-                        "LimitDate" => $limit_date,
-                        "PhoneNumber" => "$userPhone",
-                        "phone" => "$userPhone"
-                        // Assuming SignType has at least one value
-                        // "Type" => $template['SignType'][0] ?? "Firma sencilla"
-                    ];
-
-                    // Add AditionalInformation for compatibility
-                    $signature["AditionalInformation"] = [
-                        "x" => $signature['x'],
-                        "y" => $signature['y'],
-                        "width" => $signature['width'],
-                        "height" => $signature['height'],
-                        "bgcolor" => "#" . $signature['bgColor'],
-                        "name" => $signature['Name'],
-                        "page" => 0,
-                        "dimensions" => $signature['dimension']
-                    ];
-                } else {
-                    $signature = [
-                        "Name" => $userName,
-                        "Email" => $userEmail,
-                        "Charge" => $userSign['Charge'],
-                        "Position" => $userSign['Position'],
-                        "BusinessName" => $userSign['BusinessName'],
-                        "Order" => null,
-                        "external" => true,
-                        "Status" => $userStatus,
-                        "AditionalInformation" => [],
-                        "editing" => false,
-                        // "currentUserExternal" => $userSign['external'],
-                        "LimitDate" => $limit_date,
-                        "PhoneNumber" => "$userPhone",
-                        "phone" => "$userPhone",
-                        "Type" => "Firma sencilla",
-                    ];
-
-                    // Add AditionalInformation for compatibility
-                    $signature["AditionalInformation"] = [
-                        "bgcolor" => "#undefined",
-                        "name" => $signature['Name'],
-                        "dimensions" => [
-                            "w" => 612,
-                            "h" => 792,
-                            "pageHeight" => 792,
-                            "pages" => 1
-                        ]
-                    ];
-                }
+                $signature = $userSign;
+                $signature["Name"] = $userName;
+                $signature["Phone"] = $userPhone;
+                $signature["PhoneNumber"] = $userPhone;
+                $signature["Email"] = $userEmail;
+                $signature["Status"] = $userStatus;
+                $signature["LimitDate"] = $limit_date;
+                $signature["AditionalInformation"]["name"] = $userName;
 
                 if ($userSign["Charge"] == "Signed") {
                     foreach ($template["SignType"] as $key => $value) {
