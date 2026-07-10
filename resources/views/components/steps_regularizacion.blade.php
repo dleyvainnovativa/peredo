@@ -14,15 +14,15 @@
     <li class="nav-item flex-fill text-center calendar-options active" role="presentation">
         <button disabled class="nav-link text-center  mx-auto active" id="tab-employee" data-bs-toggle="pill" data-bs-target="#pane-employee" type="button">
             <div class="rounded-circle bg-primary-subtle border border-dark text-secondary d-flex align-items-center justify-content-center mx-auto">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-file-contract"></i>
             </div>
-            <small class="d-xl-block d-none mt-2 text-muted">Datos del Empleado</small>
+            <small class="d-xl-block d-none mt-2 text-muted">Datos de la Solicitud</small>
         </button>
     </li>
     <li class="nav-item flex-fill text-center calendar-options" role="presentation">
         <button disabled class="nav-link text-center mx-auto" id="tab-review" data-bs-toggle="pill" data-bs-target="#pane-review" type="button">
             <div class="rounded-circle bg-primary-subtle border border-dark text-secondary d-flex align-items-center justify-content-center mx-auto">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-check-circle"></i>
             </div>
             <small class="d-xl-block d-none mt-2 text-muted">Resumen de Solicitud</small>
         </button>

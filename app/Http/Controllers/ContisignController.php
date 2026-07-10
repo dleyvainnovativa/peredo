@@ -471,7 +471,7 @@ class ContisignController extends Controller
         return $template;
     }
 
-    function fillTemplateHTML($html, $fields)
+    public static function fillTemplateHTML($html, $fields)
     {
         foreach ($fields as $field) {
             $key = $field['name'];

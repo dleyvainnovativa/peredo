@@ -287,7 +287,8 @@ class PeredoController extends Controller
             "no_____________________________________________________qu" => "QUINCENA_INICIAL",
             "no2_____________________________________________qu" => "QUINCENA_FINAL",
             "paq2" => "TASA_FIJA_DOS",
-            "cts________________________rfa" => "CUENTAS"
+            "cts________________________rfa" => "CUENTAS",
+            "cd______________________________________pg" => "CIUDAD_CREDITO",
         ];
 
         $template_values = collect($template_fields)->map(function ($field) use ($field_mapping, $credito_data) {
