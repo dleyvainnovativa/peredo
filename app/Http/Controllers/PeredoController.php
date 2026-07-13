@@ -289,6 +289,12 @@ class PeredoController extends Controller
             "paq2" => "TASA_FIJA_DOS",
             "cts________________________rfa" => "CUENTAS",
             "cd______________________________________pg" => "CIUDAD_CREDITO",
+            "cal___________________________________________le" => "CALLE",
+            "col__________________________________________onia" => "COLONIA",
+            "codigo____________________________________Postal" => "CODIGO_POSTAL",
+            "ciu____________________________________________dad" => "MUNICIPIO",
+            "est___________________________________________ado" => "ESTADO",
+            "tel__________________________________________efono" => "TELEFONO"
         ];
 
         $template_values = collect($template_fields)->map(function ($field) use ($field_mapping, $credito_data) {
