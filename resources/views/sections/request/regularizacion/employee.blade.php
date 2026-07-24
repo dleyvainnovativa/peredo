@@ -7,9 +7,12 @@
         <div class="row g-4 mb-5" id="employee-grid">
             <form id="employee_form" class="needs-validation">
                 <div class="row g-3">
-                   
+
                     <div class="col-md-12 pb-4">
                         {!! $html !!}
+                    </div>
+                    <div class="col-md-12 pb-4">
+                        {!! $html2 !!}
                     </div>
 
                     <div class="col-md-12">

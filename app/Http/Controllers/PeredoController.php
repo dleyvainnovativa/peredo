@@ -199,6 +199,7 @@ class PeredoController extends Controller
             'idCredito' => $obj["id_credito"],
             'id_documento' => $obj["id_documento"],
             'id_promotor' => $obj["id_promotor"],
+            'ID_SUBTIPODOCUMENTO' => $obj["id_subtipo"],
         ]);
 
         if (!$response->successful()) {
@@ -251,12 +252,21 @@ class PeredoController extends Controller
     public static function getTemplateValues($credito_data, $content)
     {
         $template_credito = [];
+        $template_credito_pagare = [];
         foreach ($content as $key => $template) {
             if ($template["id"] == "27b06828-3a61-40ab-b0dc-f3f4b638e329") {
                 $template_credito = $template;
             }
+            if ($template["id"] == "884492c7-ad14-4e81-a75f-5da5529522cb") {
+                $template_credito_pagare = $template;
+            }
         }
-        $template_fields_all = $template_credito["Fields"];
+
+        // $template_fields_all = $template_credito["Fields"];
+        $template_fields_all = array_merge(
+            $template_credito["Fields"] ?? [],
+            $template_credito_pagare["Fields"] ?? []
+        );
         $template_fields = [];
         foreach ($template_fields_all as $key => $field) {
             if (isset($field["description"])) {

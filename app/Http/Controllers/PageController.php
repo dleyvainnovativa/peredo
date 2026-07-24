@@ -203,14 +203,17 @@ class PageController extends Controller
 
 
         $template_credito = [];
+        $template_credito_pagare = [];
         foreach ($content as $key => $template) {
             if ($template["id"] == "27b06828-3a61-40ab-b0dc-f3f4b638e329") {
                 $template_credito = $template;
             }
+            if ($template["id"] == "884492c7-ad14-4e81-a75f-5da5529522cb") {
+                $template_credito_pagare = $template;
+            }
         }
 
 
-        // dd($credito_fields);
         $data["credito_fields"] = $credito_fields;
         $template_values = PeredoController::getTemplateValues($credito_data, $content);
         $fields = [];
@@ -221,9 +224,11 @@ class PageController extends Controller
             ];
         }
         $html = ContisignController::fillTemplateHTML($template_credito["Templates"], $fields);
+        $html2 = ContisignController::fillTemplateHTML($template_credito_pagare["Templates"], $fields);
         // $data["template_fields"] = $template_fields;
         $data["template"] = $template_credito;
         $data["html"] = $html;
+        $data["html2"] = $html2;
         $data["empresa"] = $empresa;
         $data["credito"] = $credito;
         $data["promotor"] = $promotor;
