@@ -151,7 +151,7 @@ class PageController extends Controller
     {
         $credito = ($request->input("credito")) ?? null;
         $empresa = ($request->input("empresa")) ?? null;
-        $promotor = ($request->input("promotor")) ?? null;
+        $promotor = ($request->input("promotor")) ?? 0;
         $logo = asset('img/logo.png');
         $empresa_flag = false;
         $templates = [];
@@ -167,12 +167,12 @@ class PageController extends Controller
 
         // dd($request);
         $data["logo"] = $logo;
-        if (!$promotor) {
-            $data["title"] = "¡No hay identificador del promotor a consultar asignado!";
-            $data["subtitle"] = "Falta agregar el identificador del promotor a consultar en la petición.
-                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
-            return view('error', $data);
-        }
+        // if (!$promotor) {
+        //     $data["title"] = "¡No hay identificador del promotor a consultar asignado!";
+        //     $data["subtitle"] = "Falta agregar el identificador del promotor a consultar en la petición.
+        //                             Verifica la información proporcionada o contacta al administrador para más detalles.";
+        //     return view('error', $data);
+        // }
         if (!$credito) {
             $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
             $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.

@@ -172,9 +172,8 @@ class ContisignController extends Controller
                 'annexed_selfie' => 'nullable|file',
                 'company_id' => 'required|string',
                 'credit_id' => 'required|string',
-                'promotor_id' => 'required|string',
+                'promotor_id' => 'nullable|string',
             ]);
-
             // $template_id = $request["template_id"];
             $company_id = $request["company_id"];
             $email = env('CONTISIGN_EMAIL');
@@ -209,7 +208,7 @@ class ContisignController extends Controller
             // 'numero_empleado' => $request->input("employee_num"),
             // 'monto_prestamo' => $request->input("employee_amount"),
             // 'uuid_ultimo_pago' => $request->input("employee_lastid"),
-            'id_promotor' => $request->input("promotor_id"),
+            'id_promotor' => $request->input("promotor_id") ?? 0,
             // 'promotor_name' => $request->input("promotor_name"),
             'id_credito' => $request->input("credit_id"),
             'id_empresa' => $request->input("company_id"),
