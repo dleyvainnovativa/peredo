@@ -329,7 +329,24 @@ class PageController extends Controller
             abort(404, 'PDF not available');
         }
 
-        $response = Http::get($data['documentUrl']);
+        $documentUrl = $data['documentUrl'];
+
+        // Check if it's a Base64 Data URI
+        if (str_starts_with($documentUrl, 'data:application/pdf;base64,')) {
+            $base64 = substr($documentUrl, strlen('data:application/pdf;base64,'));
+            $pdf = base64_decode($base64);
+
+            if ($pdf === false) {
+                abort(500, 'Invalid PDF data');
+            }
+
+            return response($pdf, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'inline; filename="document.pdf"');
+        }
+
+        // Fallback: regular URL
+        $response = Http::get($documentUrl);
 
         if (! $response->successful()) {
             abort(404, 'Unable to retrieve PDF');
