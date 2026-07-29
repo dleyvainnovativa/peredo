@@ -87,17 +87,16 @@ class ContisignController extends Controller
                 ],
                 [
                     "type" => "PROMOTOR",
-                    // "email" => $request->input("promotor_email"),
-                    // "name" => iconv(
-                    //     'UTF-8',
-                    //     'ASCII//TRANSLIT',
-                    //     $request->input('promotor_name')
-                    // ),
+                    "email" => $request->input("promotor_email"),
+                    "name" => iconv(
+                        'UTF-8',
+                        'ASCII//TRANSLIT',
+                        $request->input('promotor_name')
+                    ),
                     "status" => "Esperando",
-                    // "phone" => $request->input("promotor_phone") ?? null,
-                    "email" => "angelsam0102@hotmail.com",
-                    "name" => "Angel Samuel",
-                    "phone" => "2291272270"
+                    "phone" => $request->input("promotor_phone") ?? null,
+                    // "email" => "caballerodlc@outlook.com",
+                    // "name" => "Daniel Leyva"
                 ],
                 [
                     "type" => "ARCHIVO",
@@ -123,9 +122,9 @@ class ContisignController extends Controller
             $obj["peredo_id"] = null;
             $obj["peredo_folio"] = null;
 
-            // $peredo = PeredoController::setDatosSolicitud($obj);
-            // $obj["peredo_id"] = $peredo->id;
-            // $obj["peredo_folio"] = $peredo->folio;
+            $peredo = PeredoController::setDatosSolicitud($obj);
+            $obj["peredo_id"] = $peredo->id;
+            $obj["peredo_folio"] = $peredo->folio;
             foreach ($fields as $key => &$field) {
                 if ($field["name"] == "uuid" && $field["value"] == "") {
                     $field["value"] = $obj["peredo_folio"];
@@ -232,20 +231,17 @@ class ContisignController extends Controller
             [
                 "type" => "CLIENTE",
                 // "email" => "dancaballerodlc@gmail.com" ?? null,
-                // "email" => $credito_data["EMAIL_CLIENTE"] ?? null,
-                // "name" => iconv(
-                //     'UTF-8',
-                //     'ASCII//TRANSLIT',
-                //     // $request->input('employee_name')
-                //     $credito_data["CLIENTE"] ?? null
-                //     // "Pruebas Prueba Pruebas"
-                // ),
+                "email" => $credito_data["EMAIL_CLIENTE"] ?? null,
+                "name" => iconv(
+                    'UTF-8',
+                    'ASCII//TRANSLIT',
+                    // $request->input('employee_name')
+                    $credito_data["CLIENTE"] ?? null
+                    // "Pruebas Prueba Pruebas"
+                ),
                 "status" => "Pendiente",
                 // "phone" => "2291645189" ?? null,
-                // "phone" => $credito_data["CELULAR_CLIENTE"] ?? null,
-                "email" => "angelsam0102@hotmail.com",
-                "name" => "Angel Samuel",
-                "phone" => "2291272270"
+                "phone" => $credito_data["CELULAR_CLIENTE"] ?? null,
             ],
         ];
         $fields = [];
@@ -267,9 +263,9 @@ class ContisignController extends Controller
         $obj["peredo_folio"] = "SOLFE00091";
         $obj["id_subtipo"] = $id_subtipo;
 
-        // $peredo = PeredoController::setDatosRegularizacion($obj);
-        // $obj["peredo_id"] = $peredo->id;
-        // $obj["peredo_folio"] = $peredo->folio;
+        $peredo = PeredoController::setDatosRegularizacion($obj);
+        $obj["peredo_id"] = $peredo->id;
+        $obj["peredo_folio"] = $peredo->folio;
         $template["Formato"] = $format;
         usort($template['UserSigns'], function ($a, $b) {
             if ($a['Order'] === null) return 1;
