@@ -87,16 +87,17 @@ class ContisignController extends Controller
                 ],
                 [
                     "type" => "PROMOTOR",
-                    "email" => $request->input("promotor_email"),
-                    "name" => iconv(
-                        'UTF-8',
-                        'ASCII//TRANSLIT',
-                        $request->input('promotor_name')
-                    ),
+                    // "email" => $request->input("promotor_email"),
+                    // "name" => iconv(
+                    //     'UTF-8',
+                    //     'ASCII//TRANSLIT',
+                    //     $request->input('promotor_name')
+                    // ),
                     "status" => "Esperando",
-                    "phone" => $request->input("promotor_phone") ?? null,
-                    // "email" => "caballerodlc@outlook.com",
-                    // "name" => "Daniel Leyva"
+                    // "phone" => $request->input("promotor_phone") ?? null,
+                    "email" => "angelsam0102@hotmail.com",
+                    "name" => "Angel Samuel",
+                    "phone" => "2291272270"
                 ],
                 [
                     "type" => "ARCHIVO",
