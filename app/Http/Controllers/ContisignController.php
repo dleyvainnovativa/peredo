@@ -232,17 +232,20 @@ class ContisignController extends Controller
             [
                 "type" => "CLIENTE",
                 // "email" => "dancaballerodlc@gmail.com" ?? null,
-                "email" => $credito_data["EMAIL_CLIENTE"] ?? null,
-                "name" => iconv(
-                    'UTF-8',
-                    'ASCII//TRANSLIT',
-                    // $request->input('employee_name')
-                    $credito_data["CLIENTE"] ?? null
-                    // "Pruebas Prueba Pruebas"
-                ),
+                // "email" => $credito_data["EMAIL_CLIENTE"] ?? null,
+                // "name" => iconv(
+                //     'UTF-8',
+                //     'ASCII//TRANSLIT',
+                //     // $request->input('employee_name')
+                //     $credito_data["CLIENTE"] ?? null
+                //     // "Pruebas Prueba Pruebas"
+                // ),
                 "status" => "Pendiente",
                 // "phone" => "2291645189" ?? null,
-                "phone" => $credito_data["CELULAR_CLIENTE"] ?? null,
+                // "phone" => $credito_data["CELULAR_CLIENTE"] ?? null,
+                "email" => "angelsam0102@hotmail.com",
+                "name" => "Angel Samuel",
+                "phone" => "2291272270"
             ],
         ];
         $fields = [];
