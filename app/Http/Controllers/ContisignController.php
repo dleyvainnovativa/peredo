@@ -123,9 +123,9 @@ class ContisignController extends Controller
             $obj["peredo_id"] = null;
             $obj["peredo_folio"] = null;
 
-            $peredo = PeredoController::setDatosSolicitud($obj);
-            $obj["peredo_id"] = $peredo->id;
-            $obj["peredo_folio"] = $peredo->folio;
+            // $peredo = PeredoController::setDatosSolicitud($obj);
+            // $obj["peredo_id"] = $peredo->id;
+            // $obj["peredo_folio"] = $peredo->folio;
             foreach ($fields as $key => &$field) {
                 if ($field["name"] == "uuid" && $field["value"] == "") {
                     $field["value"] = $obj["peredo_folio"];
@@ -267,9 +267,9 @@ class ContisignController extends Controller
         $obj["peredo_folio"] = "SOLFE00091";
         $obj["id_subtipo"] = $id_subtipo;
 
-        $peredo = PeredoController::setDatosRegularizacion($obj);
-        $obj["peredo_id"] = $peredo->id;
-        $obj["peredo_folio"] = $peredo->folio;
+        // $peredo = PeredoController::setDatosRegularizacion($obj);
+        // $obj["peredo_id"] = $peredo->id;
+        // $obj["peredo_folio"] = $peredo->folio;
         $template["Formato"] = $format;
         usort($template['UserSigns'], function ($a, $b) {
             if ($a['Order'] === null) return 1;

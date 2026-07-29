@@ -257,7 +257,7 @@ class TemplateController extends Controller
                 "ruta_INE" => route("home") . "/pdf/" . $dataTemplateData['id'] . "/ine",
                 "ruta_Selfie" => route("home") . "/pdf/" . $dataTemplateData['id'] . "/selfie",
             ];
-            PeredoController::updateDatosSolicitud($updated);
+            // PeredoController::updateDatosSolicitud($updated);
 
 
 

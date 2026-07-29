@@ -102,7 +102,7 @@ class RequestService
                             // "ruta_Selfie" => $selfieFile,
                         ];
 
-                        PeredoController::updateDatosSolicitud($updated);
+                        // PeredoController::updateDatosSolicitud($updated);
                         $documents[] = $updated;
                     }
                 }
