@@ -272,7 +272,7 @@ class PeredoController extends Controller
             if (isset($field["description"])) {
                 $objField["variable"] = $field["variable"];
                 $objField["description"] = $field["description"];
-                $objField["dataType"] = $field["dataType"];
+                $objField["dataType"] = $field["dataType"] ?? "";
                 array_push($template_fields, $objField);
             }
         }
@@ -287,6 +287,9 @@ class PeredoController extends Controller
             "cfntdd__________________ltr" => "MONTOFINANCIADO_TEXT",
             "a_m" => "PLAZO",
             "am___qc" => "DESCUENTO_NUM",
+            "cntdd__________________ltr2" => "CAPITAL_TEXT",
+            "cntdd________ltr2" => "CAPITAL_TEXT",
+            "cntdd2" => "CAPITAL_NUM",
             "amqc____________________________________________ltr" => "DESCUENTO_TEXT",
             "paq" => "TASA_FIJA_UNO",
             "pri____pi" => "PAGOINTENCION_NUM",
@@ -294,6 +297,7 @@ class PeredoController extends Controller
             "priam___qc" => "PAGOINTENCION_NUM2",
             "priamqc____________________________________________ltr" => "PAGOINTENCION_TEXT2",
             "a_mq" => "PLAZO_QUINCENAL",
+            "a_mq2" => "PLAZO_QUINCENAL_2",
             "no_____________________________________________________qu" => "QUINCENA_INICIAL",
             "no2_____________________________________________qu" => "QUINCENA_FINAL",
             "paq2" => "TASA_FIJA_DOS",
