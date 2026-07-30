@@ -394,17 +394,73 @@ class PageController extends Controller
             ->header('Content-Disposition', 'attachment; filename="constancia.zip"')
             ->header('Content-Length', strlen($zipContent));
     }
+    // public function showAnnexed($id, $type)
+    // {
+    //     try {
+    //         $data = app(ContisignService::class)->getFullDocument($id);
+    //         // $path = storage_path('app/public/document.json');
+    //         // $data = json_decode(file_get_contents($path), true);
+    //         // if (!isset($data['annexed'])) {
+    //         //     abort(404, 'Annexed documents not available');
+    //         // }
+    //         switch ($type) {
+
+    //             case 'ine':
+    //                 $searchKeyword = 'ine';
+    //                 break;
+
+    //             case 'selfie':
+    //                 $searchKeyword = 'selfie';
+    //                 break;
+
+    //             default:
+    //                 abort(404, 'Invalid annexed type');
+    //         }
+    //         $document = collect($data['annexed'])
+    //             ->first(function ($item) use ($searchKeyword) {
+
+    //                 return str_contains(
+    //                     strtolower($item['FileName']),
+    //                     strtolower($searchKeyword)
+    //                 );
+    //             });
+    //         // dd($document);
+    //         if (!$document) {
+    //             abort(404, 'Document not found');
+    //         }
+    //         if (!isset($document["path"])) {
+    //             abort(404, 'Document path not available');
+    //         }
+    //         $base64 = $document['path'];
+    //         $base64 = explode(',', $document['path'], 2)[1] ?? '';
+    //         // Remove spaces/newlines
+    //         $base64 = str_replace(
+    //             ["\r", "\n", " "],
+    //             '',
+    //             $base64
+    //         );
+    //         $fileContent = base64_decode($base64);
+
+    //         return response($fileContent, 200)
+    //             ->header('Content-Type', $document['mimetype'])
+    //             ->header(
+    //                 'Content-Disposition',
+    //                 'inline; filename="' . $document['originalName'] . '"'
+    //             );
+    //     } catch (\Throwable $e) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => $e->getMessage(),
+    //         ], 500);
+    //     }
+    // }
+
     public function showAnnexed($id, $type)
     {
         try {
             $data = app(ContisignService::class)->getFullDocument($id);
-            // $path = storage_path('app/public/document.json');
-            // $data = json_decode(file_get_contents($path), true);
-            // if (!isset($data['annexed'])) {
-            //     abort(404, 'Annexed documents not available');
-            // }
-            switch ($type) {
 
+            switch ($type) {
                 case 'ine':
                     $searchKeyword = 'ine';
                     break;
@@ -416,39 +472,42 @@ class PageController extends Controller
                 default:
                     abort(404, 'Invalid annexed type');
             }
-            $document = collect($data['annexed'])
-                ->first(function ($item) use ($searchKeyword) {
 
+            $document = collect($data['annexed'] ?? [])
+                ->first(function ($item) use ($searchKeyword) {
                     return str_contains(
-                        strtolower($item['FileName']),
+                        strtolower($item['FileName'] ?? ''),
                         strtolower($searchKeyword)
                     );
                 });
+
             if (!$document) {
                 abort(404, 'Document not found');
             }
-            if (!isset($document["path"])) {
+
+            if (empty($document['path'])) {
                 abort(404, 'Document path not available');
             }
-            $base64 = $document['path'];
-            $base64 = explode(',', $document['path'], 2)[1] ?? '';
-            // Remove spaces/newlines
-            $base64 = str_replace(
-                ["\r", "\n", " "],
-                '',
-                $base64
-            );
-            $fileContent = base64_decode($base64);
 
-            return response($fileContent, 200)
-                ->header('Content-Type', $document['mimetype'])
+            // The path is now a URL
+            $response = Http::get($document['path']);
+
+            if (!$response->successful()) {
+                abort(404, 'Unable to retrieve annexed document');
+            }
+
+            return response($response->body(), 200)
+                ->header(
+                    'Content-Type',
+                    $document['mimetype'] ?? 'application/pdf'
+                )
                 ->header(
                     'Content-Disposition',
-                    'inline; filename="' . $document['originalName'] . '"'
+                    'inline; filename="' .
+                        ($document['originalName'] ?? 'document.pdf') .
+                        '"'
                 );
         } catch (\Throwable $e) {
-
-
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage(),
