@@ -215,6 +215,8 @@ class PageController extends Controller
 
 
         $data["credito_fields"] = $credito_fields;
+        $review_map = PeredoController::buildReviewMap($credito_data);
+        $data["reviewMap"] = $review_map;
         $template_values = PeredoController::getTemplateValues($credito_data, $content);
         $fields = [];
         foreach ($template_values as $key => $value) {

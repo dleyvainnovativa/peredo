@@ -327,4 +327,104 @@ class PeredoController extends Controller
         })->values()->toArray();
         return $template_values;
     }
+    public static function buildReviewMap(array $credito): array
+    {
+        return [
+            [
+                'title' => 'Préstamo Original',
+                'rows' => [
+                    [
+                        'label' => 'Monto Préstamo Original',
+                        'value' => '$ ' . $credito['MONTOFINANCIADO_NUM'],
+                        'text'  => $credito['MONTOFINANCIADO_TEXT'],
+                    ],
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Plazo Original',
+                                'value' => $credito['PLAZO'],
+                            ],
+                            [
+                                'label' => 'Tasa Original',
+                                'value' => $credito['TASA_FIJA_UNO'],
+                            ],
+                        ]
+                    ],
+                    [
+                        'label' => 'Descuento Original',
+                        'value' => '$ ' . $credito['DESCUENTO_NUM'],
+                        'text'  => $credito['DESCUENTO_TEXT'],
+                    ],
+                ],
+            ],
+
+            [
+                'title' => 'Nuevo Financiamiento',
+                'rows' => [
+                    [
+                        'label' => 'Adeudo Pendiente de cubrir',
+                        'value' => '$ ' . $credito['SALDO_NUM'],
+                        'text'  => $credito['SALDO_TEXT'],
+                    ],
+                    [
+                        'label' => 'Saldo Capital Pendiente de cubrir',
+                        'value' => '$ ' . $credito['CAPITAL_NUM'],
+                        'text'  => $credito['CAPITAL_TEXT'],
+                    ],
+                    [
+                        'label' => 'Pago inicial a Refinanciar',
+                        'value' => '$ ' . $credito['PAGOINTENCION_NUM'],
+                        'text'  => $credito['PAGOINTENCION_TEXT'],
+                    ],
+                    [
+                        'label' => 'Pagos subsecuentes',
+                        'value' => '$ ' . $credito['PAGOINTENCION_NUM2'],
+                        'text'  => $credito['PAGOINTENCION_TEXT2'],
+                    ],
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Plazo Refinanciar',
+                                'value' => $credito['PLAZO_QUINCENAL_2'],
+                            ],
+                            [
+                                'label' => 'Tasa Refinanciamiento',
+                                'value' => $credito['TASA_FIJA_DOS'],
+                            ],
+                        ]
+                    ],
+                ],
+            ],
+
+            [
+                'title' => 'Datos del Cliente',
+                'rows' => [
+                    [
+                        'label' => 'Cliente',
+                        'value' => $credito['CLIENTE'],
+                    ],
+                    [
+                        'label' => 'RFC',
+                        'value' => $credito['RFC_CLIENTE'],
+                    ],
+                    [
+                        'label' => 'Folio Venta',
+                        'value' => $credito['FOLIO_VENTA'],
+                    ],
+                    [
+                        'label' => 'Dirección',
+                        'value' => $credito['DIRECCION'],
+                    ],
+                    [
+                        'label' => 'Email',
+                        'value' => $credito['EMAIL_CLIENTE'],
+                    ],
+                    [
+                        'label' => 'Teléfono',
+                        'value' => $credito['TELEFONO'],
+                    ],
+                ],
+            ],
+        ];
+    }
 }

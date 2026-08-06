@@ -688,3 +688,7 @@ label.selectable-card:has(.form-check-input:checked) .branch-img {
     border-radius: .325rem !important;
     background-color: var(--dark-color) !important;
 }
+
+#review_container .card-body > .border-bottom:last-child {
+    border-bottom: 0 !important;
+}

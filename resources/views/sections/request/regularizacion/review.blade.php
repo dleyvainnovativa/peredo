@@ -8,27 +8,64 @@
         </div>
 
         <div class="row g-4 pb-5">
-            <div class="col-12">
-                <div class="card card-dark border border-dark">
+            <div class="col-12" id="review_container">
+                @foreach($reviewMap as $section)
 
-                    <div class="card-body p-4">
-                        <div class="row g-3">
-                            @foreach($credito_fields as $variable)
-                            <div class="col-md-6">
-                                <div class="border rounded p-3 h-100">
-                                    <small class="text-secondary d-block">
-                                        {{ $variable['name'] }}
-                                    </small>
+                <div class="card border-dark mb-4">
+                    <div class="card-header text-center fw-bold">
+                        {{ $section['title'] }}
+                    </div>
 
-                                    <div class="fw-semibold fs-5">
-                                        {{ $variable['value'] ?: '-' }}
-                                    </div>
+                    <div class="card-body p-0">
+
+                        @foreach($section['rows'] as $row)
+
+                        @if(isset($row['columns']))
+
+                        <div class="row g-0 border-bottom">
+                            @foreach($row['columns'] as $column)
+                            <div class="col-md-6 border-end p-2 p-md-3">
+                                <small class="fw-semibold">
+                                    {{ $column['label'] }}
+                                </small>
+
+                                <div class="">
+                                    {{ $column['value'] }}
                                 </div>
                             </div>
                             @endforeach
                         </div>
+
+                        @else
+
+                        <div class="row g-0 border-bottom">
+                            <div class="col-md-4 border-end p-2 p-md-3 fw-semibold">
+                                {{ $row['label'] }}
+                            </div>
+
+                            <div class="col-md-8 p-2 p-md-3">
+
+                                <div>
+                                    {{ $row['value'] }}
+                                </div>
+
+                                @isset($row['text'])
+                                <small class="">
+                                    ({{ $row['text'] }})
+                                </small>
+                                @endisset
+
+                            </div>
+                        </div>
+
+                        @endif
+
+                        @endforeach
+
                     </div>
                 </div>
+
+                @endforeach
             </div>
             <div class="col-12">
                 <div class="form-check">
