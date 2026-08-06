@@ -339,6 +339,11 @@ class PeredoController extends Controller
                         'text'  => $credito['MONTOFINANCIADO_TEXT'],
                     ],
                     [
+                        'label' => 'Descuento Original',
+                        'value' => '$ ' . $credito['DESCUENTO_NUM'],
+                        'text'  => $credito['DESCUENTO_TEXT'],
+                    ],
+                    [
                         'columns' => [
                             [
                                 'label' => 'Plazo Original',
@@ -349,11 +354,6 @@ class PeredoController extends Controller
                                 'value' => $credito['TASA_FIJA_UNO'],
                             ],
                         ]
-                    ],
-                    [
-                        'label' => 'Descuento Original',
-                        'value' => '$ ' . $credito['DESCUENTO_NUM'],
-                        'text'  => $credito['DESCUENTO_TEXT'],
                     ],
                 ],
             ],
