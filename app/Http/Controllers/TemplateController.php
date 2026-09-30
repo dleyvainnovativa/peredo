@@ -241,14 +241,27 @@ class TemplateController extends Controller
             $register["document_url"] = $dataTemplateData['documentUrl'];
 
             RequestController::store($register);
+
+            //30/09/2026 SE AGREGA PARA OBTENER LAS URLS DE LOS FIRMANTES
+            $document = $contisign::getDocument($dataTemplateData['id']);
+            $obj = [];
+            foreach ($document["signatures"] as $signatureObj) {
+                if ($signatureObj["Order"] == 1) {
+                    $obj["client_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
+                }
+                if ($signatureObj["Order"] == 2) {
+                    $obj["promotor_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
+                }
+            }
+
             $updated = [
                 "id_solicitud" => $register["peredo_id"],
                 "fecha_genera_doc" => self::formatDate($dataTemplateData["created_at"]),
                 "id_contisign" => $dataTemplateData['id'],
                 "estatus_contisign" => $dataTemplateData['Signsstatus'],
-                "liga_cliente" => null,
+                "liga_cliente" => $obj["client_url"] ?? null,
                 "fecha_firma_cliente" => null,
-                "liga_promotor" => null,
+                "liga_promotor" => $obj["promotor_url"] ?? null,
                 "fecha_firma_promotor" => null,
                 "rutaQR_XML" => route("home") . "/xml/" . $dataTemplateData['id'],
                 // "rutaQR_XML" => $dataTemplateData['ConstancyRC'],
