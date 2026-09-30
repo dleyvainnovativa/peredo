@@ -246,11 +246,13 @@ class TemplateController extends Controller
             $document = $contisign::getDocument($dataTemplateData['id']);
             $obj = [];
             foreach ($document["signatures"] as $signatureObj) {
-                if ($signatureObj["Order"] == 1) {
-                    $obj["client_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
-                }
-                if ($signatureObj["Order"] == 2) {
-                    $obj["promotor_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
+                if ($signatureObj["Charge"] == "Signed" && $signatureObj["Type"] == "Firma autógrafa") {
+                    if ($signatureObj["Order"] == 1) {
+                        $obj["client_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
+                    }
+                    if ($signatureObj["Order"] == 2) {
+                        $obj["promotor_url"] = "https://www.contisign.com.mx/es/document/" . $signatureObj["signToken"];
+                    }
                 }
             }
 
