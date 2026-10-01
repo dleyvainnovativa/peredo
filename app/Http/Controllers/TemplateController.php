@@ -243,7 +243,7 @@ class TemplateController extends Controller
             RequestController::store($register);
 
             //30/09/2026 SE AGREGA PARA OBTENER LAS URLS DE LOS FIRMANTES
-            $document = $contisign::getDocument($dataTemplateData['id']);
+            $document = $contisign->getDocument($dataTemplateData['id']);
             $obj = [];
             foreach ($document["signatures"] as $signatureObj) {
                 if ($signatureObj["Charge"] == "Signed" && $signatureObj["Type"] == "Firma autógrafa") {
