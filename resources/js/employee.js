@@ -178,7 +178,7 @@ async function prepareEmployee() {
     }
 }
 async function prepareEmployeeRegularizacion() {
-    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    const maxSize = 15 * 1024 * 1024; // 15MB in bytes
 
     // Initialize Form Validation & Submit
     const form = document.querySelector('#employee_form.needs-validation')

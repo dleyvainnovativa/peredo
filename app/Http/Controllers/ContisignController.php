@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ContisignService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ContisignController extends Controller
 {
@@ -167,6 +168,19 @@ class ContisignController extends Controller
     public function generateDocumentRegularizacion(Request $request)
     {
         try {
+            Log::info('Regularizacion file debug', [
+                'annexed_present' => $request->file('annexed') !== null,
+                'annexed_valid' => $request->file('annexed')?->isValid(),
+                'annexed_error' => $request->file('annexed')?->getError(),
+                'annexed_error_message' => $request->file('annexed')?->getErrorMessage(),
+                'annexed_size' => $request->file('annexed')?->getSize(),
+
+                'selfie_present' => $request->file('annexed_selfie') !== null,
+                'selfie_valid' => $request->file('annexed_selfie')?->isValid(),
+                'selfie_error' => $request->file('annexed_selfie')?->getError(),
+                'selfie_error_message' => $request->file('annexed_selfie')?->getErrorMessage(),
+                'selfie_size' => $request->file('annexed_selfie')?->getSize(),
+            ]);
             $request->validate([
                 'annexed' => 'nullable|file',
                 'annexed_selfie' => 'nullable|file',
@@ -187,6 +201,19 @@ class ContisignController extends Controller
             $data = self::sendTemplate($credito_data, $request, "884492c7-ad14-4e81-a75f-5da5529522cb", $template_values, $this->contisign, "FORMATO PAGARÉ REESTRUCTURA", 2);
             return SuccessResponse(200, "Documento generado", __METHOD__, [$data]);
         } catch (\Exception $e) {
+            Log::info('Regularizacion file debug', [
+                'annexed_present' => $request->file('annexed') !== null,
+                'annexed_valid' => $request->file('annexed')?->isValid(),
+                'annexed_error' => $request->file('annexed')?->getError(),
+                'annexed_error_message' => $request->file('annexed')?->getErrorMessage(),
+                'annexed_size' => $request->file('annexed')?->getSize(),
+
+                'selfie_present' => $request->file('annexed_selfie') !== null,
+                'selfie_valid' => $request->file('annexed_selfie')?->isValid(),
+                'selfie_error' => $request->file('annexed_selfie')?->getError(),
+                'selfie_error_message' => $request->file('annexed_selfie')?->getErrorMessage(),
+                'selfie_size' => $request->file('annexed_selfie')?->getSize(),
+            ]);
             return ErrorResponse(400, $e->getMessage(), __METHOD__, $request);
             // return response()->json(['error' => $e->getMessage()], 500);
         }
