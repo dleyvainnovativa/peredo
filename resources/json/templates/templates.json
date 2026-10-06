@@ -139,6 +139,7 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -236,6 +237,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:58:16.107Z",
@@ -253,6 +255,7 @@
         "Active": true,
         "Fields": [
             {
+                "order": 0,
                 "variable": "deu_______________________________________dor",
                 "description": "Nombre del deudor",
                 "autocomplete": "",
@@ -264,6 +267,7 @@
                 "separate": false
             },
             {
+                "order": 1,
                 "variable": "dom________________________________________lio",
                 "description": "Domicilio del deudor",
                 "autocomplete": "",
@@ -275,6 +279,7 @@
                 "separate": false
             },
             {
+                "order": 2,
                 "variable": "f__li",
                 "description": "Folio del adeudo",
                 "autocomplete": "",
@@ -286,6 +291,7 @@
                 "separate": false
             },
             {
+                "order": 3,
                 "variable": "cntdd",
                 "description": "Saldo Adeudo Pendiente $",
                 "autocomplete": "",
@@ -297,6 +303,7 @@
                 "separate": false
             },
             {
+                "order": 4,
                 "variable": "cntdd__________________ltr",
                 "description": "Saldo Adeudo Pendiente en letra",
                 "autocomplete": "",
@@ -308,6 +315,7 @@
                 "separate": false
             },
             {
+                "order": 5,
                 "variable": "cfntdd",
                 "description": "Monto financiado",
                 "autocomplete": "",
@@ -319,6 +327,7 @@
                 "separate": false
             },
             {
+                "order": 6,
                 "variable": "cfntdd__________________ltr",
                 "description": "Monto financiado en letra",
                 "autocomplete": "",
@@ -330,6 +339,7 @@
                 "separate": false
             },
             {
+                "order": 7,
                 "variable": "a_m",
                 "description": "Amortizaciones quincenales",
                 "autocomplete": "",
@@ -341,6 +351,7 @@
                 "separate": false
             },
             {
+                "order": 8,
                 "variable": "am___qc",
                 "description": "Cantidad a pagar en amortizaciones quincenales $",
                 "autocomplete": "",
@@ -352,6 +363,7 @@
                 "separate": false
             },
             {
+                "order": 9,
                 "variable": "amqc____________________________________________ltr",
                 "description": "Cantidad en letra a pagar en amortizaciones quincenales",
                 "autocomplete": "",
@@ -363,6 +375,7 @@
                 "separate": false
             },
             {
+                "order": 10,
                 "variable": "paq",
                 "description": "Taza anual fija de amortizaciones quincenales",
                 "autocomplete": "",
@@ -374,22 +387,27 @@
                 "separate": false
             },
             {
+                "order": 11,
                 "variable": "cntdd2",
                 "description": "Saldo capital",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
                 "unique": false,
                 "separate": false
             },
             {
+                "order": 12,
                 "variable": "cntdd__________________ltr2",
                 "description": "Saldo capital texto",
                 "autocomplete": "",
                 "showlist": "",
+                "dataType": "text",
                 "unique": false,
                 "separate": false
             },
             {
+                "order": 13,
                 "variable": "pri____pi",
                 "description": "1er Pago de intención $",
                 "autocomplete": "",
@@ -401,6 +419,7 @@
                 "separate": false
             },
             {
+                "order": 14,
                 "variable": "pripi________________ltr",
                 "description": "1er Pago de intención en letra",
                 "autocomplete": "",
@@ -412,6 +431,7 @@
                 "separate": false
             },
             {
+                "order": 15,
                 "variable": "priam___qc",
                 "description": "2do Pago de intención $",
                 "autocomplete": "",
@@ -423,6 +443,7 @@
                 "separate": false
             },
             {
+                "order": 16,
                 "variable": "priamqc____________________________________________ltr",
                 "description": "2do Pago de intención en letra",
                 "autocomplete": "",
@@ -434,6 +455,7 @@
                 "separate": false
             },
             {
+                "order": 17,
                 "variable": "a_mq",
                 "description": "Amortizaciones quincenales en pagos de intención",
                 "autocomplete": "",
@@ -445,6 +467,7 @@
                 "separate": false
             },
             {
+                "order": 18,
                 "variable": "no_____________________________________________________qu",
                 "description": "Quincena Inicial",
                 "autocomplete": "",
@@ -456,6 +479,7 @@
                 "separate": false
             },
             {
+                "order": 19,
                 "variable": "no2_____________________________________________qu",
                 "description": "Quincena Final",
                 "autocomplete": "",
@@ -467,6 +491,7 @@
                 "separate": false
             },
             {
+                "order": 20,
                 "variable": "paq2",
                 "description": "Taza anual fija de amortizaciones quincenales de pagos de intención",
                 "autocomplete": "",
@@ -478,6 +503,7 @@
                 "separate": false
             },
             {
+                "order": 21,
                 "variable": "cts________________________rfa",
                 "description": "Cuentas bancarias en donde se realizará el pago señalado en la cláusula",
                 "autocomplete": "",
@@ -488,6 +514,7 @@
                 "separate": false
             },
             {
+                "order": 22,
                 "variable": "ddm__ssañ_nñ",
                 "description": "Fecha de hoy",
                 "autocomplete": "",
@@ -499,76 +526,99 @@
                 "separate": false
             },
             {
+                "order": 23,
                 "variable": "deu_______________________________________dor"
             },
             {
+                "order": 24,
                 "variable": "dom________________________________________lio"
             },
             {
+                "order": 25,
                 "variable": "f__li"
             },
             {
+                "order": 26,
                 "variable": "cntdd"
             },
             {
+                "order": 27,
                 "variable": "cntdd__________________ltr"
             },
             {
+                "order": 28,
                 "variable": "cfntdd"
             },
             {
+                "order": 29,
                 "variable": "cfntdd__________________ltr"
             },
             {
+                "order": 30,
                 "variable": "a_m"
             },
             {
+                "order": 31,
                 "variable": "am___qc"
             },
             {
+                "order": 32,
                 "variable": "amqc____________________________________________ltr"
             },
             {
+                "order": 33,
                 "variable": "paq"
             },
             {
+                "order": 34,
                 "variable": "cntdd2"
             },
             {
+                "order": 35,
                 "variable": "cntdd__________________ltr2"
             },
             {
+                "order": 36,
                 "variable": "pri____pi"
             },
             {
+                "order": 37,
                 "variable": "pripi________________ltr"
             },
             {
+                "order": 38,
                 "variable": "priam___qc"
             },
             {
+                "order": 39,
                 "variable": "priamqc____________________________________________ltr"
             },
             {
+                "order": 40,
                 "variable": "a_mq"
             },
             {
+                "order": 41,
                 "variable": "no_____________________________________________________qu"
             },
             {
+                "order": 42,
                 "variable": "no2_____________________________________________qu"
             },
             {
+                "order": 43,
                 "variable": "paq2"
             },
             {
+                "order": 44,
                 "variable": "cts________________________rfa"
             },
             {
+                "order": 45,
                 "variable": "ddm__ssañ_nñ"
             }
         ],
-        "Templates": "<p style=\"text-align:center;\"><span class=\"text-huge\"><strong>CONVENIO DE REGULARIZACIÓN DE CREDITO</strong></span></p><p style=\"text-align:justify;\">PRIMERO.- MANIFIESTA <strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R</strong>., ESTAR LEGALMENTE CONSTITUIDA, Y TENER SU DOMICILIO EN AV. COYOACAN 707, COLONIA DEL VALLE CENTRO, BENITO JUAREZ CD. DE MEXICO.&nbsp;</p><p style=\"text-align:justify;\">SEGUNDO.- LA C. <s>deu_______________________________________dor</s> QUIEN EN LO SUBSECUENTE SE LE DENOMINARÁ DEUDOR, MANIFIESTA SER MEXICANO MAYOR DE EDAD, EN PLENO GOCE Y EJERCICIO DE SUS DERECHOS CIVILES Y TENER SU DOMICILIO EN <s>dom________________________________________lio</s>.&nbsp;</p><p style=\"text-align:justify;\">TERCERO.- EL DEUDOR RECONOCE QUE ESTE CONVENIO DERIVA DEL ADEUDO DEL FOLIO <s>f__li</s>.&nbsp;</p><p style=\"text-align:justify;\">CUARTO.- EL DEUDOR EN ESTE ACTO MANIFIESTA RECONOCER LA EXISTENCIA DEL ADEUDO PENDIENTE DE CUBRIR CON <strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R.</strong> A QUIEN EN LO SUBSECUENTE SE LE DENOMINARA REFACIL, POR LA CANTIDAD DE $ <s>cntdd</s> (<s>cntdd__________________ltr</s>) COMPROMETIENDOSE A CUBRIRLO EN LAS CONDICIONES Y TERMINOS QUE A CONTINUACIÓN SE PRECISAN:</p><p style=\"text-align:center;\"><strong>C L A U S U L A S:</strong></p><p style=\"text-align:justify;\">I. AMBAS PARTES RECONOCEN TENER SUSCRITO UN CONTRATO POR LA CANTIDAD DE $<s>cfntdd</s> (<s>cfntdd__________________ltr</s>) Mismo que sería pagado en <s>a_m</s> amortizaciones quincenales de $<s>am___qc</s> (<s>amqc____________________________________________ltr</s>) con <strong>TASA ANUAL FIJA DEL</strong> <s>paq</s><strong>%</strong>&nbsp;</p><p style=\"text-align:justify;\">II. Que derivado del contrato señalado en la clausula que antecede actualmente presenta un adeudo con REFACIL, cuyo monto asciende por la cantidad de $<s>cntdd2</s> (<s>cntdd__________________ltr2</s> PESOS 00/100 M.N.) como se precisa en el Antecedente&nbsp;</p><p style=\"text-align:justify;\">III. El DEUDOR, se compromete a cubrir en primera instancia UN PAGO DE INTENCION por la cantidad de $<s>pri____pi</s> (<s>pripi________________ltr</s> 00/100 M.N.) a la fecha de firma de este contrato y por otra parte el pago pactado por $<s>priam___qc</s> (<s>priamqc____________________________________________ltr</s>), de manera quincenal durante <s>a_mq</s> amortizaciones a partir de la <s>no_____________________________________________________qu</s>, y hasta <s>no2_____________________________________________qu</s>. Actualizándose la <strong>TASA ANUAL FIJA DEL</strong> <s>paq2</s><strong>%</strong>&nbsp;</p><p style=\"text-align:justify;\">IV. El pago señalado en la cláusula que antecede se realizará vía bancaria de manera quincenal, a las cuentas <s>cts________________________rfa</s>.&nbsp;</p><p style=\"text-align:justify;\">V. El DEUDOR se compromete a notificar a REFACIL el pago efectuado, por lo que en caso de que el deudor no cubra el abono pactado en la fecha y montos especificados en este convenio, deberá cubrirlo en un plazo no mayor de 2 días, inclusive el día de su vencimiento.; por lo tanto, una vez realizado el pago, deberá enviar el comprobante al correo sercarefacilcredit@contactocp.com.mx.</p><p style=\"text-align:justify;\">VI. El deudor firmante en este acto otorga el consentimiento expresado en la cláusula DECIMA CUARTA, respecto a las causas de recisión del contrato que origina este convenio.</p><p style=\"text-align:justify;\">VII. A la firma de este Convenio el DEUDOR deberá proporcionar el nombre, domicilios completos y número telefónico, de dos referencias personales, estos son, de un familiar que viva en domicilio distinto del deudor y en la misma localidad, y, de un conocido, mayores de edad.</p><p style=\"text-align:justify;\">VIII. El DEUDOR se obliga a exhibir copia fotostática de su credencial de elector vigente y un comprobante de domicilio reciente.&nbsp;</p><p style=\"text-align:justify;\">IX. Manifiestan las partes intervinientes que en la celebración del presente convenio no existió error, dolo o mala fe o coacción alguna.&nbsp;</p><p style=\"text-align:justify;\">SE FIRMA POR DUPLICADO EL PRESENTE AL <s>ddm__ssañ_nñ</s>, FIRMANDO LAS PARTES UNA VEZ QUE FUE LEIDO Y ENTENDIDO SU ALCANCE E INTENCIÓN.&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p style=\"text-align:center;\"><strong>REFACIL</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V.</strong></p><p style=\"text-align:center;\"><strong>SOFOM E.N.R.</strong>&nbsp;</p></td><td style=\"border:1px solid hsl(0, 0%, 100%);vertical-align:top;width:297.5px;\"><p style=\"text-align:center;\"><strong>DEUDOR</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><s>deu_______________________________________dor</s></p><p style=\"text-align:center;\"><strong>Nombre y firma</strong></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
+        "Templates": "<p style=\"text-align:center;\"><span class=\"text-huge\"><strong>CONVENIO DE REGULARIZACIÓN DE CRÉDITO</strong></span></p><p style=\"text-align:justify;\">PRIMERO.- MANIFIESTA <strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R</strong>., ESTAR LEGALMENTE CONSTITUIDA, Y TENER SU DOMICILIO EN AV. COYOACAN 707, COLONIA DEL VALLE CENTRO, BENITO JUAREZ CD. DE MEXICO.&nbsp;</p><p style=\"text-align:justify;\">SEGUNDO.- LA C. <s>deu_______________________________________dor</s> QUIEN EN LO SUBSECUENTE SE LE DENOMINARÁ DEUDOR, MANIFIESTA SER MEXICANO MAYOR DE EDAD, EN PLENO GOCE Y EJERCICIO DE SUS DERECHOS CIVILES Y TENER SU DOMICILIO EN <s>dom________________________________________lio</s>.&nbsp;</p><p style=\"text-align:justify;\">TERCERO.- EL DEUDOR RECONOCE QUE ESTE CONVENIO DERIVA DEL ADEUDO DEL FOLIO <s>f__li</s>.&nbsp;</p><p style=\"text-align:justify;\">CUARTO.- EL DEUDOR EN ESTE ACTO MANIFIESTA RECONOCER LA EXISTENCIA DEL ADEUDO PENDIENTE DE CUBRIR CON <strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V. SOFOM E.N.R.</strong> A QUIEN EN LO SUBSECUENTE SE LE DENOMINARÁ REFACIL, POR LA CANTIDAD DE $ <s>cntdd</s> (<s>cntdd__________________ltr</s>) COMPROMETIÉNDOSE A CUBRIRLO EN LAS CONDICIONES Y TERMINOS QUE A CONTINUACIÓN SE PRECISAN:</p><p style=\"text-align:center;\"><strong>C L A U S U L A S:</strong></p><p style=\"text-align:justify;\">I. AMBAS PARTES RECONOCEN TENER SUSCRITO UN CONTRATO POR LA CANTIDAD DE $<s>cfntdd</s> (<s>cfntdd__________________ltr</s>) Mismo que sería pagado en <s>a_m</s> amortizaciones quincenales de $<s>am___qc</s> (<s>amqc____________________________________________ltr</s>) con <strong>TASA ANUAL FIJA DEL</strong> <s>paq</s><strong>%</strong>&nbsp;</p><p style=\"text-align:justify;\">II. Que derivado del contrato señalado en la clausula que antecede actualmente presenta un adeudo con REFACIL, cuyo monto asciende por la cantidad de $<s>cntdd2</s> (<s>cntdd__________________ltr2</s> PESOS 00/100 M.N.) como se precisa en el Antecedente&nbsp;</p><p style=\"text-align:justify;\">III. El DEUDOR, se compromete a cubrir en primera instancia UN PAGO DE INTENCIÓN por la cantidad de $<s>pri____pi</s> (<s>pripi________________ltr</s>) a la fecha de firma de este contrato y por otra parte el pago pactado por $<s>priam___qc</s> (<s>priamqc____________________________________________ltr</s>), de manera quincenal durante <s>a_mq</s> amortizaciones a partir de la <s>no_____________________________________________________qu</s>, y hasta <s>no2_____________________________________________qu</s>. Actualizándose la <strong>TASA ANUAL FIJA DEL</strong> <s>paq2</s><strong>%</strong>&nbsp;</p><p style=\"text-align:justify;\">IV. El pago señalado en la cláusula que antecede se realizará vía bancaria de manera quincenal, a las cuentas <s>cts________________________rfa</s>.&nbsp;</p><p style=\"text-align:justify;\">V. El DEUDOR se compromete a notificar a REFACIL el pago efectuado, por lo que en caso de que el deudor no cubra el abono pactado en la fecha y montos especificados en este convenio, deberá cubrirlo en un plazo no mayor de 2 días, inclusive el día de su vencimiento.; por lo tanto, una vez realizado el pago, deberá enviar el comprobante al correo sercarefacilcredit@contactocp.com.mx.</p><p style=\"text-align:justify;\">VI. El deudor firmante en este acto otorga el consentimiento expresado en la cláusula DECIMA CUARTA, respecto a las causas de recisión del contrato que origina este convenio.</p><p style=\"text-align:justify;\">VII. A la firma de este Convenio el DEUDOR deberá proporcionar el nombre, domicilios completos y número telefónico, de dos referencias personales, estos son, de un familiar que viva en domicilio distinto del deudor y en la misma localidad, y, de un conocido, mayores de edad.</p><p style=\"text-align:justify;\">VIII. El DEUDOR se obliga a exhibir copia fotostática de su credencial de elector vigente y un comprobante de domicilio reciente.&nbsp;</p><p style=\"text-align:justify;\">IX. Manifiestan las partes intervinientes que en la celebración del presente convenio no existió error, dolo o mala fe o coacción alguna.&nbsp;</p><p style=\"text-align:justify;\">SE FIRMA POR DUPLICADO EL PRESENTE AL <s>ddm__ssañ_nñ</s>, FIRMANDO LAS PARTES UNA VEZ QUE FUE LEIDO Y ENTENDIDO SU ALCANCE E INTENCIÓN.&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p style=\"text-align:center;\"><strong>REFACIL</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><strong>REFACIL SERVICIOS INTEGRALES S.A. DE C.V.</strong></p><p style=\"text-align:center;\"><strong>SOFOM E.N.R.</strong>&nbsp;</p></td><td style=\"border:1px solid hsl(0, 0%, 100%);vertical-align:top;width:297.5px;\"><p style=\"text-align:center;\"><strong>DEUDOR</strong></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><s>deu_______________________________________dor</s></p><p style=\"text-align:center;\"><strong>Nombre y firma</strong></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
         "FileMetadata": {
             "dimensions": {
                 "width": 612,
@@ -576,7 +626,7 @@
                 "totalPages": 2
             }
         },
-        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1785431706130.pdf",
+        "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1790985565115.pdf",
         "TemplateName": "REFACIL_Convenio de reestructura de Crédito",
         "Category": "Uso general",
         "Grouped": null,
@@ -585,6 +635,7 @@
             "Selfie"
         ],
         "AnnexedQuantity": 2,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -641,10 +692,11 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": "previewFile/1781633612711.pdf",
         "created_at": "2026-06-16T18:14:46.019Z",
-        "updated_at": "2026-07-30T17:15:13.606Z",
+        "updated_at": "2026-10-03T00:07:08.130Z",
         "personid": "bc9e9d43-b1e1-4ad9-ae5b-97cf736938cb"
     },
     {
@@ -772,6 +824,7 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -878,6 +931,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:46:46.957Z",
@@ -1009,6 +1063,7 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -1115,6 +1170,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:49:34.041Z",
@@ -1241,6 +1297,7 @@
         "Grouped": null,
         "Annexed": [],
         "AnnexedQuantity": 0,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -1350,6 +1407,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": "previewFile/1779323947665.pdf",
         "created_at": "2026-05-21T00:40:06.099Z",
@@ -1517,6 +1575,7 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -1623,6 +1682,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T20:01:59.759Z",
@@ -1865,6 +1925,7 @@
             "Selfie"
         ],
         "AnnexedQuantity": 2,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -1921,6 +1982,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": "previewFile/1784571864781.pdf",
         "created_at": "2026-07-20T18:43:24.438Z",
@@ -2160,6 +2222,7 @@
             "SELFIE"
         ],
         "AnnexedQuantity": 3,
+        "AnnexedOptional": false,
         "PSCreq": true,
         "SignType": [
             "Firma autógrafa"
@@ -2266,6 +2329,7 @@
         "ShowQR": false,
         "Status": null,
         "allowBulkUpload": false,
+        "AllowDownloadDocumento": true,
         "requireSMS": true,
         "FilePath": null,
         "created_at": "2026-03-03T19:54:12.487Z",
