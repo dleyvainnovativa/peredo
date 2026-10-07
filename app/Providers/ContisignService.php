@@ -143,4 +143,15 @@ class ContisignService
 
         return $response->json();
     }
+
+    public function cancelDocument($id)
+    {
+        $response = $this->withAuth()->delete("{$this->baseUrl}/v3/document/$id");
+
+        if ($response->failed()) {
+            throw new \Exception("Error cancelDocument: ID: $id " . $response->body());
+        }
+
+        return $response->json();
+    }
 }

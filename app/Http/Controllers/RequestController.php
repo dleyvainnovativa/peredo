@@ -136,4 +136,31 @@ class RequestController extends Controller
             ->format('d/m/Y H:i:s')
             : null;
     }
+
+    public function cancel($id)
+    {
+        try {
+            // $id = the Contisign document id (requests.id_contisign)
+            $request = Request::where('id_contisign', $id)->first();
+
+            if (!$request) {
+                return ErrorResponse(404, "No se encontró la solicitud de este documento", __METHOD__);
+            }
+
+            if ($request->status === "Totalmente firmado") {
+                return ErrorResponse(409, "El documento ya está totalmente firmado; no puede cancelarse", __METHOD__);
+            }
+            $result = $this->contisign->cancelDocument($id);
+
+            $request->update(['status' => 'Documento rechazado']);
+            // $result = null;
+
+            // TODO (decision): notify Peredo of the cancellation — see note below
+            // PeredoController::updateDatosSolicitud([... estatus_contisign => 'Documento cancelado' ...]);
+
+            return SuccessResponse(200, "Documento cancelado correctamente", __METHOD__, $result);
+        } catch (\Exception $e) {
+            return ErrorResponse(400, $e->getMessage(), __METHOD__);
+        }
+    }
 }

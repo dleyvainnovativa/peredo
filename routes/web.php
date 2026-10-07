@@ -20,3 +20,6 @@ Route::get('/validate', [RequestController::class, 'validate']);
 Route::post('/employees/search', [PageController::class, 'search']);
 Route::post('contisign/send', [ContisignController::class, 'generateDocument']);
 Route::post('contisign/regularizacion', [ContisignController::class, 'generateDocumentRegularizacion']);
+
+Route::get('/contisign/cancelar/{id}', [RequestController::class, 'cancel'])->whereUuid('id');
+// later, when auth lands:  ->middleware('auth');
