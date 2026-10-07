@@ -151,6 +151,7 @@ class PageController extends Controller
     {
         $credito = ($request->input("credito")) ?? null;
         $empresa = ($request->input("empresa")) ?? null;
+        $idReestructura = ($request->input("idReestructura")) ?? null;
         $promotor = ($request->input("promotor")) ?? 0;
         $logo = asset('img/logo.png');
         $empresa_flag = false;
@@ -165,21 +166,20 @@ class PageController extends Controller
             }
         }
 
-        // dd($request);
         $data["logo"] = $logo;
-        // if (!$promotor) {
-        //     $data["title"] = "¡No hay identificador del promotor a consultar asignado!";
-        //     $data["subtitle"] = "Falta agregar el identificador del promotor a consultar en la petición.
-        //                             Verifica la información proporcionada o contacta al administrador para más detalles.";
-        //     return view('error', $data);
-        // }
+        if (!$idReestructura) {
+            $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
+            $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
+            Verifica la información proporcionada o contacta al administrador para más detalles.";
+            return view('error', $data);
+        }
         if (!$credito) {
             $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
             $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
-                                    Verifica la información proporcionada o contacta al administrador para más detalles.";
+                Verifica la información proporcionada o contacta al administrador para más detalles.";
             return view('error', $data);
         } else {
-            $credito_data = PeredoController::searchByCredito($credito, $empresa);
+            $credito_data = PeredoController::searchByCredito($credito, $empresa, $idReestructura);
             if (!$credito_data) {
                 $data["title"] = "Identificador del crédito a consultar no identificado!";
                 $data["subtitle"] = "El ID que estás intentando consultar no se encuentra registrado en nuestro sistema.

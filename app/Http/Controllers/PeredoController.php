@@ -99,7 +99,7 @@ class PeredoController extends Controller
             'phone' => $promotor['CELULAR_PROMOTOR'] ?? null,
         ];
     }
-    public static function searchByCredito($identificador, $empresa)
+    public static function searchByCredito($identificador, $empresa, $idReestructura)
     {
         $token = self::getToken();
         $url = env("PEREDO_URL") . "?accion=getDatosRegularizacion";
@@ -113,6 +113,7 @@ class PeredoController extends Controller
         ])->asForm()->post("$url", [
             'idEmpresa' => $empresa,
             'idCredito' => $identificador,
+            'idReestructura' => $idReestructura,
         ]);
 
         if (!$response->successful()) {
