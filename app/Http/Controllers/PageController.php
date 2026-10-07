@@ -151,7 +151,7 @@ class PageController extends Controller
     {
         $credito = ($request->input("credito")) ?? null;
         $empresa = ($request->input("empresa")) ?? null;
-        $idReestructura = ($request->input("idReestructura")) ?? null;
+        $idReestructura = ($request->input("idReestructura")) ?? 0;
         $promotor = ($request->input("promotor")) ?? 0;
         $logo = asset('img/logo.png');
         $empresa_flag = false;
@@ -167,12 +167,12 @@ class PageController extends Controller
         }
 
         $data["logo"] = $logo;
-        if (!$idReestructura) {
-            $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
-            $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
-            Verifica la información proporcionada o contacta al administrador para más detalles.";
-            return view('error', $data);
-        }
+        // if (!$idReestructura) {
+        //     $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
+        //     $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
+        //     Verifica la información proporcionada o contacta al administrador para más detalles.";
+        //     return view('error', $data);
+        // }
         if (!$credito) {
             $data["title"] = "¡No hay identificador del crédito a consultar asignado!";
             $data["subtitle"] = "Falta agregar el identificador del crédito a consultar en la petición.
