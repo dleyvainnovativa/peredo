@@ -150,13 +150,16 @@ class RequestController extends Controller
             if ($request->status === "Totalmente firmado") {
                 return ErrorResponse(409, "El documento ya está totalmente firmado; no puede cancelarse", __METHOD__);
             }
+
+            if (in_array($request->status, ["Documento cancelado", "Documento rechazado"], true)) {
+                return ErrorResponse(409, "El documento ya se encuentra en estado \"{$request->status}\"; no puede cancelarse de nuevo", __METHOD__);
+            }
+
             $result = $this->contisign->cancelDocument($id);
 
-            $request->update(['status' => 'Documento rechazado']);
-            // $result = null;
+            $request->update(['status' => 'Documento cancelado']);
 
-            // TODO (decision): notify Peredo of the cancellation — see note below
-            // PeredoController::updateDatosSolicitud([... estatus_contisign => 'Documento cancelado' ...]);
+            // TODO (decision): notify Peredo of the cancellation
 
             return SuccessResponse(200, "Documento cancelado correctamente", __METHOD__, $result);
         } catch (\Exception $e) {
