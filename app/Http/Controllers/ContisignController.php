@@ -190,11 +190,12 @@ class ContisignController extends Controller
             ]);
             // $template_id = $request["template_id"];
             $company_id = $request["company_id"];
+            $reestructura_id = $request["reestructura_id"] ?? 0;
             $email = env('CONTISIGN_EMAIL');
             $password = env('CONTISIGN_PASSWORD');
             $content = getJsonData("templates/templates.json");
             $credito = $request["credit_id"];
-            $credito_data = PeredoController::searchByCredito($credito, $company_id);
+            $credito_data = PeredoController::searchByCredito($credito, $company_id, $reestructura_id);
             $template_values = PeredoController::getTemplateValues($credito_data, $content);
 
             $data = self::sendTemplate($credito_data, $request, "27b06828-3a61-40ab-b0dc-f3f4b638e329", $template_values, $this->contisign, "FORMATO REESTRUCTURA", 1);

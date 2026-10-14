@@ -93,6 +93,7 @@
                         <form>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input name="company_id" type="hidden" value="{{$empresa}}" id="send_company_id">
+                            <input name="reestructura_id" type="hidden" value="{{$reestructura}}" id="send_reestructura_id">
                             <input name="promotor_id" type="hidden" value="{{$promotor}}" id="send_promotor_id">
                             <input class="d-none" name="annexed" type="file" id="annexed_input">
                             <input class="d-none" name="annexed_selfie" type="file" id="annexed_selfie_input">

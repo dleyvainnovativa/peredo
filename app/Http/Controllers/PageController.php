@@ -234,6 +234,7 @@ class PageController extends Controller
         $data["empresa"] = $empresa;
         $data["credito"] = $credito;
         $data["promotor"] = $promotor;
+        $data["reestructura"] = $idReestructura;
         // $data["credito"] = json_encode($credito_data);
         // $data["template_fields"] = json_encode($template_fields);
         $data["template_values"] = ($template_values);
