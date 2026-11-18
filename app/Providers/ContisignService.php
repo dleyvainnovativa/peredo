@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ContisignService
 {
@@ -79,6 +80,45 @@ class ContisignService
         }
 
         return $response->json();
+    }
+
+    public function uploadAnnexed($file, $name)
+    {
+        try {
+
+            if (!$file || !$file->isValid()) {
+                return null;
+            }
+            $filename = Str::uuid() . '.pdf';
+
+            // $response = Http::timeout((int) config('contisign.http.timeout', 60))
+            //     ->withHeaders(['Authorization' => $this->auth->token()])
+            //     ->attach('file', $handle, basename($absolutePath))
+            //     ->post($url, ['type' => 'annexed']);
+
+            $response = $this->withAuth()
+                ->timeout((int) 30)
+                ->attach('file', fopen($file->getRealPath(), 'r'), $filename)
+                ->post('https://api.contisign.com.mx/api/uploaddocumentfile', [
+                    'type' => 'annexed'
+                ]);
+            // Log::debug(["Contisign Annexed Upload Response R", [$response->body(), $file->getRealPath(), $filename, $file]]);
+
+            if (!$response->successful()) {
+                throw new \Exception('Error al subir archivo a Contisign');
+            }
+            $data = $response->json();
+            Log::debug(["Contisign Annexed Upload Response:", $data]);
+            return
+                [
+                    "FileName" => $name,
+                    "FieldUrl" => $data['ImageUrl'] ?? null,
+                    "Path" => $data['path'] ?? null,
+                ];
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+            return null;
+        }
     }
 
     /**

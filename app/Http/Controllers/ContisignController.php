@@ -96,6 +96,7 @@ class ContisignController extends Controller
                     ),
                     "status" => "Esperando",
                     "phone" => $request->input("promotor_phone") ?? null,
+                    // "phone" => "2291645189",
                     // "email" => "caballerodlc@outlook.com",
                     // "name" => "Daniel Leyva"
                 ],
